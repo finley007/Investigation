@@ -1,5 +1,6 @@
 package stock.vo;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -12,19 +13,21 @@ public class StockInfo {
 	
 	private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); 
 	
-	Date time;
-	
-	public StockInfo(Date now) {
-		this.time = now;
+	public StockInfo(Stock stock) {
+		this.stock = stock;
 	}
 	
-	private Integer mainInflow = 0;
+	private Stock stock;
 	
-	private Integer mainOutflow = 0;
+	private Date time;
 	
-	private Integer retailInflow = 0;
+	private Double mainInflow = 0.0;
 	
-	private Integer retailOutflow = 0;
+	private Double mainOutflow = 0.0;
+	
+	private Double retailInflow = 0.0;
+	
+	private Double retailOutflow = 0.0;
 
 	public Date getTime() {
 		return time;
@@ -34,36 +37,55 @@ public class StockInfo {
 		this.time = time;
 	}
 
-	public Integer getMainInflow() {
+	public Double getMainInflow() {
 		return mainInflow;
 	}
+	
+	public Stock getStock() {
+		return stock;
+	}
 
-	public void setMainInflow(Integer mainInflow) {
+	public void setStock(Stock stock) {
+		this.stock = stock;
+	}
+
+	public void setMainInflow(Double mainInflow) {
 		this.mainInflow = mainInflow;
 	}
 
-	public Integer getMainOutflow() {
+	public Double getMainOutflow() {
 		return mainOutflow;
 	}
 
-	public void setMainOutflow(Integer mainOutflow) {
+	public void setMainOutflow(Double mainOutflow) {
 		this.mainOutflow = mainOutflow;
 	}
 
-	public Integer getRetailInflow() {
+	public Double getRetailInflow() {
 		return retailInflow;
 	}
 
-	public void setRetailInflow(Integer retailInflow) {
+	public void setRetailInflow(Double retailInflow) {
 		this.retailInflow = retailInflow;
 	}
 
-	public Integer getRetailOutflow() {
+	public Double getRetailOutflow() {
 		return retailOutflow;
 	}
 
-	public void setRetailOutflow(Integer retailOutflow) {
+	public void setRetailOutflow(Double retailOutflow) {
 		this.retailOutflow = retailOutflow;
+	}
+	
+	public String toString() {
+		StringBuffer sb = new StringBuffer("Stock info: \n");
+		sb.append("name: " + this.stock.getName() + "\n");
+		sb.append("code: " + this.stock.getCode() + "\n");
+		sb.append("main inflow:" + this.mainInflow + "\n");
+		sb.append("main outflow:" + this.mainOutflow + "\n");
+		sb.append("retail inflow:" + this.retailInflow + "\n");
+		sb.append("retail outflow:" + this.retailOutflow + "\n");
+		return sb.toString();
 	}
 
 }

@@ -2,6 +2,9 @@ package stock.db;
 
 import java.util.List;
 
+import junit.framework.Assert;
+
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,7 +25,7 @@ public class DBQueryImplTest {
 	public void testGetStockList() {
 		try {
 			List<Stock> stocks = query.getStockList();
-			assert(stocks.size() == 1);
+			Assert.assertEquals(stocks.size(),1);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -37,6 +37,7 @@ public class DBQueryImpl implements DBQuery {
 				Stock stock = new Stock();
 				stock.setCode(rs.getString("code"));
 				stock.setName(rs.getString("name"));
+				result.add(stock);
 			}  
 			rs.close();  
 			conn.close();
