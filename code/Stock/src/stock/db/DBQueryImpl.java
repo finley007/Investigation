@@ -21,7 +21,6 @@ public class DBQueryImpl implements DBQuery {
 		this.connector = connector;
 	}
 
-	@Override
 	public List<Stock> getStockList() throws Exception {
 		// TODO Auto-generated method stub
 		List<Stock> result = new ArrayList<Stock>();

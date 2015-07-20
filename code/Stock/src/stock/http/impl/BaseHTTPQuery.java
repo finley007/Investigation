@@ -20,7 +20,6 @@ public class BaseHTTPQuery implements HTTPQuery {
 
 	protected HTTPCaller caller;
 
-	@Override
 	public StockInfo getStockInfo(Stock stock) throws Exception {
 		// TODO Auto-generated method stub
 		return null;

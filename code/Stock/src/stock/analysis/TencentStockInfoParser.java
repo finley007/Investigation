@@ -1,13 +1,10 @@
 package stock.analysis;
 
-import java.math.BigDecimal;
-
 import stock.vo.Stock;
 import stock.vo.StockInfo;
 
 public class TencentStockInfoParser implements InfoParser {
 
-	@Override
 	public StockInfo parseStockInfo(Stock stock, String info) throws Exception {
 		// TODO Auto-generated method stub
 		StockInfo stockInfo = new StockInfo(stock);

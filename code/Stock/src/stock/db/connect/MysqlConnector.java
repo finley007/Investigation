@@ -10,7 +10,6 @@ public class MysqlConnector implements DBConnector {
 	private String user = "root";
 	private String password = "";
 
-	@Override
 	public Connection getConnection() throws Exception {
 		// TODO Auto-generated method stub
 		Class.forName(driver);

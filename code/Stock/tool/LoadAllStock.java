@@ -1,5 +1,4 @@
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -12,8 +11,8 @@ public class LoadAllStock {
 	public static void main(String[] args) {
 		try {
 			String urlTemplate = "http://stock.finance.sina.com.cn/stock/quote/sha{0}.html"; 
-			for (int i = 0; i < 1; i++) {
-				FileOutputStream fos = new FileOutputStream("e:\\11.txt");
+			FileOutputStream fos = new FileOutputStream("d:\\11.txt");
+			for (int i = 0; i < 17; i++) {
 				String url = MessageFormat.format(urlTemplate, new Object[]{i});
 				System.out.println(url);
 				URL getUrl = new URL(url); 
@@ -25,21 +24,22 @@ public class LoadAllStock {
 		        while ((lines = reader.readLine()) != null) { 
 		              if (load) {
 		            	  lines = lines.substring(lines.indexOf(">") + 1, lines.lastIndexOf("<"));
-//		            	  System.out.println(new String(lines.getBytes()));
-		            	  System.out.println(bytesToHexString(lines.getBytes("GBK")));
-		            	  fos.write(lines.getBytes("GBK"));
+		            	  System.out.println(new String(lines.getBytes()));
+//		            	  System.out.println(bytesToHexString(lines.getBytes()));
+		            	  fos.write((lines + "|").getBytes());
 		            	  load = false;
-		            	  break;
 		              }
 		        	  if (lines.indexOf("<td class=td04 height=23>") > 0) {
-//		            	  System.out.println(lines);
-//		            	  fos.write(lines.getBytes());
+		        		  lines = lines.substring(lines.indexOf("realstock/") + 10, lines.indexOf(".html"));
+		            	  System.out.println(lines);
+		            	  fos.write(lines.getBytes());
 		            	  load = true;
 		              }
 		        } 
 		        reader.close(); 
 		        connection.disconnect(); 
 			}
+			fos.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
