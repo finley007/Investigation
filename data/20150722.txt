@@ -1,0 +1,465 @@
+The stocks to be checked: 
+Stock info: 
+name: ????
+code: sh600007
+main inflow:257.31
+main outflow:116.73
+retail inflow:249.6
+retail outflow:227.34
+
+Stock info: 
+name: ????
+code: sh600026
+main inflow:3957.08
+main outflow:1737.94
+retail inflow:216.98
+retail outflow:250.16
+
+Stock info: 
+name: ????
+code: sh600035
+main inflow:29085.8
+main outflow:2013.55
+retail inflow:436.08
+retail outflow:0.0
+
+Stock info: 
+name: ????
+code: sh600038
+main inflow:5596.07
+main outflow:2791.31
+retail inflow:106.92
+retail outflow:62.59
+
+Stock info: 
+name: ????
+code: sh600072
+main inflow:3519.74
+main outflow:1657.91
+retail inflow:186.41
+retail outflow:206.19
+
+Stock info: 
+name: ????
+code: sh600091
+main inflow:483.43
+main outflow:180.94
+retail inflow:145.49
+retail outflow:199.81
+
+Stock info: 
+name: ????
+code: sh600133
+main inflow:1602.0
+main outflow:658.54
+retail inflow:189.68
+retail outflow:188.59
+
+Stock info: 
+name: ????
+code: sh600165
+main inflow:70.18
+main outflow:0.0
+retail inflow:34.02
+retail outflow:0.0
+
+Stock info: 
+name: ???
+code: sh600184
+main inflow:5194.4
+main outflow:2561.63
+retail inflow:58.96
+retail outflow:43.86
+
+Stock info: 
+name: ????
+code: sh600192
+main inflow:650.49
+main outflow:279.55
+retail inflow:298.84
+retail outflow:235.76
+
+Stock info: 
+name: ????
+code: sh600195
+main inflow:3563.71
+main outflow:1400.68
+retail inflow:148.49
+retail outflow:166.33
+
+Stock info: 
+name: ????
+code: sh600216
+main inflow:821.74
+main outflow:379.06
+retail inflow:369.65
+retail outflow:221.44
+
+Stock info: 
+name: ????
+code: sh600241
+main inflow:1404.06
+main outflow:152.52
+retail inflow:128.3
+retail outflow:195.84
+
+Stock info: 
+name: ????
+code: sh600247
+main inflow:91.74
+main outflow:0.0
+retail inflow:55.7
+retail outflow:0.0
+
+Stock info: 
+name: ???
+code: sh600249
+main inflow:642.74
+main outflow:312.26
+retail inflow:231.92
+retail outflow:192.47
+
+Stock info: 
+name: ???
+code: sh600275
+main inflow:1094.58
+main outflow:517.58
+retail inflow:288.62
+retail outflow:202.89
+
+Stock info: 
+name: ????
+code: sh600280
+main inflow:285.17
+main outflow:0.0
+retail inflow:32.48
+retail outflow:0.0
+
+Stock info: 
+name: ????
+code: sh600290
+main inflow:47991.3
+main outflow:9164.28
+retail inflow:42.02
+retail outflow:0.0
+
+Stock info: 
+name: ????
+code: sh600300
+main inflow:2006.68
+main outflow:856.17
+retail inflow:264.86
+retail outflow:200.56
+
+Stock info: 
+name: ????
+code: sh600337
+main inflow:223.9
+main outflow:62.26
+retail inflow:251.54
+retail outflow:102.21
+
+Stock info: 
+name: ????
+code: sh600392
+main inflow:4899.56
+main outflow:0.0
+retail inflow:311.23
+retail outflow:0.0
+
+Stock info: 
+name: ????
+code: sh600403
+main inflow:93.16
+main outflow:38.54
+retail inflow:128.01
+retail outflow:147.6
+
+Stock info: 
+name: ????
+code: sh600418
+main inflow:122.42
+main outflow:0.0
+retail inflow:93.71
+retail outflow:0.0
+
+Stock info: 
+name: ????
+code: sh600421
+main inflow:250.46
+main outflow:57.21
+retail inflow:173.47
+retail outflow:125.53
+
+Stock info: 
+name: ????
+code: sh600423
+main inflow:1828.39
+main outflow:731.55
+retail inflow:228.81
+retail outflow:182.53
+
+Stock info: 
+name: ????
+code: sh600452
+main inflow:246.64
+main outflow:69.95
+retail inflow:189.66
+retail outflow:111.01
+
+Stock info: 
+name: ????
+code: sh600511
+main inflow:1437.06
+main outflow:685.22
+retail inflow:231.03
+retail outflow:164.74
+
+Stock info: 
+name: ????
+code: sh600521
+main inflow:2780.49
+main outflow:899.27
+retail inflow:178.16
+retail outflow:102.9
+
+Stock info: 
+name: ????
+code: sh600537
+main inflow:1941.83
+main outflow:946.94
+retail inflow:301.67
+retail outflow:153.17
+
+Stock info: 
+name: ????
+code: sh600567
+main inflow:190.55
+main outflow:0.0
+retail inflow:114.16
+retail outflow:0.0
+
+Stock info: 
+name: ????
+code: sh600612
+main inflow:34.31
+main outflow:7.53
+retail inflow:131.76
+retail outflow:76.09
+
+Stock info: 
+name: ????
+code: sh600619
+main inflow:302.44
+main outflow:114.3
+retail inflow:181.02
+retail outflow:210.06
+
+Stock info: 
+name: ????
+code: sh600644
+main inflow:121.24
+main outflow:37.64
+retail inflow:186.4
+retail outflow:124.55
+
+Stock info: 
+name: ????
+code: sh600650
+main inflow:1976.6
+main outflow:986.31
+retail inflow:253.64
+retail outflow:91.58
+
+Stock info: 
+name: ????
+code: sh600651
+main inflow:14662.59
+main outflow:6020.65
+retail inflow:54.92
+retail outflow:35.63
+
+Stock info: 
+name: ???
+code: sh600663
+main inflow:2974.17
+main outflow:1416.36
+retail inflow:231.63
+retail outflow:108.88
+
+Stock info: 
+name: ????
+code: sh600697
+main inflow:241.04
+main outflow:115.25
+retail inflow:117.4
+retail outflow:104.84
+
+Stock info: 
+name: ????
+code: sh600708
+main inflow:1664.86
+main outflow:654.34
+retail inflow:283.93
+retail outflow:212.98
+
+Stock info: 
+name: ST??
+code: sh600714
+main inflow:211.19
+main outflow:91.67
+retail inflow:226.18
+retail outflow:138.77
+
+Stock info: 
+name: ST??
+code: sh600715
+main inflow:2016.22
+main outflow:850.32
+retail inflow:214.13
+retail outflow:77.3
+
+Stock info: 
+name: ????
+code: sh600727
+main inflow:415.51
+main outflow:171.75
+retail inflow:270.0
+retail outflow:201.96
+
+Stock info: 
+name: ????
+code: sh600730
+main inflow:12782.1
+main outflow:5483.71
+retail inflow:52.95
+retail outflow:65.13
+
+Stock info: 
+name: ????
+code: sh600740
+main inflow:527.37
+main outflow:258.94
+retail inflow:232.05
+retail outflow:241.43
+
+Stock info: 
+name: ????
+code: sh600761
+main inflow:220.89
+main outflow:90.96
+retail inflow:138.48
+retail outflow:195.27
+
+Stock info: 
+name: ????
+code: sh600791
+main inflow:360.42
+main outflow:162.69
+retail inflow:191.84
+retail outflow:285.13
+
+Stock info: 
+name: ????
+code: sh600792
+main inflow:316.37
+main outflow:78.02
+retail inflow:208.18
+retail outflow:230.91
+
+Stock info: 
+name: ????
+code: sh600796
+main inflow:910.23
+main outflow:428.16
+retail inflow:230.4
+retail outflow:230.5
+
+Stock info: 
+name: ???
+code: sh600804
+main inflow:1437.24
+main outflow:0.0
+retail inflow:118.26
+retail outflow:0.0
+
+Stock info: 
+name: ???
+code: sh600830
+main inflow:1287.07
+main outflow:614.19
+retail inflow:205.42
+retail outflow:157.18
+
+Stock info: 
+name: ????
+code: sh600831
+main inflow:1143.17
+main outflow:471.79
+retail inflow:237.14
+retail outflow:180.49
+
+Stock info: 
+name: ST??
+code: sh600844
+main inflow:1118.85
+main outflow:537.65
+retail inflow:250.58
+retail outflow:186.76
+
+Stock info: 
+name: ST???
+code: sh600847
+main inflow:279.2
+main outflow:108.48
+retail inflow:163.01
+retail outflow:178.38
+
+Stock info: 
+name: ????
+code: sh600877
+main inflow:1960.66
+main outflow:909.93
+retail inflow:282.93
+retail outflow:181.93
+
+Stock info: 
+name: ????
+code: sh600885
+main inflow:78.22
+main outflow:36.86
+retail inflow:144.47
+retail outflow:119.09
+
+Stock info: 
+name: ST??
+code: sh600890
+main inflow:60.85
+main outflow:0.0
+retail inflow:22.58
+retail outflow:0.0
+
+Stock info: 
+name: ????
+code: sh600962
+main inflow:2045.83
+main outflow:0.0
+retail inflow:173.1
+retail outflow:0.0
+
+Stock info: 
+name: ????
+code: sh600971
+main inflow:209.08
+main outflow:99.28
+retail inflow:199.81
+retail outflow:125.81
+
+Stock info: 
+name: ????
+code: sh600979
+main inflow:956.07
+main outflow:367.2
+retail inflow:317.75
+retail outflow:192.79
+

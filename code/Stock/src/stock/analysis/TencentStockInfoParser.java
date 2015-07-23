@@ -1,14 +1,18 @@
 package stock.analysis;
 
+import org.apache.log4j.Logger;
+
 import stock.vo.Stock;
 import stock.vo.StockInfo;
 
 public class TencentStockInfoParser implements InfoParser {
+	
+	Logger logger = Logger.getLogger(TencentStockInfoParser.class);
 
 	public StockInfo parseStockInfo(Stock stock, String info) throws Exception {
 		// TODO Auto-generated method stub
 		StockInfo stockInfo = new StockInfo(stock);
-		System.out.println(info);
+		logger.debug(info);
 		parseStockInfo(stockInfo, info);
 		return stockInfo;
 	}
