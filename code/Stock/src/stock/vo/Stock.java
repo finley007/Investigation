@@ -7,6 +7,15 @@ package stock.vo;
  */
 public class Stock {
 	
+	public Stock() {
+		
+	}
+	
+	public Stock(String code, String name) {
+		this.code = code;
+		this.name = name;
+	}
+	
 	private String code;
 	
 	private String name;

@@ -8,6 +8,7 @@ import java.util.List;
 
 import stock.db.connect.DBConnector;
 import stock.vo.Stock;
+import stock.vo.StockInfo;
 
 public class DBQueryImpl implements DBQuery {
 	
@@ -30,7 +31,7 @@ public class DBQueryImpl implements DBQuery {
 		}
 		if (conn != null && !conn.isClosed()) {
 			Statement statement = conn.createStatement();
-			String sql = "select * from stock";
+			String sql = "select * from stock order by code";
 			ResultSet rs = statement.executeQuery(sql);  
 			while (rs.next()) {
 				Stock stock = new Stock();
@@ -44,4 +45,27 @@ public class DBQueryImpl implements DBQuery {
 		return result;
 	}
 	
+	public List<StockInfo> getMyStock() throws Exception {
+		List<StockInfo> result = new ArrayList<StockInfo>();
+		Connection conn = null;
+		if (connector != null) {
+			conn = this.connector.getConnection();
+		}
+		if (conn != null && !conn.isClosed()) {
+			Statement statement = conn.createStatement();
+			String sql = "select * from my_stock t where t.status = 1 order by t.stock_id";
+			ResultSet rs = statement.executeQuery(sql);  
+			while (rs.next()) {
+				String code = rs.getString("stock_id");
+				String name = rs.getString("stock_id");
+				StockInfo stock = new StockInfo(new Stock(code, name));
+				result.add(stock);
+			}  
+			rs.close();  
+			conn.close();
+		}
+		return result;
+	}
+	
 }
+ 
