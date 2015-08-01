@@ -1,10 +1,11 @@
 package stock.db;
 
 import java.util.List;
+import java.util.Map;
 
 import stock.db.connect.DBConnector;
+import stock.vo.MyStockInfo;
 import stock.vo.Stock;
-import stock.vo.StockInfo;
 
 /**
  * @author liuli
@@ -20,6 +21,12 @@ public interface DBQuery {
 	
 	public List<Stock> getStockList() throws Exception;
 	
-	public List<StockInfo> getMyStock() throws Exception;
+	public List<MyStockInfo> getMyStock() throws Exception;
+	
+	public MyStockInfo getMyStockByCode(String code) throws Exception;
+	
+	public void addMyStock(MyStockInfo info) throws Exception;
+	
+	public Map<String, String> getStockCodeNamePair() throws Exception;
 
 }

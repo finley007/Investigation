@@ -1,5 +1,7 @@
 package stock.vo;
 
+import stock.cache.StockCache;
+
 /**
  * @author liuli
  *
@@ -11,9 +13,13 @@ public class Stock {
 		
 	}
 	
-	public Stock(String code, String name) {
+	public Stock(String code) {
 		this.code = code;
-		this.name = name;
+		try {
+			this.name = StockCache.getNameByCode(code);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private String code;

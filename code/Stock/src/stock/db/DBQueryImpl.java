@@ -1,14 +1,20 @@
 package stock.db;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import stock.db.connect.DBConnector;
+import stock.util.StockConstants;
+import stock.util.StockUtils;
+import stock.vo.MyStockInfo;
 import stock.vo.Stock;
-import stock.vo.StockInfo;
 
 public class DBQueryImpl implements DBQuery {
 	
@@ -21,50 +27,97 @@ public class DBQueryImpl implements DBQuery {
 	public void setConn(DBConnector connector) {
 		this.connector = connector;
 	}
+	
+	private Connection getConnection() throws Exception {
+		Connection conn = null;
+		if (connector != null) {
+			conn = this.connector.getConnection();
+		}
+		if (conn != null && !conn.isClosed()) {
+			return conn;
+		} else {
+			throw new Exception("DB connection init error!!");
+		}
+	}
 
 	public List<Stock> getStockList() throws Exception {
 		// TODO Auto-generated method stub
 		List<Stock> result = new ArrayList<Stock>();
-		Connection conn = null;
-		if (connector != null) {
-			conn = this.connector.getConnection();
-		}
-		if (conn != null && !conn.isClosed()) {
-			Statement statement = conn.createStatement();
-			String sql = "select * from stock order by code";
-			ResultSet rs = statement.executeQuery(sql);  
-			while (rs.next()) {
-				Stock stock = new Stock();
-				stock.setCode(rs.getString("code"));
-				stock.setName(rs.getString("name"));
-				result.add(stock);
-			}  
-			rs.close();  
-			conn.close();
-		}
+		Connection conn = getConnection();
+		Statement statement = conn.createStatement();
+		String sql = "select * from stock order by code";
+		ResultSet rs = statement.executeQuery(sql);  
+		while (rs.next()) {
+			Stock stock = new Stock();
+			stock.setCode(rs.getString("code"));
+			stock.setName(rs.getString("name"));
+			result.add(stock);
+		}  
+		rs.close();  
+		conn.close();
 		return result;
 	}
 	
-	public List<StockInfo> getMyStock() throws Exception {
-		List<StockInfo> result = new ArrayList<StockInfo>();
-		Connection conn = null;
-		if (connector != null) {
-			conn = this.connector.getConnection();
-		}
-		if (conn != null && !conn.isClosed()) {
-			Statement statement = conn.createStatement();
-			String sql = "select * from my_stock t where t.status = 1 order by t.stock_id";
-			ResultSet rs = statement.executeQuery(sql);  
-			while (rs.next()) {
-				String code = rs.getString("stock_id");
-				String name = rs.getString("stock_id");
-				StockInfo stock = new StockInfo(new Stock(code, name));
-				result.add(stock);
-			}  
-			rs.close();  
-			conn.close();
-		}
+	public List<MyStockInfo> getMyStock() throws Exception {
+		List<MyStockInfo> result = new ArrayList<MyStockInfo>();
+		Connection conn = getConnection();
+		Statement statement = conn.createStatement();
+		String sql = "select * from my_stock t where t.status = 1 order by t.stock_code";
+		ResultSet rs = statement.executeQuery(sql);  
+		while (rs.next()) {
+			String code = rs.getString("stock_code");
+			MyStockInfo stock = new MyStockInfo(new Stock(code));
+			stock.initMyStockInfo(rs);
+			result.add(stock);
+		}  
+		rs.close();  
+		conn.close();
 		return result;
+	}
+	
+	public MyStockInfo getMyStockByCode(String code) throws Exception {
+		Connection conn = getConnection();
+		PreparedStatement statement = conn.prepareStatement("select * from my_stock t where t.stock_code = ?");
+		statement.setString(1, code);
+		ResultSet rs = statement.executeQuery();  
+		if (rs.next()) {
+			String stock_code = rs.getString("stock_code");
+			MyStockInfo stock = new MyStockInfo(new Stock(stock_code));
+			stock.initMyStockInfo(rs);
+			return stock;
+		}  
+		rs.close();  
+		conn.close();
+		return null;
+	}
+	
+	public void addMyStock(MyStockInfo info) throws Exception {
+		Connection conn = getConnection();
+		PreparedStatement statement = conn.prepareStatement("insert into my_stock values (?,?,?,?,?,?)");
+		statement.setString(1, StockUtils.createTransactionId(info.getStock().getCode()));
+		statement.setString(2, info.getStock().getCode());
+		statement.setDouble(3, info.getBuyingPrice());
+		statement.setInt(4, info.getQuantity());
+		statement.setTimestamp(5, new Timestamp(info.getBuyingTime().getTime()));
+		statement.setInt(6, StockConstants.MY_STOCK_STATUS_IN);
+		statement.execute();
+	}
+	
+	public Map<String, String> getStockCodeNamePair() throws Exception {
+		Map<String, String> result = new HashMap<String, String>();
+		Connection conn = getConnection();
+		Statement statement = conn.createStatement();
+		String sql = "select * from stock t order by t.code";
+		ResultSet rs = statement.executeQuery(sql);  
+		while (rs.next()) {
+			String code = rs.getString("code");
+			String name = rs.getString("name");
+			result.put(code, name);
+		}  
+		rs.close();
+		conn.close();
+		return result;
+		
 	}
 	
 }

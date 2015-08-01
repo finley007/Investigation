@@ -11,23 +11,23 @@ import java.util.Date;
  */
 public class StockInfo {
 	
-	private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); 
+	protected static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); 
 	
 	public StockInfo(Stock stock) {
 		this.stock = stock;
 	}
 	
-	private Stock stock;
+	protected Stock stock;
 	
-	private Date time;
+	protected Date time;
 	
-	private Double mainInflow = 0.0;
+	protected Double mainInflow = 0.0;
 	
-	private Double mainOutflow = 0.0;
+	protected Double mainOutflow = 0.0;
 	
-	private Double retailInflow = 0.0;
+	protected Double retailInflow = 0.0;
 	
-	private Double retailOutflow = 0.0;
+	protected Double retailOutflow = 0.0;
 
 	public Date getTime() {
 		return time;
