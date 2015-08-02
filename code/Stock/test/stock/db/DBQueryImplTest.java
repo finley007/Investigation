@@ -46,8 +46,8 @@ public class DBQueryImplTest {
 	@Test
 	public void testGetMyStockByCode() {
 		try {
-			StockInfo stock = query.getMyStockByCode("600731");
-			Assert.assertEquals(stock.getStock().getCode(),"600731");
+			StockInfo stock = query.getMyStockByTransId("20150731220735636sh600278");
+			Assert.assertEquals(stock.getCode(),"sh600278");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -56,7 +56,8 @@ public class DBQueryImplTest {
 	@Test
 	public void testAddMyStock() {
 		try {
-			MyStockInfo stock = new MyStockInfo(new Stock("aa"));
+			MyStockInfo stock = new MyStockInfo();
+			stock.setCode("aa");
 			stock.setBuyingPrice(22.6);
 			stock.setQuantity(800);
 			stock.setBuyingTime(new Date());

@@ -5,10 +5,16 @@ import java.util.Date;
 
 public class MyStockInfo extends StockInfo {
 	
-	public MyStockInfo(Stock stock) {
-		super(stock);
-	}
+	private String transId;
 	
+	public String getTransId() {
+		return transId;
+	}
+
+	public void setTransId(String transId) {
+		this.transId = transId;
+	}
+
 	private Double buyingPrice;
 	
 	public Double getBuyingPrice() {
@@ -40,14 +46,17 @@ public class MyStockInfo extends StockInfo {
 	private Date buyingTime;
 	
 	public void initMyStockInfo(ResultSet rs) throws Exception {
+		String code = rs.getString("stock_code");
+		String transId = rs.getString("transaction_id");
 		Double price = rs.getDouble("buy_price");
 		Integer quantity = rs.getInt("quantity");
 		rs.getLong("buy_time");
 		Date date = new Date(rs.getLong("buy_time"));
+		this.setCode(code);
+		this.setTransId(transId);
 		this.setBuyingPrice(price);
 		this.setQuantity(quantity);
 		this.setBuyingTime(date);
 	}
 	
-
 }

@@ -65,8 +65,7 @@ public class DBQueryImpl implements DBQuery {
 		String sql = "select * from my_stock t where t.status = 1 order by t.stock_code";
 		ResultSet rs = statement.executeQuery(sql);  
 		while (rs.next()) {
-			String code = rs.getString("stock_code");
-			MyStockInfo stock = new MyStockInfo(new Stock(code));
+			MyStockInfo stock = new MyStockInfo();
 			stock.initMyStockInfo(rs);
 			result.add(stock);
 		}  
@@ -75,14 +74,13 @@ public class DBQueryImpl implements DBQuery {
 		return result;
 	}
 	
-	public MyStockInfo getMyStockByCode(String code) throws Exception {
+	public MyStockInfo getMyStockByTransId(String transId) throws Exception {
 		Connection conn = getConnection();
-		PreparedStatement statement = conn.prepareStatement("select * from my_stock t where t.stock_code = ?");
-		statement.setString(1, code);
+		PreparedStatement statement = conn.prepareStatement("select * from my_stock t where t.transaction_id = ?");
+		statement.setString(1, transId);
 		ResultSet rs = statement.executeQuery();  
 		if (rs.next()) {
-			String stock_code = rs.getString("stock_code");
-			MyStockInfo stock = new MyStockInfo(new Stock(stock_code));
+			MyStockInfo stock = new MyStockInfo();
 			stock.initMyStockInfo(rs);
 			return stock;
 		}  
@@ -94,13 +92,16 @@ public class DBQueryImpl implements DBQuery {
 	public void addMyStock(MyStockInfo info) throws Exception {
 		Connection conn = getConnection();
 		PreparedStatement statement = conn.prepareStatement("insert into my_stock values (?,?,?,?,?,?)");
-		statement.setString(1, StockUtils.createTransactionId(info.getStock().getCode()));
-		statement.setString(2, info.getStock().getCode());
+		statement.setString(1, StockUtils.createTransactionId(info.getCode()));
+		statement.setString(2, info.getCode());
 		statement.setDouble(3, info.getBuyingPrice());
 		statement.setInt(4, info.getQuantity());
 		statement.setTimestamp(5, new Timestamp(info.getBuyingTime().getTime()));
 		statement.setInt(6, StockConstants.MY_STOCK_STATUS_IN);
 		statement.execute();
+	}
+	
+	public void updateMyStock(MyStockInfo info) throws Exception {
 	}
 	
 	public Map<String, String> getStockCodeNamePair() throws Exception {

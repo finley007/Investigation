@@ -23,9 +23,11 @@ public interface DBQuery {
 	
 	public List<MyStockInfo> getMyStock() throws Exception;
 	
-	public MyStockInfo getMyStockByCode(String code) throws Exception;
+	public MyStockInfo getMyStockByTransId(String transId) throws Exception;
 	
 	public void addMyStock(MyStockInfo info) throws Exception;
+	
+	public void updateMyStock(MyStockInfo info) throws Exception;
 	
 	public Map<String, String> getStockCodeNamePair() throws Exception;
 

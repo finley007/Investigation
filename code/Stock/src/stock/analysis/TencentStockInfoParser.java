@@ -11,7 +11,7 @@ public class TencentStockInfoParser implements InfoParser {
 
 	public StockInfo parseStockInfo(Stock stock, String info) throws Exception {
 		// TODO Auto-generated method stub
-		StockInfo stockInfo = new StockInfo(stock);
+		StockInfo stockInfo = new StockInfo();
 		logger.debug(info);
 		parseStockInfo(stockInfo, info);
 		return stockInfo;

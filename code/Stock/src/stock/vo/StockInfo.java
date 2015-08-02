@@ -1,6 +1,5 @@
 package stock.vo;
 
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -9,15 +8,9 @@ import java.util.Date;
  *
  * Stock information VO
  */
-public class StockInfo {
+public class StockInfo extends Stock {
 	
 	protected static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); 
-	
-	public StockInfo(Stock stock) {
-		this.stock = stock;
-	}
-	
-	protected Stock stock;
 	
 	protected Date time;
 	
@@ -41,14 +34,6 @@ public class StockInfo {
 		return mainInflow;
 	}
 	
-	public Stock getStock() {
-		return stock;
-	}
-
-	public void setStock(Stock stock) {
-		this.stock = stock;
-	}
-
 	public void setMainInflow(Double mainInflow) {
 		this.mainInflow = mainInflow;
 	}
@@ -79,8 +64,8 @@ public class StockInfo {
 	
 	public String toString() {
 		StringBuffer sb = new StringBuffer("Stock info: \n");
-		sb.append("name: " + this.stock.getName() + "\n");
-		sb.append("code: " + this.stock.getCode() + "\n");
+		sb.append("name: " + this.getName() + "\n");
+		sb.append("code: " + this.getCode() + "\n");
 		sb.append("main inflow:" + this.mainInflow + "\n");
 		sb.append("main outflow:" + this.mainOutflow + "\n");
 		sb.append("retail inflow:" + this.retailInflow + "\n");
