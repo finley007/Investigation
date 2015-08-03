@@ -25,6 +25,8 @@ public interface DBQuery {
 	
 	public MyStockInfo getMyStockByTransId(String transId) throws Exception;
 	
+	public MyStockInfo getMyStockByCode(String code) throws Exception;
+	
 	public void addMyStock(MyStockInfo info) throws Exception;
 	
 	public void updateMyStock(MyStockInfo info) throws Exception;

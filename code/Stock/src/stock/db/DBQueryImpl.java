@@ -103,6 +103,19 @@ public class DBQueryImpl implements DBQuery {
 		return null;
 	}
 	
+	public MyStockInfo getMyStockByCode(String code) throws Exception {
+		Connection conn = getConnection();
+		PreparedStatement statement = conn.prepareStatement("select * from my_stock t where t.STOCK_CODE = ? and t.STATUS = 1");
+		statement.setString(1, code);
+		ResultSet rs = statement.executeQuery();  
+		if (rs.next()) {
+			return initStock(rs);
+		}  
+		rs.close();  
+		conn.close();
+		return null;
+	}
+	
 	public void addMyStock(MyStockInfo info) throws Exception {
 		Connection conn = getConnection();
 		PreparedStatement statement = conn.prepareStatement("insert into my_stock values (?,?,?,?,?,?)");
