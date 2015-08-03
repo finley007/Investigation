@@ -3,9 +3,11 @@ package stock.db;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,13 +67,27 @@ public class DBQueryImpl implements DBQuery {
 		String sql = "select * from my_stock t where t.status = 1 order by t.stock_code";
 		ResultSet rs = statement.executeQuery(sql);  
 		while (rs.next()) {
-			MyStockInfo stock = new MyStockInfo();
-			stock.initMyStockInfo(rs);
+			MyStockInfo stock = initStock(rs);
 			result.add(stock);
 		}  
 		rs.close();  
 		conn.close();
 		return result;
+	}
+
+	private MyStockInfo initStock(ResultSet rs) throws SQLException {
+		MyStockInfo stock = new MyStockInfo();
+		String code = rs.getString("stock_code");
+		String transId = rs.getString("transaction_id");
+		Double price = rs.getDouble("buy_price");
+		Integer quantity = rs.getInt("quantity");
+		Date date = rs.getDate("buy_time");
+		stock.setCode(code);
+		stock.setTransId(transId);
+		stock.setBuyingPrice(price);
+		stock.setQuantity(quantity);
+		stock.setBuyingTime(date);
+		return stock;
 	}
 	
 	public MyStockInfo getMyStockByTransId(String transId) throws Exception {
@@ -80,9 +96,7 @@ public class DBQueryImpl implements DBQuery {
 		statement.setString(1, transId);
 		ResultSet rs = statement.executeQuery();  
 		if (rs.next()) {
-			MyStockInfo stock = new MyStockInfo();
-			stock.initMyStockInfo(rs);
-			return stock;
+			return initStock(rs);
 		}  
 		rs.close();  
 		conn.close();
@@ -96,7 +110,7 @@ public class DBQueryImpl implements DBQuery {
 		statement.setString(2, info.getCode());
 		statement.setDouble(3, info.getBuyingPrice());
 		statement.setInt(4, info.getQuantity());
-		statement.setTimestamp(5, new Timestamp(info.getBuyingTime().getTime()));
+		statement.setTimestamp(5, Timestamp.valueOf(StockUtils.getDateString(info.getBuyingTime())));
 		statement.setInt(6, StockConstants.MY_STOCK_STATUS_IN);
 		statement.execute();
 	}

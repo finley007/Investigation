@@ -1,6 +1,5 @@
 package stock.analysis;
 
-import stock.vo.Stock;
 import stock.vo.StockInfo;
 
 /**
@@ -10,6 +9,6 @@ import stock.vo.StockInfo;
  */
 public interface InfoParser {
 	
-	public StockInfo parseStockInfo(Stock stock, String info) throws Exception;
+	public void parseStockInfo(StockInfo stock, String info) throws Exception;
 
 }

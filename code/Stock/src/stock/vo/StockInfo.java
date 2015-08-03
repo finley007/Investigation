@@ -10,6 +10,14 @@ import java.util.Date;
  */
 public class StockInfo extends Stock {
 	
+	public StockInfo() {
+		
+	}
+	
+	public StockInfo(Stock stock) {
+		this.code = stock.getCode();
+	}
+	
 	protected static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); 
 	
 	protected Date time;
@@ -21,6 +29,16 @@ public class StockInfo extends Stock {
 	protected Double retailInflow = 0.0;
 	
 	protected Double retailOutflow = 0.0;
+	
+	protected Double currentPrice = 0.0;
+
+	public Double getCurrentPrice() {
+		return currentPrice;
+	}
+
+	public void setCurrentPrice(Double currentPrice) {
+		this.currentPrice = currentPrice;
+	}
 
 	public Date getTime() {
 		return time;

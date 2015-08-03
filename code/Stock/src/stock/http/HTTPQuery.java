@@ -1,6 +1,5 @@
 package stock.http;
 
-import stock.vo.Stock;
 import stock.vo.StockInfo;
 
 /**
@@ -10,7 +9,7 @@ import stock.vo.StockInfo;
  */
 public interface HTTPQuery {
 	
-	public StockInfo getStockInfo(Stock stock) throws Exception;
+	public void richStockInfo(StockInfo stock) throws Exception;
 	
 	public void setHTTPCaller(HTTPCaller caller);
 	

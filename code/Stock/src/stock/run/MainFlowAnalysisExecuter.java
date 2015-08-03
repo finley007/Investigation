@@ -13,7 +13,7 @@ import stock.db.connect.DBConnector;
 import stock.db.connect.MysqlConnector;
 import stock.http.HTTPCaller;
 import stock.http.HTTPQuery;
-import stock.http.impl.TencentHTTPQuery;
+import stock.http.impl.tencent.TencentHTTPFlowQuery;
 import stock.rule.MainInputFlowRule;
 import stock.rule.Rule;
 import stock.vo.Stock;
@@ -28,8 +28,6 @@ public class MainFlowAnalysisExecuter extends BaseExcecuter{
 	
 	private static Logger logger = LogManager.getLogger(MainFlowAnalysisExecuter.class);  
 	
-	private static String URL_TEMPLATE = "http://qt.gtimg.cn/q=ff_{0}";
-	
 	public void excecute() {
 		DBConnector connector = new MysqlConnector();
 		DBQuery query = new DBQueryImpl();
@@ -40,12 +38,10 @@ public class MainFlowAnalysisExecuter extends BaseExcecuter{
 			if (stocks != null && stocks.size() > 0) {
 				for (Stock stock : stocks) {
 					logger.debug("Stock name: " + stock.getName() + " and code: " + stock.getCode());
-					HTTPCaller caller = HTTPCaller.getIns(HTTPCaller.Method.Get);
-					caller.setUrl(createURL(stock));
-					HTTPQuery httpQuery = new TencentHTTPQuery();
-					httpQuery.setHTTPCaller(caller);
+					HTTPQuery httpQuery = new TencentHTTPFlowQuery();
 					try {
-						StockInfo info = httpQuery.getStockInfo(stock);
+						StockInfo info = new StockInfo(stock);
+						httpQuery.richStockInfo(info);
 						logger.debug(info.toString());
 						Rule rule = new MainInputFlowRule();
 						if (rule.isSatisfy(info)) {
@@ -64,10 +60,6 @@ public class MainFlowAnalysisExecuter extends BaseExcecuter{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-	
-	private static String createURL(Stock stock) {
-		return MessageFormat.format(URL_TEMPLATE, new Object[]{stock.getCode()});
 	}
 
 }

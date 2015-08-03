@@ -3,10 +3,9 @@ package stock.http.impl;
 import stock.analysis.InfoParser;
 import stock.http.HTTPCaller;
 import stock.http.HTTPQuery;
-import stock.vo.Stock;
 import stock.vo.StockInfo;
 
-public class BaseHTTPQuery implements HTTPQuery {
+public abstract class BaseHTTPQuery implements HTTPQuery {
 	
 	protected InfoParser parser;
 	
@@ -20,9 +19,29 @@ public class BaseHTTPQuery implements HTTPQuery {
 
 	protected HTTPCaller caller;
 
-	public StockInfo getStockInfo(Stock stock) throws Exception {
+	public void richStockInfo(StockInfo stock) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		if (caller == null) {
+			caller = createGetCaller(stock);
+		}
+		String result = caller.callHTTPServ(null);
+		this.parser.parseStockInfo(stock, result);
+	}
+	
+	protected abstract String getURL(StockInfo stock);
+	
+	protected HTTPCaller createGetCaller(StockInfo stock) {
+		HTTPCaller caller = HTTPCaller.getIns(HTTPCaller.Method.Get);
+		String url = getURL(stock);
+		caller.setUrl(url);
+		return caller;
+	}
+	
+	protected HTTPCaller createPostCaller(StockInfo stock) {
+		HTTPCaller caller = HTTPCaller.getIns(HTTPCaller.Method.Post);
+		String url = getURL(stock);
+		caller.setUrl(url);
+		return caller;
 	}
 
 }
