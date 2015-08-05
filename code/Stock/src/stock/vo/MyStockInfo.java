@@ -7,7 +7,7 @@ import stock.util.StockUtils;
 
 public class MyStockInfo extends StockInfo {
 	
-	private String transId;
+	private String transId = "";
 	
 	protected Double profit = 0.0;
 	

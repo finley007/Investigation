@@ -56,6 +56,7 @@ public class MainFlowAnalysisExecuter extends BaseExcecuter{
 			logger.info("The stocks to be checked: ");
 			for (StockInfo info : resultSet) {
 				logger.info(info.toString());
+				Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler http://finance.sina.com.cn/realstock/company/" + info.getCode() + "/nc.shtml");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

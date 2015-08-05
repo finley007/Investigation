@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import stock.db.connect.DBConnector;
 import stock.util.StockConstants;
@@ -119,16 +120,55 @@ public class DBQueryImpl implements DBQuery {
 	public void addMyStock(MyStockInfo info) throws Exception {
 		Connection conn = getConnection();
 		PreparedStatement statement = conn.prepareStatement("insert into my_stock values (?,?,?,?,?,?)");
-		statement.setString(1, StockUtils.createTransactionId(info.getCode()));
+		String transId = StockUtils.createTransactionId(info.getCode());
+		info.setTransId(transId);
+		statement.setString(1, transId);
 		statement.setString(2, info.getCode());
 		statement.setDouble(3, info.getBuyingPrice());
 		statement.setInt(4, info.getQuantity());
 		statement.setTimestamp(5, Timestamp.valueOf(StockUtils.getDateString(info.getBuyingTime())));
 		statement.setInt(6, StockConstants.MY_STOCK_STATUS_IN);
 		statement.execute();
+		addAction(conn, info, StockConstants.ACTION_TYPE_BUY);
 	}
 	
-	public void updateMyStock(MyStockInfo info) throws Exception {
+	private void addAction(Connection conn, MyStockInfo info, Integer action) throws Exception {
+		PreparedStatement statement = conn.prepareStatement("insert into my_action values (?,?,?,?,?,?)");
+		statement.setString(1, info.getTransId());
+		statement.setString(2, UUID.randomUUID().toString());
+		statement.setInt(3, info.getQuantity());
+		statement.setDouble(4, info.getBuyingPrice());
+		statement.setTimestamp(5, Timestamp.valueOf(StockUtils.getDateString(info.getBuyingTime())));
+		statement.setInt(6, action);
+		statement.execute();
+	}
+	
+	public void updateMyStock(MyStockInfo info, Integer action) throws Exception {
+		Connection conn = getConnection();
+		addAction(conn, info, action);
+		MyStockInfo curInfo = getMyStockByTransId(info.getTransId());
+		PreparedStatement statement = conn.prepareStatement("update my_stock t set t.buy_price = ?, t.quantity = ?, t.status = ? where t.transaction_id = ?");
+		int status = StockConstants.MY_STOCK_STATUS_IN;
+		int quantity = 0;
+		double buyingPrice = 0.0;
+		if (action == StockConstants.ACTION_TYPE_BUY) {
+			quantity = info.getQuantity() + curInfo.getQuantity();
+			buyingPrice = (info.getBuyingPrice() * info.getQuantity() + curInfo.getBuyingPrice() * curInfo.getQuantity()) / quantity;
+		} else {
+			if (info.getQuantity().equals(curInfo.getQuantity())) { //Sold out, then buying price will save the profit
+				status = StockConstants.MY_STOCK_STATUS_OUT;
+				quantity = 0;
+				buyingPrice = ((curInfo.getBuyingPrice() * curInfo.getQuantity() - info.getBuyingPrice() * info.getQuantity()));
+			} else {
+				quantity = curInfo.getQuantity() - info.getQuantity();
+				buyingPrice = ((curInfo.getBuyingPrice() * curInfo.getQuantity() - info.getBuyingPrice() * info.getQuantity())) / quantity;
+			}
+		}
+		statement.setDouble(1, buyingPrice);
+		statement.setInt(2, quantity);
+		statement.setInt(3, status);
+		statement.setString(4, info.getTransId());
+		statement.execute();
 	}
 	
 	public Map<String, String> getStockCodeNamePair() throws Exception {

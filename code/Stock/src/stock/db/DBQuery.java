@@ -29,7 +29,7 @@ public interface DBQuery {
 	
 	public void addMyStock(MyStockInfo info) throws Exception;
 	
-	public void updateMyStock(MyStockInfo info) throws Exception;
+	public void updateMyStock(MyStockInfo info, Integer action) throws Exception;
 	
 	public Map<String, String> getStockCodeNamePair() throws Exception;
 
