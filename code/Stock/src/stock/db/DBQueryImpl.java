@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import stock.db.connect.DBConnector;
+import stock.timer.TimerConstants;
 import stock.util.StockConstants;
 import stock.util.StockUtils;
 import stock.vo.MyStockInfo;
@@ -130,7 +131,7 @@ public class DBQueryImpl implements DBQuery {
 		statement.setInt(4, info.getQuantity());
 		statement.setTimestamp(5, Timestamp.valueOf(StockUtils.getDateString(info.getBuyingTime())));
 		statement.setInt(6, StockConstants.MY_STOCK_STATUS_IN);
-		statement.setInt(7, StockConstants.NOT_MONITOR);
+		statement.setInt(7, TimerConstants.NOT_MONITOR);
 		statement.execute();
 		addAction(conn, info, StockConstants.ACTION_TYPE_BUY);
 	}
@@ -191,14 +192,11 @@ public class DBQueryImpl implements DBQuery {
 	}
 	
 	public void updateMonitorStatus(String transId, Integer isMonitor) throws Exception {
-		MyStockInfo stockInfo = getMyStockByTransId(transId);
-		if (stockInfo != null) {
-			Connection conn = getConnection();
-			PreparedStatement statement = conn.prepareStatement("update my_stock t set t.is_monitor = ? where t.transaction_id = ?");
-			statement.setInt(0, isMonitor);
-			statement.setString(1, transId);
-			statement.execute();
-		}
+		Connection conn = getConnection();
+		PreparedStatement statement = conn.prepareStatement("update my_stock t set t.is_monitor = ? where t.transaction_id = ?");
+		statement.setInt(1, isMonitor);
+		statement.setString(2, transId);
+		statement.execute();
 	}
 	
 }

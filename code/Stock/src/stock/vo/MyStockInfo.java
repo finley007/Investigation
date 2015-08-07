@@ -1,9 +1,8 @@
 package stock.vo;
 
-import java.sql.ResultSet;
 import java.util.Date;
 
-import stock.util.StockConstants;
+import stock.timer.TimerConstants;
 import stock.util.StockUtils;
 
 public class MyStockInfo extends StockInfo {
@@ -31,7 +30,7 @@ public class MyStockInfo extends StockInfo {
 	}
 	
 	public void setIsMonitor(Integer isMonitor) {
-		this.setIsMonitor(StockConstants.IS_MONITOR == isMonitor); 
+		this.setIsMonitor(TimerConstants.IS_MONITOR == isMonitor); 
 	}
 
 	public Double getProfit() {

@@ -12,7 +12,4 @@ public class StockConstants {
 	public static final Integer ACTION_TYPE_BUY = 1;
 	public static final Integer ACTION_TYPE_SELL = 0;
 	
-	public static final Integer IS_MONITOR = 1;
-	public static final Integer NOT_MONITOR = 0;
-	
 }
