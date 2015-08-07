@@ -32,5 +32,7 @@ public interface DBQuery {
 	public void updateMyStock(MyStockInfo info, Integer action) throws Exception;
 	
 	public Map<String, String> getStockCodeNamePair() throws Exception;
+	
+	public void updateMonitorStatus(String transId, Integer isMonitor) throws Exception;
 
 }

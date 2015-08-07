@@ -83,11 +83,13 @@ public class DBQueryImpl implements DBQuery {
 		Double price = rs.getDouble("buy_price");
 		Integer quantity = rs.getInt("quantity");
 		Date date = rs.getDate("buy_time");
+		Integer isMonitor = rs.getInt("is_monitor");
 		stock.setCode(code);
 		stock.setTransId(transId);
 		stock.setBuyingPrice(price);
 		stock.setQuantity(quantity);
 		stock.setBuyingTime(date);
+		stock.setIsMonitor(isMonitor);
 		return stock;
 	}
 	
@@ -119,7 +121,7 @@ public class DBQueryImpl implements DBQuery {
 	
 	public void addMyStock(MyStockInfo info) throws Exception {
 		Connection conn = getConnection();
-		PreparedStatement statement = conn.prepareStatement("insert into my_stock values (?,?,?,?,?,?)");
+		PreparedStatement statement = conn.prepareStatement("insert into my_stock values (?,?,?,?,?,?,?)");
 		String transId = StockUtils.createTransactionId(info.getCode());
 		info.setTransId(transId);
 		statement.setString(1, transId);
@@ -128,6 +130,7 @@ public class DBQueryImpl implements DBQuery {
 		statement.setInt(4, info.getQuantity());
 		statement.setTimestamp(5, Timestamp.valueOf(StockUtils.getDateString(info.getBuyingTime())));
 		statement.setInt(6, StockConstants.MY_STOCK_STATUS_IN);
+		statement.setInt(7, StockConstants.NOT_MONITOR);
 		statement.execute();
 		addAction(conn, info, StockConstants.ACTION_TYPE_BUY);
 	}
@@ -185,7 +188,17 @@ public class DBQueryImpl implements DBQuery {
 		rs.close();
 		conn.close();
 		return result;
-		
+	}
+	
+	public void updateMonitorStatus(String transId, Integer isMonitor) throws Exception {
+		MyStockInfo stockInfo = getMyStockByTransId(transId);
+		if (stockInfo != null) {
+			Connection conn = getConnection();
+			PreparedStatement statement = conn.prepareStatement("update my_stock t set t.is_monitor = ? where t.transaction_id = ?");
+			statement.setInt(0, isMonitor);
+			statement.setString(1, transId);
+			statement.execute();
+		}
 	}
 	
 }

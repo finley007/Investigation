@@ -3,6 +3,7 @@ package stock.vo;
 import java.sql.ResultSet;
 import java.util.Date;
 
+import stock.util.StockConstants;
 import stock.util.StockUtils;
 
 public class MyStockInfo extends StockInfo {
@@ -19,6 +20,20 @@ public class MyStockInfo extends StockInfo {
 	
 	private Double buyingPrice = 0.0;
 	
+	private Boolean isMonitor = false;
+	
+	public Boolean getIsMonitor() {
+		return isMonitor;
+	}
+
+	public void setIsMonitor(Boolean isMonitor) {
+		this.isMonitor = isMonitor;
+	}
+	
+	public void setIsMonitor(Integer isMonitor) {
+		this.setIsMonitor(StockConstants.IS_MONITOR == isMonitor); 
+	}
+
 	public Double getProfit() {
 		return profit;
 	}

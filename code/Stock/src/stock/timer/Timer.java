@@ -12,8 +12,6 @@ import org.quartz.SchedulerFactory;
 import org.quartz.Trigger;
 import org.quartz.impl.StdSchedulerFactory;
 
-import stock.timer.job.HelloJob;
-
 public class Timer {
 	
 	private static Scheduler sched;
@@ -35,7 +33,7 @@ public class Timer {
 	}
 	
 	public static JobDetail createJob(Class clz, String jobName, String groupName) {
-		return newJob(HelloJob.class).withIdentity(jobName, groupName).build();
+		return newJob(clz).withIdentity(jobName, groupName).build();
 	}
 	
 	public static Trigger createTrigger(String triggerName, String groupName, Date startTime, int interval) {
@@ -45,6 +43,10 @@ public class Timer {
 	
 	public static void scheduleJob(JobDetail job, Trigger trigger) throws Exception {
 		getSched().scheduleJob(job, trigger);
+	}
+	
+	public static void unscheduleJob(Trigger trigger) throws Exception {
+		getSched().unscheduleJob(trigger.getKey());
 	}
 
 }
