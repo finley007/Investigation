@@ -17,6 +17,7 @@ import stock.db.connect.DBConnector;
 import stock.timer.TimerConstants;
 import stock.util.StockConstants;
 import stock.util.StockUtils;
+import stock.vo.AlertVO;
 import stock.vo.MyStockInfo;
 import stock.vo.Stock;
 
@@ -134,6 +135,7 @@ public class DBQueryImpl implements DBQuery {
 		statement.setInt(7, TimerConstants.NOT_MONITOR);
 		statement.execute();
 		addAction(conn, info, StockConstants.ACTION_TYPE_BUY);
+		conn.close();
 	}
 	
 	private void addAction(Connection conn, MyStockInfo info, Integer action) throws Exception {
@@ -173,6 +175,7 @@ public class DBQueryImpl implements DBQuery {
 		statement.setInt(3, status);
 		statement.setString(4, info.getTransId());
 		statement.execute();
+		conn.close();
 	}
 	
 	public Map<String, String> getStockCodeNamePair() throws Exception {
@@ -197,6 +200,55 @@ public class DBQueryImpl implements DBQuery {
 		statement.setInt(1, isMonitor);
 		statement.setString(2, transId);
 		statement.execute();
+		conn.close();
+	}
+	
+	public void addAlert(String stockCode, Integer alertType, String message) throws Exception {
+		Connection conn = getConnection();
+		PreparedStatement statement = conn.prepareStatement("insert into monitor_alert values (?,?,?,?,?,?)");
+		String alertId = UUID.randomUUID().toString();
+		statement.setString(1, alertId);
+		statement.setInt(2, StockConstants.ALERT_TYPE_STOCK_DROP);
+		statement.setString(3, stockCode);
+		statement.setString(4, message);
+		statement.setInt(5, StockConstants.ALERT_STATUS_TO_NOTICE);
+		statement.setTimestamp(6, Timestamp.valueOf(StockUtils.getDateString(new Date())));
+		statement.execute();
+		conn.close();
+	}
+	
+	public List<AlertVO> readAlert() throws Exception {
+		List<AlertVO> result = new ArrayList<AlertVO>();
+		Connection conn = getConnection();
+		Statement statement = conn.createStatement();
+		String sql = "select * from monitor_alert t where t.status = " + StockConstants.ALERT_STATUS_TO_NOTICE + " order by t.alert_time desc";
+		ResultSet rs = statement.executeQuery(sql);  
+		while (rs.next()) {
+			AlertVO alertVO = new AlertVO();
+			String alertId = rs.getString("alert_id");
+			Integer alertType = rs.getInt("alert_type");
+			String stockCode = rs.getString("stock_code");
+			String message = rs.getString("message");
+			Integer status = rs.getInt("status");
+			Date alertTime = rs.getDate("alert_time");
+			alertVO.setAlertId(alertId);
+			alertVO.setAlertType(alertType);
+			alertVO.setStockCode(stockCode);
+			alertVO.setMessage(message);
+			result.add(alertVO);
+		}  
+		rs.close();  
+		conn.close();
+		return result;
+	}
+	
+	public void updateAlertStatus(String alertId, Integer status) throws Exception {
+		Connection conn = getConnection();
+		PreparedStatement statement = conn.prepareStatement("update monitor_alert t set t.status = ? where t.alert_id = ?");
+		statement.setInt(1, status);
+		statement.setString(2, alertId);
+		statement.execute();
+		conn.close();
 	}
 	
 }

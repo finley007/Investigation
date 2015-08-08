@@ -11,5 +11,9 @@ public class StockConstants {
 
 	public static final Integer ACTION_TYPE_BUY = 1;
 	public static final Integer ACTION_TYPE_SELL = 0;
+
+	public static final Integer ALERT_TYPE_STOCK_DROP = 0;
 	
+	public static final Integer ALERT_STATUS_TO_NOTICE = 0;
+	public static final Integer ALERT_STATUS_NOTICED = 1;
 }

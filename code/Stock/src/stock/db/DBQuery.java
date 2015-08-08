@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import stock.db.connect.DBConnector;
+import stock.vo.AlertVO;
 import stock.vo.MyStockInfo;
 import stock.vo.Stock;
 
@@ -35,4 +36,9 @@ public interface DBQuery {
 	
 	public void updateMonitorStatus(String transId, Integer isMonitor) throws Exception;
 
+	public void addAlert(String stockCode, Integer alertType, String message) throws Exception;
+	
+	public List<AlertVO> readAlert() throws Exception;
+	
+	public void updateAlertStatus(String alertId, Integer status) throws Exception;
 }
