@@ -1,7 +1,8 @@
-package stock.analysis;
+package stock.analysis.tencent;
 
 import org.apache.log4j.Logger;
 
+import stock.analysis.InfoParser;
 import stock.vo.StockInfo;
 
 public class TencentStockFlowParser implements InfoParser {

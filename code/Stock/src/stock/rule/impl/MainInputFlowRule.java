@@ -1,5 +1,6 @@
-package stock.rule;
+package stock.rule.impl;
 
+import stock.rule.Rule;
 import stock.vo.StockInfo;
 
 public class MainInputFlowRule implements Rule {

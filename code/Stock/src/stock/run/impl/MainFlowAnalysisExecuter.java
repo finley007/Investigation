@@ -1,4 +1,4 @@
-package stock.run;
+package stock.run.impl;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -14,8 +14,9 @@ import stock.db.connect.MysqlConnector;
 import stock.http.HTTPCaller;
 import stock.http.HTTPQuery;
 import stock.http.impl.tencent.TencentHTTPFlowQuery;
-import stock.rule.MainInputFlowRule;
 import stock.rule.Rule;
+import stock.rule.impl.MainInputFlowRule;
+import stock.run.BaseExcecuter;
 import stock.vo.Stock;
 import stock.vo.StockInfo;
 

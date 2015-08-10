@@ -2,6 +2,8 @@ package stock.vo;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author liuli
@@ -31,6 +33,8 @@ public class StockInfo extends Stock {
 	protected Double retailOutflow = 0.0;
 	
 	protected Double currentPrice = 0.0;
+	
+	protected Map<String, DailyPriceVO> dailyPrice = new HashMap<String, DailyPriceVO>();
 
 	public Double getCurrentPrice() {
 		return currentPrice;
@@ -80,6 +84,18 @@ public class StockInfo extends Stock {
 		this.retailOutflow = retailOutflow;
 	}
 	
+	public void clearDailyPrice() {
+		this.dailyPrice = new HashMap<String, DailyPriceVO>(); 
+	}
+	
+	public void addDailyPrice(String date, DailyPriceVO vo) {
+		this.dailyPrice.put(date, vo);
+	}
+	
+	public Map<String, DailyPriceVO> getDailyPrice() {
+		return dailyPrice;
+	}
+
 	public String toString() {
 		StringBuffer sb = new StringBuffer("Stock info: \n");
 		sb.append("name: " + this.getName() + "\n");
