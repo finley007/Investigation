@@ -22,4 +22,8 @@ public class StockConstants {
 	
 	public static final Integer ALERT_STATUS_TO_NOTICE = 0;
 	public static final Integer ALERT_STATUS_NOTICED = 1;
+	
+	public static final Integer FIRST_DAY_RESULT = 1;
+	public static final Integer SECOND_DAY_RESULT = 2;
+	public static final Integer THIRD_DAY_RESULT = 3;
 }

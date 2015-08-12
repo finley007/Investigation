@@ -30,8 +30,13 @@ public class TrendRule implements Rule {
 				}
 			}
 			DailyPriceVO vo1 = info.getDailyPrice().get(list.get(0));
-			DailyPriceVO vo2 = info.getDailyPrice().get(list.get(list.size() - 1));
+			DailyPriceVO vo2 = info.getDailyPrice().get(list.get(1));
 			if ((vo1.getEndPrice() - vo2.getEndPrice())/vo2.getEndPrice() < 0.1) {
+				return false;
+			}
+			Double range = vo2.getEndPrice() * 0.1 * 2;
+			if (((vo1.getEndPrice() - vo1.getStartPrice()) / range) < 0.5
+					|| vo1.getEndPrice() == vo1.getStartPrice()) {
 				return false;
 			}
 			if (vo1.getEndPrice() > 20) {

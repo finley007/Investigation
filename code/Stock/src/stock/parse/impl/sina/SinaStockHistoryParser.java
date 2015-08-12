@@ -24,11 +24,12 @@ public class SinaStockHistoryParser implements InfoParser {
 		stock.clearDailyPrice();
 		int size = StockConstants.HISTORY_DAILY_INFO_SIZE;
         Matcher matcher = pattern.matcher(info);
-        while(matcher.find() && size > 0) {
+        while (matcher.find() && size > 0) {
         	String target = matcher.group();
         	String date = getDate(target);
         	if (!"".equals(date)) {
 	        	setDailyPriceInfo(stock, target, date);
+	        	size--;
         	}
         }
 	}
@@ -37,7 +38,7 @@ public class SinaStockHistoryParser implements InfoParser {
 		DailyPriceVO vo = new DailyPriceVO(date);
 		Matcher matcher2 = pattern2.matcher(target);
 		List list = new ArrayList();
-		while(matcher2.find()) {
+		while (matcher2.find()) {
 			list.add(matcher2.group());
 		}
 		vo.setStartPrice(Double.valueOf(list.get(0).toString()));

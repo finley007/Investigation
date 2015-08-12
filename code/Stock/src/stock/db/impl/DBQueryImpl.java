@@ -268,11 +268,14 @@ public class DBQueryImpl implements DBQuery {
 	
 	public void addRuleResult(String historyId, String stockCode) throws Exception {
 		Connection conn = getConnection();
-		PreparedStatement statement = conn.prepareStatement("insert into rule_result values (?,?,?)");
+		PreparedStatement statement = conn.prepareStatement("insert into rule_result values (?,?,?,?,?,?)");
 		String id = UUID.randomUUID().toString();
 		statement.setString(1, id);
 		statement.setString(2, historyId);
 		statement.setString(3, stockCode);
+		statement.setDouble(4, 0.0);
+		statement.setDouble(5, 0.0);
+		statement.setDouble(6, 0.0);
 		statement.execute();
 		conn.close();
 	}
@@ -291,6 +294,28 @@ public class DBQueryImpl implements DBQuery {
 		rs.close();  
 		conn.close();
 		return result;
+	}
+	
+	public void updateRuleResultTrend(String historyId, String stockCode, Integer day, Double profit) throws Exception {
+		Connection conn = getConnection();
+		String dayCol = "";
+		if (day.equals(StockConstants.FIRST_DAY_RESULT)) {
+			dayCol = "first_day_trend";
+		} else if (day.equals(StockConstants.SECOND_DAY_RESULT)) {
+			dayCol = "second_day_trend";
+		} else if (day.equals(StockConstants.THIRD_DAY_RESULT)) {
+			dayCol = "third_day_trend";
+		} else {
+			return;
+		}
+		String sql = "update rule_result t set t." + dayCol + " = ? where t.history_id = ? and t.stock_code = ?";
+		PreparedStatement statement = conn.prepareStatement(sql);
+		statement.setDouble(1, profit);
+		statement.setString(2, historyId);
+		statement.setString(3, stockCode);
+		statement.execute();
+		conn.close();
+		
 	}
 	
 }

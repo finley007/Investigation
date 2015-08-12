@@ -47,4 +47,6 @@ public interface DBQuery {
 	public void addRuleResult(String historyId, String stockCode) throws Exception;
 	
 	public List<Stock> getRuleResultByHistoryId(String historyId) throws Exception;
+	
+	public void updateRuleResultTrend(String historyId, String stockCode, Integer day, Double profit) throws Exception;
 }

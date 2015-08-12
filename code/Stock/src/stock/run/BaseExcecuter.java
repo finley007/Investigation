@@ -69,6 +69,7 @@ public abstract class BaseExcecuter {
 						resultSet.add(info);
 					}
 				} catch (Exception e) {
+					e.printStackTrace();
 					logger.error("Ths stock: " + stock.getCode() + " are failed to obtain");
 				}
 			}
