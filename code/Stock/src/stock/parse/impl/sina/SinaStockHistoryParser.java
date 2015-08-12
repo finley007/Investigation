@@ -1,11 +1,11 @@
-package stock.analysis.sina;
+package stock.parse.impl.sina;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import stock.analysis.InfoParser;
+import stock.parse.InfoParser;
 import stock.util.StockConstants;
 import stock.vo.DailyPriceVO;
 import stock.vo.StockInfo;

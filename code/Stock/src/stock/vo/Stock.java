@@ -1,7 +1,7 @@
 package stock.vo;
 
 import stock.cache.StockCache;
-import stock.json.JsonHelper;
+import stock.util.JsonHelper;
 
 /**
  * @author liuli

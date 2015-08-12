@@ -1,4 +1,4 @@
-package stock.tool;
+package stock.util;
 
 import java.awt.Desktop;
 import java.net.URI;

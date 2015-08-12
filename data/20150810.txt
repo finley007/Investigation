@@ -1,0 +1,2056 @@
+The stocks to be checked: 
+Stock info: 
+name: 
+code: sh600005
+main inflow:134728.4
+main outflow:74692.5
+retail inflow:51723.7
+retail outflow:111759.4
+
+Stock info: 
+name: 
+code: sh600006
+main inflow:18082.29
+main outflow:7621.86
+retail inflow:400.51
+retail outflow:10860.95
+
+Stock info: 
+name: 
+code: sh600017
+main inflow:46983.2
+main outflow:49249.0
+retail inflow:56471.1
+retail outflow:54205.2
+
+Stock info: 
+name: 
+code: sh600029
+main inflow:235928.6
+main outflow:195410.3
+retail inflow:113008.8
+retail outflow:153527.1
+
+Stock info: 
+name: 
+code: sh600050
+main inflow:189498.9
+main outflow:107384.2
+retail inflow:25381.5
+retail outflow:107496.5
+
+Stock info: 
+name: 
+code: sh600056
+main inflow:53024.3
+main outflow:29930.4
+retail inflow:23050.06
+retail outflow:46144.0
+
+Stock info: 
+name: 
+code: sh600057
+main inflow:13412.09
+main outflow:11694.07
+retail inflow:20828.93
+retail outflow:22546.89
+
+Stock info: 
+name: 
+code: sh600070
+main inflow:10579.22
+main outflow:7232.32
+retail inflow:9977.74
+retail outflow:13324.64
+
+Stock info: 
+name: 
+code: sh600076
+main inflow:8363.96
+main outflow:6475.51
+retail inflow:13204.03
+retail outflow:15092.49
+
+Stock info: 
+name: 
+code: sh600081
+main inflow:5145.12
+main outflow:2694.65
+retail inflow:1487.27
+retail outflow:3937.74
+
+Stock info: 
+name: 
+code: sh600082
+main inflow:8355.56
+main outflow:8888.59
+retail inflow:15677.16
+retail outflow:15144.14
+
+Stock info: 
+name: 
+code: sh600084
+main inflow:15399.39
+main outflow:9649.61
+retail inflow:14908.38
+retail outflow:20658.17
+
+Stock info: 
+name: 
+code: sh600090
+main inflow:10384.99
+main outflow:8099.47
+retail inflow:17622.99
+retail outflow:19908.51
+
+Stock info: 
+name: 
+code: sh600095
+main inflow:16317.52
+main outflow:12699.82
+retail inflow:14800.53
+retail outflow:18418.27
+
+Stock info: 
+name: 
+code: sh600098
+main inflow:61657.7
+main outflow:40769.5
+retail inflow:22560.64
+retail outflow:43448.8
+
+Stock info: 
+name: 
+code: sh600103
+main inflow:16804.07
+main outflow:11564.85
+retail inflow:18950.61
+retail outflow:24189.8
+
+Stock info: 
+name: 
+code: sh600106
+main inflow:34613.2
+main outflow:28439.6
+retail inflow:19990.66
+retail outflow:26164.2
+
+Stock info: 
+name: 
+code: sh600111
+main inflow:101921.3
+main outflow:93032.7
+retail inflow:123171.5
+retail outflow:132060.1
+
+Stock info: 
+name: 
+code: sh600112
+main inflow:35824.63
+main outflow:25411.8
+retail inflow:5785.88
+retail outflow:16198.69
+
+Stock info: 
+name: 
+code: sh600115
+main inflow:248096.0
+main outflow:225110.7
+retail inflow:169641.5
+retail outflow:192627.5
+
+Stock info: 
+name: 
+code: sh600116
+main inflow:18002.0
+main outflow:16135.09
+retail inflow:17471.0
+retail outflow:19337.88
+
+Stock info: 
+name: 
+code: sh600125
+main inflow:76233.6
+main outflow:61926.5
+retail inflow:45537.1
+retail outflow:59844.2
+
+Stock info: 
+name: 
+code: sh600126
+main inflow:6311.3
+main outflow:4052.41
+retail inflow:8685.36
+retail outflow:10944.25
+
+Stock info: 
+name: 
+code: sh600127
+main inflow:44277.3
+main outflow:51562.0
+retail inflow:64348.2
+retail outflow:57063.5
+
+Stock info: 
+name: 
+code: sh600128
+main inflow:12102.95
+main outflow:9787.54
+retail inflow:11851.54
+retail outflow:14166.95
+
+Stock info: 
+name: 
+code: sh600131
+main inflow:6751.04
+main outflow:4696.76
+retail inflow:12182.2
+retail outflow:14236.49
+
+Stock info: 
+name: 
+code: sh600133
+main inflow:14807.52
+main outflow:11100.48
+retail inflow:20135.19
+retail outflow:23842.2
+
+Stock info: 
+name: 
+code: sh600143
+main inflow:57249.0
+main outflow:39071.3
+retail inflow:28979.2
+retail outflow:47156.8
+
+Stock info: 
+name: 
+code: sh600149
+main inflow:32927.9
+main outflow:24314.77
+retail inflow:24980.84
+retail outflow:33594.0
+
+Stock info: 
+name: 
+code: sh600151
+main inflow:69636.1
+main outflow:75575.9
+retail inflow:109074.7
+retail outflow:103134.8
+
+Stock info: 
+name: 
+code: sh600152
+main inflow:4866.38
+main outflow:4737.07
+retail inflow:10887.57
+retail outflow:11016.87
+
+Stock info: 
+name: 
+code: sh600156
+main inflow:14026.59
+main outflow:11130.71
+retail inflow:11049.86
+retail outflow:13945.75
+
+Stock info: 
+name: 
+code: sh600160
+main inflow:50983.6
+main outflow:40430.3
+retail inflow:29507.5
+retail outflow:40060.9
+
+Stock info: 
+name: 
+code: sh600168
+main inflow:15693.73
+main outflow:13032.84
+retail inflow:17182.77
+retail outflow:19843.66
+
+Stock info: 
+name: 
+code: sh600178
+main inflow:7730.76
+main outflow:5629.62
+retail inflow:9665.71
+retail outflow:11766.84
+
+Stock info: 
+name: 
+code: sh600179
+main inflow:16058.91
+main outflow:13777.89
+retail inflow:18875.54
+retail outflow:21156.49
+
+Stock info: 
+name: 
+code: sh600190
+main inflow:24440.77
+main outflow:14305.14
+retail inflow:15350.59
+retail outflow:25486.3
+
+Stock info: 
+name: 
+code: sh600199
+main inflow:12819.13
+main outflow:7711.19
+retail inflow:9198.68
+retail outflow:14306.61
+
+Stock info: 
+name: 
+code: sh600203
+main inflow:9520.7
+main outflow:7499.86
+retail inflow:12322.25
+retail outflow:14343.09
+
+Stock info: 
+name: 
+code: sh600206
+main inflow:51934.0
+main outflow:55457.6
+retail inflow:52328.0
+retail outflow:48804.3
+
+Stock info: 
+name: 
+code: sh600215
+main inflow:7178.28
+main outflow:7485.01
+retail inflow:11324.66
+retail outflow:11017.93
+
+Stock info: 
+name: 
+code: sh600218
+main inflow:10356.28
+main outflow:9542.71
+retail inflow:12749.34
+retail outflow:13562.91
+
+Stock info: 
+name: 
+code: sh600222
+main inflow:10630.74
+main outflow:10449.72
+retail inflow:15868.63
+retail outflow:16049.68
+
+Stock info: 
+name: 
+code: sh600223
+main inflow:13000.71
+main outflow:10670.57
+retail inflow:11954.47
+retail outflow:14284.6
+
+Stock info: 
+name: 
+code: sh600227
+main inflow:23487.01
+main outflow:15200.05
+retail inflow:20958.78
+retail outflow:29245.8
+
+Stock info: 
+name: 
+code: sh600228
+main inflow:8592.52
+main outflow:10353.36
+retail inflow:15998.78
+retail outflow:14237.95
+
+Stock info: 
+name: 
+code: sh600230
+main inflow:17175.3
+main outflow:11841.99
+retail inflow:10421.69
+retail outflow:15755.01
+
+Stock info: 
+name: 
+code: sh600235
+main inflow:10695.02
+main outflow:8977.57
+retail inflow:10375.06
+retail outflow:12092.52
+
+Stock info: 
+name: 
+code: sh600236
+main inflow:15273.38
+main outflow:8911.68
+retail inflow:25972.2
+retail outflow:32333.9
+
+Stock info: 
+name: 
+code: sh600238
+main inflow:8788.0
+main outflow:7708.18
+retail inflow:8601.76
+retail outflow:9681.57
+
+Stock info: 
+name: 
+code: sh600239
+main inflow:26256.8
+main outflow:18709.81
+retail inflow:18014.12
+retail outflow:25561.1
+
+Stock info: 
+name: 
+code: sh600240
+main inflow:35736.9
+main outflow:34012.8
+retail inflow:22316.18
+retail outflow:24040.42
+
+Stock info: 
+name: 
+code: sh600241
+main inflow:4268.16
+main outflow:4285.27
+retail inflow:6416.27
+retail outflow:6399.16
+
+Stock info: 
+name: 
+code: sh600243
+main inflow:7514.65
+main outflow:6316.9
+retail inflow:10583.32
+retail outflow:11781.07
+
+Stock info: 
+name: 
+code: sh600247
+main inflow:1781.2
+main outflow:1587.19
+retail inflow:557.77
+retail outflow:751.78
+
+Stock info: 
+name: 
+code: sh600249
+main inflow:6124.0
+main outflow:5066.02
+retail inflow:11063.08
+retail outflow:12121.06
+
+Stock info: 
+name: 
+code: sh600250
+main inflow:4372.11
+main outflow:5158.65
+retail inflow:9191.31
+retail outflow:8404.77
+
+Stock info: 
+name: 
+code: sh600257
+main inflow:15515.53
+main outflow:14352.91
+retail inflow:18899.74
+retail outflow:20062.31
+
+Stock info: 
+name: 
+code: sh600268
+main inflow:20283.56
+main outflow:18334.47
+retail inflow:31024.0
+retail outflow:32973.1
+
+Stock info: 
+name: 
+code: sh600272
+main inflow:4645.7
+main outflow:4001.86
+retail inflow:8522.49
+retail outflow:9166.34
+
+Stock info: 
+name: 
+code: sh600278
+main inflow:15296.74
+main outflow:10481.75
+retail inflow:10711.21
+retail outflow:15526.18
+
+Stock info: 
+name: 
+code: sh600280
+main inflow:36239.2
+main outflow:29259.01
+retail inflow:40207.6
+retail outflow:47187.7
+
+Stock info: 
+name: 
+code: sh600282
+main inflow:36898.3
+main outflow:22299.07
+retail inflow:25675.7
+retail outflow:40275.1
+
+Stock info: 
+name: 
+code: sh600283
+main inflow:8277.44
+main outflow:8249.04
+retail inflow:13076.47
+retail outflow:13104.88
+
+Stock info: 
+name: 
+code: sh600284
+main inflow:24324.12
+main outflow:15858.3
+retail inflow:25905.24
+retail outflow:34371.0
+
+Stock info: 
+name: 
+code: sh600285
+main inflow:24674.96
+main outflow:15213.52
+retail inflow:15327.27
+retail outflow:24788.7
+
+Stock info: 
+name: 
+code: sh600287
+main inflow:12187.62
+main outflow:9667.38
+retail inflow:19092.38
+retail outflow:21612.6
+
+Stock info: 
+name: 
+code: sh600290
+main inflow:23503.49
+main outflow:14095.7
+retail inflow:14004.58
+retail outflow:23412.34
+
+Stock info: 
+name: 
+code: sh600293
+main inflow:21281.37
+main outflow:15571.27
+retail inflow:10049.89
+retail outflow:15760.0
+
+Stock info: 
+name: 
+code: sh600299
+main inflow:12748.97
+main outflow:9921.13
+retail inflow:9009.44
+retail outflow:11837.27
+
+Stock info: 
+name: 
+code: sh600302
+main inflow:7751.22
+main outflow:5556.34
+retail inflow:8201.88
+retail outflow:10396.77
+
+Stock info: 
+name: 
+code: sh600307
+main inflow:114910.0
+main outflow:94881.9
+retail inflow:82314.7
+retail outflow:102342.8
+
+Stock info: 
+name: 
+code: sh600308
+main inflow:13494.54
+main outflow:8742.05
+retail inflow:16168.89
+retail outflow:20921.4
+
+Stock info: 
+name: 
+code: sh600313
+main inflow:17804.91
+main outflow:13596.61
+retail inflow:10984.94
+retail outflow:15193.27
+
+Stock info: 
+name: 
+code: sh600327
+main inflow:12463.26
+main outflow:10272.25
+retail inflow:11184.39
+retail outflow:13375.39
+
+Stock info: 
+name: 
+code: sh600328
+main inflow:24832.86
+main outflow:21418.31
+retail inflow:27433.3
+retail outflow:30847.93
+
+Stock info: 
+name: 
+code: sh600330
+main inflow:26372.91
+main outflow:26995.82
+retail inflow:29642.4
+retail outflow:29019.4
+
+Stock info: 
+name: 
+code: sh600331
+main inflow:33745.1
+main outflow:23507.66
+retail inflow:16513.33
+retail outflow:26750.7
+
+Stock info: 
+name: 
+code: sh600345
+main inflow:6530.48
+main outflow:4779.94
+retail inflow:10166.06
+retail outflow:11916.6
+
+Stock info: 
+name: 
+code: sh600360
+main inflow:14677.2
+main outflow:11581.27
+retail inflow:17102.56
+retail outflow:20198.45
+
+Stock info: 
+name: 
+code: sh600361
+main inflow:9030.33
+main outflow:8651.37
+retail inflow:17067.57
+retail outflow:17446.5
+
+Stock info: 
+name: 
+code: sh600363
+main inflow:30651.7
+main outflow:29401.0
+retail inflow:41945.3
+retail outflow:43196.1
+
+Stock info: 
+name: 
+code: sh600370
+main inflow:7122.51
+main outflow:7311.91
+retail inflow:12775.11
+retail outflow:12585.72
+
+Stock info: 
+name: 
+code: sh600371
+main inflow:11064.77
+main outflow:10731.11
+retail inflow:19828.58
+retail outflow:20162.15
+
+Stock info: 
+name: 
+code: sh600375
+main inflow:17920.18
+main outflow:22071.88
+retail inflow:19170.14
+retail outflow:15018.38
+
+Stock info: 
+name: 
+code: sh600386
+main inflow:13980.12
+main outflow:10885.99
+retail inflow:12341.81
+retail outflow:15435.94
+
+Stock info: 
+name: 
+code: sh600390
+main inflow:50773.3
+main outflow:46585.0
+retail inflow:21948.61
+retail outflow:26136.87
+
+Stock info: 
+name: 
+code: sh600397
+main inflow:17397.62
+main outflow:16165.22
+retail inflow:21777.62
+retail outflow:23010.0
+
+Stock info: 
+name: 
+code: sh600399
+main inflow:41793.2
+main outflow:29509.51
+retail inflow:57447.5
+retail outflow:69731.2
+
+Stock info: 
+name: 
+code: sh600400
+main inflow:17369.75
+main outflow:15459.77
+retail inflow:17677.18
+retail outflow:19587.14
+
+Stock info: 
+name: 
+code: sh600423
+main inflow:6572.84
+main outflow:5800.98
+retail inflow:9618.36
+retail outflow:10390.23
+
+Stock info: 
+name: 
+code: sh600438
+main inflow:6181.19
+main outflow:4061.16
+retail inflow:8559.97
+retail outflow:10679.98
+
+Stock info: 
+name: 
+code: sh600439
+main inflow:20480.64
+main outflow:15842.28
+retail inflow:22025.4
+retail outflow:26663.8
+
+Stock info: 
+name: 
+code: sh600448
+main inflow:9841.96
+main outflow:6862.26
+retail inflow:14352.74
+retail outflow:17332.45
+
+Stock info: 
+name: 
+code: sh600463
+main inflow:10740.3
+main outflow:9165.08
+retail inflow:9219.04
+retail outflow:10794.25
+
+Stock info: 
+name: 
+code: sh600466
+main inflow:14560.4
+main outflow:12271.63
+retail inflow:18622.69
+retail outflow:20911.44
+
+Stock info: 
+name: 
+code: sh600469
+main inflow:19145.31
+main outflow:12910.43
+retail inflow:15981.85
+retail outflow:22216.8
+
+Stock info: 
+name: 
+code: sh600477
+main inflow:8461.32
+main outflow:9023.57
+retail inflow:18436.47
+retail outflow:17874.21
+
+Stock info: 
+name: 
+code: sh600479
+main inflow:17029.12
+main outflow:12008.59
+retail inflow:13494.05
+retail outflow:18514.66
+
+Stock info: 
+name: 
+code: sh600480
+main inflow:27131.0
+main outflow:21317.34
+retail inflow:27703.4
+retail outflow:33517.1
+
+Stock info: 
+name: 
+code: sh600500
+main inflow:42745.4
+main outflow:28692.1
+retail inflow:11381.24
+retail outflow:25434.51
+
+Stock info: 
+name: 
+code: sh600503
+main inflow:106374.5
+main outflow:100542.7
+retail inflow:117747.0
+retail outflow:123578.8
+
+Stock info: 
+name: 
+code: sh600505
+main inflow:9086.06
+main outflow:9974.16
+retail inflow:13382.7
+retail outflow:12494.6
+
+Stock info: 
+name: 
+code: sh600508
+main inflow:17478.35
+main outflow:9961.22
+retail inflow:10522.22
+retail outflow:18039.34
+
+Stock info: 
+name: 
+code: sh600510
+main inflow:6673.87
+main outflow:5563.95
+retail inflow:9902.94
+retail outflow:11012.86
+
+Stock info: 
+name: 
+code: sh600517
+main inflow:58554.5
+main outflow:59220.3
+retail inflow:51117.9
+retail outflow:50452.1
+
+Stock info: 
+name: 
+code: sh600520
+main inflow:19322.7
+main outflow:19462.23
+retail inflow:30217.2
+retail outflow:30077.6
+
+Stock info: 
+name: 
+code: sh600526
+main inflow:24345.71
+main outflow:26508.82
+retail inflow:43676.0
+retail outflow:41512.9
+
+Stock info: 
+name: 
+code: sh600528
+main inflow:116538.5
+main outflow:85594.1
+retail inflow:81995.3
+retail outflow:112939.6
+
+Stock info: 
+name: 
+code: sh600531
+main inflow:11343.82
+main outflow:8260.95
+retail inflow:17860.75
+retail outflow:20943.62
+
+Stock info: 
+name: 
+code: sh600538
+main inflow:21610.72
+main outflow:17440.44
+retail inflow:16339.92
+retail outflow:20510.16
+
+Stock info: 
+name: 
+code: sh600543
+main inflow:16252.79
+main outflow:15751.02
+retail inflow:13422.29
+retail outflow:13924.05
+
+Stock info: 
+name: 
+code: sh600556
+main inflow:29653.04
+main outflow:27156.49
+retail inflow:23890.67
+retail outflow:26387.23
+
+Stock info: 
+name: 
+code: sh600558
+main inflow:23709.89
+main outflow:14532.0
+retail inflow:18237.74
+retail outflow:27415.7
+
+Stock info: 
+name: 
+code: sh600567
+main inflow:37510.7
+main outflow:24040.77
+retail inflow:62362.3
+retail outflow:75832.2
+
+Stock info: 
+name: 
+code: sh600577
+main inflow:17601.77
+main outflow:14729.8
+retail inflow:33832.5
+retail outflow:36704.5
+
+Stock info: 
+name: 
+code: sh600579
+main inflow:9205.27
+main outflow:5948.37
+retail inflow:5619.75
+retail outflow:8876.65
+
+Stock info: 
+name: 
+code: sh600582
+main inflow:32197.7
+main outflow:29503.8
+retail inflow:23842.33
+retail outflow:26536.07
+
+Stock info: 
+name: 
+code: sh600583
+main inflow:133727.3
+main outflow:106005.1
+retail inflow:64361.9
+retail outflow:92084.2
+
+Stock info: 
+name: 
+code: sh600598
+main inflow:47932.4
+main outflow:31906.2
+retail inflow:30189.1
+retail outflow:46215.3
+
+Stock info: 
+name: 
+code: sh600601
+main inflow:54009.3
+main outflow:36924.2
+retail inflow:50075.1
+retail outflow:67160.1
+
+Stock info: 
+name: 
+code: sh600603
+main inflow:13308.95
+main outflow:12788.09
+retail inflow:10365.07
+retail outflow:10885.91
+
+Stock info: 
+name: 
+code: sh600605
+main inflow:4696.08
+main outflow:5229.42
+retail inflow:7059.78
+retail outflow:6526.44
+
+Stock info: 
+name: 
+code: sh600608
+main inflow:1036.58
+main outflow:796.57
+retail inflow:894.07
+retail outflow:1134.07
+
+Stock info: 
+name: 
+code: sh600613
+main inflow:9316.79
+main outflow:3984.46
+retail inflow:8160.5
+retail outflow:13492.81
+
+Stock info: 
+name: 
+code: sh600615
+main inflow:4397.46
+main outflow:3930.7
+retail inflow:6909.9
+retail outflow:7376.66
+
+Stock info: 
+name: 
+code: sh600616
+main inflow:14450.59
+main outflow:14151.11
+retail inflow:16507.74
+retail outflow:16807.22
+
+Stock info: 
+name: 
+code: sh600618
+main inflow:6275.31
+main outflow:4722.89
+retail inflow:11956.76
+retail outflow:13509.17
+
+Stock info: 
+name: 
+code: sh600619
+main inflow:3863.43
+main outflow:2738.6
+retail inflow:7840.47
+retail outflow:8965.3
+
+Stock info: 
+name: 
+code: sh600621
+main inflow:13127.98
+main outflow:10430.69
+retail inflow:11692.39
+retail outflow:14389.69
+
+Stock info: 
+name: 
+code: sh600622
+main inflow:14031.51
+main outflow:8522.8
+retail inflow:12426.33
+retail outflow:17935.04
+
+Stock info: 
+name: 
+code: sh600623
+main inflow:2485.77
+main outflow:2012.8
+retail inflow:8472.03
+retail outflow:8945.0
+
+Stock info: 
+name: 
+code: sh600624
+main inflow:25210.16
+main outflow:25443.59
+retail inflow:37820.8
+retail outflow:37587.4
+
+Stock info: 
+name: 
+code: sh600626
+main inflow:49587.6
+main outflow:34519.9
+retail inflow:27618.19
+retail outflow:42686.0
+
+Stock info: 
+name: 
+code: sh600628
+main inflow:27275.85
+main outflow:19255.86
+retail inflow:16839.18
+retail outflow:24859.2
+
+Stock info: 
+name: 
+code: sh600630
+main inflow:26071.49
+main outflow:23091.35
+retail inflow:33539.1
+retail outflow:36519.2
+
+Stock info: 
+name: 
+code: sh600635
+main inflow:61642.6
+main outflow:56076.1
+retail inflow:57442.3
+retail outflow:63008.8
+
+Stock info: 
+name: 
+code: sh600636
+main inflow:11291.19
+main outflow:10325.44
+retail inflow:18115.43
+retail outflow:19081.11
+
+Stock info: 
+name: 
+code: sh600638
+main inflow:17894.05
+main outflow:12372.96
+retail inflow:12381.98
+retail outflow:17903.03
+
+Stock info: 
+name: 
+code: sh600639
+main inflow:11056.38
+main outflow:8291.01
+retail inflow:12786.89
+retail outflow:15552.27
+
+Stock info: 
+name: 
+code: sh600653
+main inflow:24417.01
+main outflow:19424.08
+retail inflow:31840.8
+retail outflow:36833.7
+
+Stock info: 
+name: 
+code: sh600655
+main inflow:28493.3
+main outflow:22969.01
+retail inflow:32730.1
+retail outflow:38254.4
+
+Stock info: 
+name: 
+code: sh600664
+main inflow:27247.3
+main outflow:16761.54
+retail inflow:14213.96
+retail outflow:24699.6
+
+Stock info: 
+name: 
+code: sh600665
+main inflow:9486.11
+main outflow:5237.96
+retail inflow:9138.38
+retail outflow:13386.53
+
+Stock info: 
+name: 
+code: sh600667
+main inflow:27578.1
+main outflow:22361.1
+retail inflow:13895.42
+retail outflow:19112.38
+
+Stock info: 
+name: 
+code: sh600675
+main inflow:24968.0
+main outflow:18803.09
+retail inflow:24891.29
+retail outflow:31056.2
+
+Stock info: 
+name: 
+code: sh600676
+main inflow:19574.06
+main outflow:16324.6
+retail inflow:27163.0
+retail outflow:30412.5
+
+Stock info: 
+name: 
+code: sh600678
+main inflow:24913.3
+main outflow:16842.56
+retail inflow:12110.59
+retail outflow:20181.31
+
+Stock info: 
+name: 
+code: sh600684
+main inflow:37440.6
+main outflow:31134.5
+retail inflow:17031.86
+retail outflow:23337.9
+
+Stock info: 
+name: 
+code: sh600688
+main inflow:75565.8
+main outflow:51405.3
+retail inflow:51190.2
+retail outflow:75350.6
+
+Stock info: 
+name: 
+code: sh600692
+main inflow:15387.37
+main outflow:11762.15
+retail inflow:15153.65
+retail outflow:18778.88
+
+Stock info: 
+name: 
+code: sh600693
+main inflow:6569.97
+main outflow:7646.67
+retail inflow:10721.84
+retail outflow:9645.12
+
+Stock info: 
+name: 
+code: sh600695
+main inflow:3409.6
+main outflow:2905.93
+retail inflow:9766.64
+retail outflow:10270.3
+
+Stock info: 
+name: 
+code: sh600698
+main inflow:12262.8
+main outflow:11815.66
+retail inflow:24025.1
+retail outflow:24472.3
+
+Stock info: 
+name: 
+code: sh600701
+main inflow:34178.44
+main outflow:31258.29
+retail inflow:46067.4
+retail outflow:48987.5
+
+Stock info: 
+name: 
+code: sh600706
+main inflow:3908.68
+main outflow:4162.29
+retail inflow:7754.73
+retail outflow:7501.12
+
+Stock info: 
+name: 
+code: sh600708
+main inflow:9657.99
+main outflow:8507.92
+retail inflow:15724.89
+retail outflow:16874.95
+
+Stock info: 
+name: 
+code: sh600712
+main inflow:18679.96
+main outflow:18538.31
+retail inflow:21326.42
+retail outflow:21468.16
+
+Stock info: 
+name: 
+code: sh600713
+main inflow:25992.6
+main outflow:14950.74
+retail inflow:22018.3
+retail outflow:33060.2
+
+Stock info: 
+name: 
+code: sh600722
+main inflow:4414.46
+main outflow:3000.63
+retail inflow:3598.8
+retail outflow:5012.63
+
+Stock info: 
+name: 
+code: sh600725
+main inflow:5934.1
+main outflow:3788.86
+retail inflow:8939.67
+retail outflow:11084.9
+
+Stock info: 
+name: 
+code: sh600727
+main inflow:6742.97
+main outflow:5307.39
+retail inflow:12203.45
+retail outflow:13639.05
+
+Stock info: 
+name: 
+code: sh600731
+main inflow:7004.14
+main outflow:6577.22
+retail inflow:8825.19
+retail outflow:9252.11
+
+Stock info: 
+name: 
+code: sh600738
+main inflow:5425.59
+main outflow:4669.76
+retail inflow:13675.82
+retail outflow:14431.66
+
+Stock info: 
+name: 
+code: sh600746
+main inflow:8845.81
+main outflow:6810.37
+retail inflow:6405.75
+retail outflow:8441.19
+
+Stock info: 
+name: 
+code: sh600751
+main inflow:12104.51
+main outflow:11165.14
+retail inflow:15751.02
+retail outflow:16690.39
+
+Stock info: 
+name: 
+code: sh600757
+main inflow:16038.95
+main outflow:14855.05
+retail inflow:15575.5
+retail outflow:16759.48
+
+Stock info: 
+name: 
+code: sh600758
+main inflow:3428.88
+main outflow:3377.91
+retail inflow:9236.05
+retail outflow:9287.01
+
+Stock info: 
+name: 
+code: sh600760
+main inflow:42879.7
+main outflow:24674.64
+retail inflow:48587.9
+retail outflow:66793.0
+
+Stock info: 
+name: 
+code: sh600769
+main inflow:7344.87
+main outflow:7583.6
+retail inflow:13699.68
+retail outflow:13460.94
+
+Stock info: 
+name: 
+code: sh600770
+main inflow:49718.4
+main outflow:47262.2
+retail inflow:38842.1
+retail outflow:41298.3
+
+Stock info: 
+name: 
+code: sh600774
+main inflow:7296.88
+main outflow:3574.91
+retail inflow:4791.14
+retail outflow:8513.1
+
+Stock info: 
+name: 
+code: sh600775
+main inflow:32409.4
+main outflow:28865.85
+retail inflow:30071.9
+retail outflow:33615.5
+
+Stock info: 
+name: 
+code: sh600776
+main inflow:16954.3
+main outflow:10332.16
+retail inflow:7519.81
+retail outflow:14141.94
+
+Stock info: 
+name: 
+code: sh600782
+main inflow:14631.74
+main outflow:18771.66
+retail inflow:20638.08
+retail outflow:16498.16
+
+Stock info: 
+name: 
+code: sh600784
+main inflow:22194.65
+main outflow:20742.45
+retail inflow:21876.94
+retail outflow:23329.11
+
+Stock info: 
+name: 
+code: sh600796
+main inflow:8081.87
+main outflow:7051.62
+retail inflow:11692.34
+retail outflow:12722.59
+
+Stock info: 
+name: 
+code: sh600797
+main inflow:42266.6
+main outflow:38654.0
+retail inflow:50955.5
+retail outflow:54568.1
+
+Stock info: 
+name: 
+code: sh600800
+main inflow:21558.51
+main outflow:21521.03
+retail inflow:26233.62
+retail outflow:26271.0
+
+Stock info: 
+name: 
+code: sh600810
+main inflow:3992.19
+main outflow:3548.63
+retail inflow:9223.95
+retail outflow:9667.51
+
+Stock info: 
+name: 
+code: sh600814
+main inflow:12145.47
+main outflow:8161.25
+retail inflow:8438.76
+retail outflow:12422.99
+
+Stock info: 
+name: 
+code: sh600815
+main inflow:36405.5
+main outflow:31407.14
+retail inflow:31668.2
+retail outflow:36666.5
+
+Stock info: 
+name: 
+code: sh600819
+main inflow:8665.52
+main outflow:7186.97
+retail inflow:10161.79
+retail outflow:11640.34
+
+Stock info: 
+name: 
+code: sh600821
+main inflow:14239.75
+main outflow:25659.3
+retail inflow:30046.8
+retail outflow:18627.24
+
+Stock info: 
+name: 
+code: sh600824
+main inflow:15354.94
+main outflow:10828.91
+retail inflow:23348.07
+retail outflow:27874.1
+
+Stock info: 
+name: 
+code: sh600829
+main inflow:4733.22
+main outflow:3502.07
+retail inflow:10490.77
+retail outflow:11721.92
+
+Stock info: 
+name: 
+code: sh600831
+main inflow:36945.1
+main outflow:42593.6
+retail inflow:33176.3
+retail outflow:27527.8
+
+Stock info: 
+name: 
+code: sh600833
+main inflow:10385.83
+main outflow:6935.18
+retail inflow:13990.29
+retail outflow:17440.95
+
+Stock info: 
+name: 
+code: sh600838
+main inflow:10184.59
+main outflow:7802.46
+retail inflow:2729.02
+retail outflow:5111.15
+
+Stock info: 
+name: 
+code: sh600839
+main inflow:183755.2
+main outflow:192837.5
+retail inflow:186201.9
+retail outflow:177119.5
+
+Stock info: 
+name: 
+code: sh600841
+main inflow:2931.81
+main outflow:2097.52
+retail inflow:4653.01
+retail outflow:5487.29
+
+Stock info: 
+name: 
+code: sh600843
+main inflow:16162.26
+main outflow:11269.02
+retail inflow:15744.31
+retail outflow:20637.55
+
+Stock info: 
+name: 
+code: sh600848
+main inflow:6681.18
+main outflow:4332.66
+retail inflow:11134.39
+retail outflow:13482.9
+
+Stock info: 
+name: 
+code: sh600851
+main inflow:18993.4
+main outflow:18081.49
+retail inflow:18761.21
+retail outflow:19673.15
+
+Stock info: 
+name: 
+code: sh600857
+main inflow:19513.06
+main outflow:15784.18
+retail inflow:10991.8
+retail outflow:14720.58
+
+Stock info: 
+name: 
+code: sh600863
+main inflow:79318.8
+main outflow:57601.2
+retail inflow:75810.7
+retail outflow:97528.2
+
+Stock info: 
+name: 
+code: sh600864
+main inflow:8348.12
+main outflow:7198.69
+retail inflow:12512.76
+retail outflow:13662.2
+
+Stock info: 
+name: 
+code: sh600868
+main inflow:118237.0
+main outflow:130040.5
+retail inflow:149483.1
+retail outflow:137679.6
+
+Stock info: 
+name: 
+code: sh600871
+main inflow:52758.6
+main outflow:27801.07
+retail inflow:35009.5
+retail outflow:59967.0
+
+Stock info: 
+name: 
+code: sh600875
+main inflow:117576.2
+main outflow:92451.3
+retail inflow:81013.5
+retail outflow:106138.5
+
+Stock info: 
+name: 
+code: sh600877
+main inflow:40532.5
+main outflow:31789.26
+retail inflow:51574.4
+retail outflow:60317.6
+
+Stock info: 
+name: 
+code: sh600883
+main inflow:5723.52
+main outflow:6858.82
+retail inflow:11639.39
+retail outflow:10504.1
+
+Stock info: 
+name: 
+code: sh600890
+main inflow:5406.18
+main outflow:3207.97
+retail inflow:2723.44
+retail outflow:4921.65
+
+Stock info: 
+name: 
+code: sh600896
+main inflow:56063.5
+main outflow:74105.4
+retail inflow:81501.2
+retail outflow:63459.3
+
+Stock info: 
+name: 
+code: sh600898
+main inflow:24653.51
+main outflow:26872.93
+retail inflow:37082.1
+retail outflow:34862.8
+
+Stock info: 
+name: 
+code: sh600960
+main inflow:18767.97
+main outflow:18375.26
+retail inflow:22567.88
+retail outflow:22960.56
+
+Stock info: 
+name: 
+code: sh600962
+main inflow:4429.88
+main outflow:4353.18
+retail inflow:5807.25
+retail outflow:5883.95
+
+Stock info: 
+name: 
+code: sh600965
+main inflow:10650.77
+main outflow:7338.21
+retail inflow:10174.25
+retail outflow:13486.81
+
+Stock info: 
+name: 
+code: sh600969
+main inflow:9398.12
+main outflow:12168.24
+retail inflow:13375.53
+retail outflow:10605.4
+
+Stock info: 
+name: 
+code: sh600973
+main inflow:13115.6
+main outflow:11448.68
+retail inflow:13968.28
+retail outflow:15635.21
+
+Stock info: 
+name: 
+code: sh600975
+main inflow:14172.16
+main outflow:14155.4
+retail inflow:25360.5
+retail outflow:25377.3
+
+Stock info: 
+name: 
+code: sh600979
+main inflow:12610.93
+main outflow:9215.75
+retail inflow:17959.81
+retail outflow:21355.0
+
+Stock info: 
+name: 
+code: sh600981
+main inflow:16284.8
+main outflow:10431.25
+retail inflow:13633.88
+retail outflow:19487.48
+
+Stock info: 
+name: 
+code: sh600985
+main inflow:4626.41
+main outflow:4336.56
+retail inflow:7707.76
+retail outflow:7997.61
+
+Stock info: 
+name: 
+code: sh600992
+main inflow:11314.17
+main outflow:9332.37
+retail inflow:7657.24
+retail outflow:9639.03
+
+Stock info: 
+name: 
+code: sh600995
+main inflow:18152.87
+main outflow:11387.67
+retail inflow:18356.08
+retail outflow:25121.2
+
+Stock info: 
+name: 
+code: sh601000
+main inflow:37892.3
+main outflow:30706.0
+retail inflow:36934.9
+retail outflow:44121.2
+
+Stock info: 
+name: 
+code: sh601002
+main inflow:17345.5
+main outflow:14830.68
+retail inflow:24699.6
+retail outflow:27214.3
+
+Stock info: 
+name: 
+code: sh601015
+main inflow:5632.59
+main outflow:4947.2
+retail inflow:12736.07
+retail outflow:13421.45
+
+Stock info: 
+name: 
+code: sh601038
+main inflow:21207.53
+main outflow:20233.57
+retail inflow:35841.1
+retail outflow:36815.0
+
+Stock info: 
+name: 
+code: sh601106
+main inflow:251080.4
+main outflow:127981.6
+retail inflow:64981.1
+retail outflow:188079.8
+
+Stock info: 
+name: 
+code: sh601117
+main inflow:76411.2
+main outflow:49698.9
+retail inflow:32974.1
+retail outflow:59686.3
+
+Stock info: 
+name: 
+code: sh601177
+main inflow:10113.96
+main outflow:6960.63
+retail inflow:10918.67
+retail outflow:14072.0
+
+Stock info: 
+name: 
+code: sh601218
+main inflow:18690.52
+main outflow:17146.17
+retail inflow:23834.9
+retail outflow:25379.2
+
+Stock info: 
+name: 
+code: sh601233
+main inflow:24616.8
+main outflow:19728.74
+retail inflow:18073.4
+retail outflow:22961.56
+
+Stock info: 
+name: 
+code: sh601258
+main inflow:60200.0
+main outflow:91755.7
+retail inflow:119440.2
+retail outflow:87884.7
+
+Stock info: 
+name: 
+code: sh601333
+main inflow:86961.5
+main outflow:54346.0
+retail inflow:54513.0
+retail outflow:87128.4
+
+Stock info: 
+name: 
+code: sh601515
+main inflow:14659.74
+main outflow:12624.27
+retail inflow:14696.14
+retail outflow:16731.7
+
+Stock info: 
+name: 
+code: sh601519
+main inflow:78320.6
+main outflow:52805.0
+retail inflow:57760.5
+retail outflow:83276.1
+
+Stock info: 
+name: 
+code: sh601567
+main inflow:11235.1
+main outflow:6943.81
+retail inflow:12935.55
+retail outflow:17226.83
+
+Stock info: 
+name: 
+code: sh601599
+main inflow:19703.38
+main outflow:29163.0
+retail inflow:36348.5
+retail outflow:26888.9
+
+Stock info: 
+name: 
+code: sh601600
+main inflow:208485.4
+main outflow:127804.2
+retail inflow:73668.8
+retail outflow:154349.6
+
+Stock info: 
+name: 
+code: sh601616
+main inflow:13727.04
+main outflow:9990.21
+retail inflow:15803.09
+retail outflow:19539.93
+
+Stock info: 
+name: 
+code: sh601618
+main inflow:269835.7
+main outflow:142509.7
+retail inflow:29550.9
+retail outflow:156877.0
+
+Stock info: 
+name: 
+code: sh601668
+main inflow:394387.0
+main outflow:266868.0
+retail inflow:202051.9
+retail outflow:329571.0
+
+Stock info: 
+name: 
+code: sh601677
+main inflow:3251.21
+main outflow:3499.49
+retail inflow:9148.22
+retail outflow:8899.94
+
+Stock info: 
+name: 
+code: sh601699
+main inflow:40728.8
+main outflow:25178.26
+retail inflow:27612.7
+retail outflow:43163.3
+
+Stock info: 
+name: 
+code: sh601717
+main inflow:27237.41
+main outflow:20048.55
+retail inflow:22595.78
+retail outflow:29784.6
+
+Stock info: 
+name: 
+code: sh601727
+main inflow:279040.5
+main outflow:157634.0
+retail inflow:107466.1
+retail outflow:228872.0
+
+Stock info: 
+name: 
+code: sh601872
+main inflow:48819.51
+main outflow:25661.8
+retail inflow:3445.79
+retail outflow:26603.5
+
+Stock info: 
+name: 
+code: sh601880
+main inflow:42752.3
+main outflow:23905.13
+retail inflow:18128.12
+retail outflow:36975.4
+
+Stock info: 
+name: 
+code: sh601886
+main inflow:14830.23
+main outflow:10064.76
+retail inflow:12785.24
+retail outflow:17550.71
+
+Stock info: 
+name: 
+code: sh601898
+main inflow:114890.8
+main outflow:71094.4
+retail inflow:41511.7
+retail outflow:85308.2
+
+Stock info: 
+name: 
+code: sh601918
+main inflow:298641.0
+main outflow:278053.0
+retail inflow:244061.0
+retail outflow:264648.0
+
+Stock info: 
+name: 
+code: sh601928
+main inflow:34876.9
+main outflow:32326.66
+retail inflow:39187.0
+retail outflow:41737.3
+
+Stock info: 
+name: 
+code: sh601985
+main inflow:800677.0
+main outflow:491511.0
+retail inflow:218004.0
+retail outflow:527169.0
+
+Stock info: 
+name: 
+code: sh601989
+main inflow:1016236.0
+main outflow:761805.0
+retail inflow:429112.0
+retail outflow:683542.0
+
+Stock info: 
+name: 
+code: sh601991
+main inflow:71111.3
+main outflow:33066.9
+retail inflow:32547.0
+retail outflow:70591.4
+
+Stock info: 
+name: 
+code: sh601996
+main inflow:8884.13
+main outflow:8924.41
+retail inflow:13348.79
+retail outflow:13308.52
+
+Stock info: 
+name: 
+code: sh601999
+main inflow:22377.9
+main outflow:16959.49
+retail inflow:14548.61
+retail outflow:19966.99
+
+Stock info: 
+name: 
+code: sh603002
+main inflow:12262.11
+main outflow:14246.78
+retail inflow:22405.0
+retail outflow:20420.29
+
+Stock info: 
+name: 
+code: sh603008
+main inflow:13510.91
+main outflow:10522.15
+retail inflow:13973.19
+retail outflow:16961.91
+
+Stock info: 
+name: 
+code: sh603167
+main inflow:9773.15
+main outflow:7660.76
+retail inflow:14677.27
+retail outflow:16789.63
+
+Stock info: 
+name: 
+code: sh603333
+main inflow:7332.09
+main outflow:4910.98
+retail inflow:9638.97
+retail outflow:12060.09
+
+Stock info: 
+name: 
+code: sh603366
+main inflow:5140.17
+main outflow:4415.83
+retail inflow:10415.87
+retail outflow:11140.22
+
+Stock info: 
+name: 
+code: sh603399
+main inflow:7377.67
+main outflow:6475.55
+retail inflow:10484.01
+retail outflow:11386.13
+
+Stock info: 
+name: 
+code: sh603993
+main inflow:110371.2
+main outflow:91427.8
+retail inflow:95081.2
+retail outflow:114024.6

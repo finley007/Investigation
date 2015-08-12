@@ -2,9 +2,9 @@ package stock.http.impl.tencent;
 
 import java.text.MessageFormat;
 
-import stock.analysis.tencent.TencentStockFlowParser;
 import stock.http.HTTPQuery;
 import stock.http.impl.BaseHTTPQuery;
+import stock.parse.impl.tencent.TencentStockFlowParser;
 import stock.vo.StockInfo;
 
 /**

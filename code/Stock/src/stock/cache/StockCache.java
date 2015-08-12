@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import stock.db.DBQuery;
-import stock.db.DBQueryImpl;
 import stock.db.connect.DBConnector;
-import stock.db.connect.MysqlConnector;
+import stock.db.connect.impl.MysqlConnector;
+import stock.db.impl.DBQueryImpl;
 
 /**
  * This class is used for dictionary cache

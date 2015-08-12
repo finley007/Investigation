@@ -1,7 +1,8 @@
-package stock.json;
+package stock.util;
 
 import org.junit.Test;
 
+import stock.util.JsonHelper;
 import stock.vo.MyStockInfo;
 
 public class JsonHelperTest {

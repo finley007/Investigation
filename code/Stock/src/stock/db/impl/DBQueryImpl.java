@@ -1,4 +1,4 @@
-package stock.db;
+package stock.db.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import stock.db.DBQuery;
 import stock.db.connect.DBConnector;
 import stock.timer.TimerConstants;
 import stock.util.StockConstants;
@@ -50,7 +51,7 @@ public class DBQueryImpl implements DBQuery {
 		List<Stock> result = new ArrayList<Stock>();
 		Connection conn = getConnection();
 		Statement statement = conn.createStatement();
-		String sql = "select * from stock order by code";
+		String sql = "select * from all_stock order by code";
 		ResultSet rs = statement.executeQuery(sql);  
 		while (rs.next()) {
 			Stock stock = new Stock();
@@ -182,7 +183,7 @@ public class DBQueryImpl implements DBQuery {
 		Map<String, String> result = new HashMap<String, String>();
 		Connection conn = getConnection();
 		Statement statement = conn.createStatement();
-		String sql = "select * from stock t order by t.code";
+		String sql = "select * from all_stock t order by t.code";
 		ResultSet rs = statement.executeQuery(sql);  
 		while (rs.next()) {
 			String code = rs.getString("code");
@@ -249,6 +250,47 @@ public class DBQueryImpl implements DBQuery {
 		statement.setString(2, alertId);
 		statement.execute();
 		conn.close();
+	}
+	
+	public String addRuleHistory(String ruleId, String historyId, Integer result, Long timeCost, Integer stockNum) throws Exception {
+		Connection conn = getConnection();
+		PreparedStatement statement = conn.prepareStatement("insert into rule_run_history values (?,?,?,?,?,?)");
+		statement.setString(1, historyId);
+		statement.setString(2, ruleId);
+		statement.setTimestamp(3, Timestamp.valueOf(StockUtils.getDateString(new Date())));
+		statement.setInt(4, result);
+		statement.setLong(5, timeCost);
+		statement.setInt(6, stockNum);
+		statement.execute();
+		conn.close();
+		return historyId;
+	}
+	
+	public void addRuleResult(String historyId, String stockCode) throws Exception {
+		Connection conn = getConnection();
+		PreparedStatement statement = conn.prepareStatement("insert into rule_result values (?,?,?)");
+		String id = UUID.randomUUID().toString();
+		statement.setString(1, id);
+		statement.setString(2, historyId);
+		statement.setString(3, stockCode);
+		statement.execute();
+		conn.close();
+	}
+	
+	public List<Stock> getRuleResultByHistoryId(String historyId) throws Exception {
+		List<Stock> result = new ArrayList<Stock>();
+		Connection conn = getConnection();
+		PreparedStatement statement = conn.prepareStatement("select * from rule_result t where t.history_id = ? order by stock_code");
+		statement.setString(1, historyId);
+		ResultSet rs = statement.executeQuery();  
+		while (rs.next()) {
+			Stock stock = new Stock();
+			stock.setCode(rs.getString("stock_code"));
+			result.add(stock);
+		}  
+		rs.close();  
+		conn.close();
+		return result;
 	}
 	
 }

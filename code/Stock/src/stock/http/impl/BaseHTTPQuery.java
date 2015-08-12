@@ -1,8 +1,8 @@
 package stock.http.impl;
 
-import stock.analysis.InfoParser;
 import stock.http.HTTPCaller;
 import stock.http.HTTPQuery;
+import stock.parse.InfoParser;
 import stock.vo.StockInfo;
 
 public abstract class BaseHTTPQuery implements HTTPQuery {

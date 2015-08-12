@@ -1,4 +1,4 @@
-package stock.date;
+package stock.util;
 
 import java.util.Date;
 
@@ -6,6 +6,7 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
+import stock.util.DateUtils;
 import stock.util.StockConstants;
 
 public class DateUtilsTest {
@@ -44,6 +45,16 @@ public class DateUtilsTest {
 			Assert.assertTrue(DateUtils.isWeekEnd(date));
 			date = StockConstants.sdf_date.parse("2015-08-04");
 			Assert.assertFalse(DateUtils.isWeekEnd(date));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testIsOverCloseTime() {
+		try {
+			Date date = new Date();
+			Assert.assertTrue(DateUtils.isOverCloseTime(date));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

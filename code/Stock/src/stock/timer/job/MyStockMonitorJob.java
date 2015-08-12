@@ -6,9 +6,9 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 import stock.db.DBQuery;
-import stock.db.DBQueryImpl;
 import stock.db.connect.DBConnector;
-import stock.db.connect.MysqlConnector;
+import stock.db.connect.impl.MysqlConnector;
+import stock.db.impl.DBQueryImpl;
 import stock.timer.TimerConstants;
 import stock.util.StockConstants;
 

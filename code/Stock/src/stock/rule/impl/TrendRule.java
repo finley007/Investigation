@@ -4,13 +4,19 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import stock.date.DateUtils;
 import stock.rule.Rule;
+import stock.util.DateUtils;
 import stock.util.StockConstants;
 import stock.vo.DailyPriceVO;
 import stock.vo.StockInfo;
 
 public class TrendRule implements Rule {
+	
+	private Boolean isOverCloseTime = false;
+	
+	public TrendRule() {
+		this.isOverCloseTime = DateUtils.isOverCloseTime(new Date());
+	}
 	
 	@Override
 	public Boolean isSatisfy(StockInfo info) throws Exception {
@@ -38,6 +44,9 @@ public class TrendRule implements Rule {
 	List<String> getRecentDate() {
 		List<String> result = new ArrayList<String>();
 		int beforeDays = 0;
+		if (this.isOverCloseTime) {
+			beforeDays --;
+		}
 		for (int i = 0; i < StockConstants.HISTORY_DAILY_INFO_SIZE; i++) {
 			Date date = null;
 			do {

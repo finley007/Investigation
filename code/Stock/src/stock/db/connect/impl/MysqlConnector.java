@@ -1,7 +1,9 @@
-package stock.db.connect;
+package stock.db.connect.impl;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+
+import stock.db.connect.DBConnector;
 
 public class MysqlConnector implements DBConnector {
 	

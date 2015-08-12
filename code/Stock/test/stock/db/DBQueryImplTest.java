@@ -8,7 +8,8 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import stock.db.connect.MysqlConnector;
+import stock.db.connect.impl.MysqlConnector;
+import stock.db.impl.DBQueryImpl;
 import stock.vo.MyStockInfo;
 import stock.vo.Stock;
 import stock.vo.StockInfo;

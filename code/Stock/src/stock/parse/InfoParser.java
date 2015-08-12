@@ -1,4 +1,4 @@
-package stock.analysis;
+package stock.parse;
 
 import stock.vo.StockInfo;
 

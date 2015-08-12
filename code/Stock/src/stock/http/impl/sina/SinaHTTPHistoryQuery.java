@@ -2,9 +2,9 @@ package stock.http.impl.sina;
 
 import java.text.MessageFormat;
 
-import stock.analysis.sina.SinaStockHistoryParser;
 import stock.http.HTTPQuery;
 import stock.http.impl.BaseHTTPQuery;
+import stock.parse.impl.sina.SinaStockHistoryParser;
 import stock.vo.StockInfo;
 
 public class SinaHTTPHistoryQuery extends BaseHTTPQuery implements HTTPQuery {

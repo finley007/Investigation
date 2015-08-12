@@ -6,6 +6,9 @@ public class StockConstants {
 	
 	public static final Integer HISTORY_DAILY_INFO_SIZE = 3;
 	
+	public static final Integer RESULT_STATUS_SUCCESS = 0;
+	public static final Integer RESULT_STATUS_FAIL = 1;
+	
 	public static final Integer MY_STOCK_STATUS_IN = 1;
 	public static final Integer MY_STOCK_STATUS_OUT = 0;
 
