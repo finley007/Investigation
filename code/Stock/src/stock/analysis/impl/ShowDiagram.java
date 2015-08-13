@@ -20,6 +20,10 @@ public class ShowDiagram implements StockAnalysis {
 		DBQuery query = new DBQueryImpl();
 		query.setConn(connector);
 		List<Stock> list = query.getRuleResultByHistoryId(historyId);
+		if (size <= 0) {
+			size = list.size();
+			init = 0;
+		}
 		for (int i = init; i < init + size; i++) {
 			BrowserOpener.open(getURL(list.get(i)));
 		}

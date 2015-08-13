@@ -1,18 +1,22 @@
 package stock.run;
 
+import java.util.Date;
+
 import stock.analysis.StockAnalysis;
+import stock.analysis.impl.ShowDiagram;
 import stock.analysis.impl.StatisticAnalysis;
+import stock.run.impl.TrendAnalysisExecuter;
 
 
 public class Runner {
 
 	public static void main(String[] args) {
-//		BaseExcecuter executer = new TrendAnalysisExecuter();
-//		Date start = new Date();
-//		executer.run();
-//		Date end = new Date();
-//		System.out.println("-------------------------------------------------");
-//		System.out.println("Using time: " + (end.getTime() - start.getTime()));
+//		executeRule();
+		checkStocks();
+//		doAnalysis();
+	}
+
+	private static void doAnalysis() {
 		StockAnalysis analysis = new StatisticAnalysis();
 		try {
 			int size = 10;
@@ -22,5 +26,26 @@ public class Runner {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	private static void checkStocks() {
+		StockAnalysis analysis = new ShowDiagram();
+		try {
+			int size = 0;
+			int init = 0;
+			analysis.doAnalysis("20150813100845591RULE_HISTORY_1", init * size + 1, size);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private static void executeRule() {
+		BaseExcecuter executer = new TrendAnalysisExecuter();
+		Date start = new Date();
+		executer.run();
+		Date end = new Date();
+		System.out.println("-------------------------------------------------");
+		System.out.println("Using time: " + (end.getTime() - start.getTime()));
 	}
 }

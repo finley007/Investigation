@@ -22,6 +22,7 @@ public class TrendRule implements Rule {
 	public Boolean isSatisfy(StockInfo info) throws Exception {
 		// TODO Auto-generated method stub
 		List<String> list = getRecentDate();
+		//TODO Consider limit up first
 		if (list != null && list.size() > 0) {
 			for (String date : list) {
 				DailyPriceVO vo = info.getDailyPrice().get(date);
@@ -31,7 +32,7 @@ public class TrendRule implements Rule {
 			}
 			DailyPriceVO vo1 = info.getDailyPrice().get(list.get(0));
 			DailyPriceVO vo2 = info.getDailyPrice().get(list.get(1));
-			if ((vo1.getEndPrice() - vo2.getEndPrice())/vo2.getEndPrice() < 0.1) {
+			if ((vo1.getEndPrice() - vo2.getEndPrice())/vo2.getEndPrice() < 0.05) {
 				return false;
 			}
 			Double range = vo2.getEndPrice() * 0.1 * 2;
