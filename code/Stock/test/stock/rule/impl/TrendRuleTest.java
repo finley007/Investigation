@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import stock.http.impl.MyHTTPQuery;
+import stock.util.DateUtils;
 import stock.vo.StockInfo;
 
 public class TrendRuleTest {
@@ -13,7 +14,7 @@ public class TrendRuleTest {
 	@Test
 	public void testGetRecentDate() {
 		TrendRule rule = new TrendRule();
-		List<String> list = rule.getRecentDate();
+		List<String> list = DateUtils.getRecentDate();
 		System.out.println(list.toString());
 	}
 	
@@ -21,7 +22,7 @@ public class TrendRuleTest {
 	public void testIsSatisfy() {
 		try { 
 			StockInfo stock = new StockInfo();
-			stock.setCode("sh600081");
+			stock.setCode("sh600628");
 			MyHTTPQuery httpQuery = new MyHTTPQuery();
 			httpQuery.richStockInfo(stock);
 			TrendRule rule = new TrendRule();
