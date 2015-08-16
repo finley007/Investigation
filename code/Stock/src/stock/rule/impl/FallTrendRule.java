@@ -1,16 +1,20 @@
 package stock.rule.impl;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import stock.rule.Rule;
 import stock.util.DateUtils;
-import stock.util.StockConstants;
 import stock.vo.DailyPriceVO;
 import stock.vo.StockInfo;
 
-public class TrendRule implements Rule {
+public class FallTrendRule implements Rule {
+	
+	private Boolean isOverCloseTime = false;
+	
+	public FallTrendRule() {
+		this.isOverCloseTime = DateUtils.isOverCloseTime(new Date());
+	}
 	
 	@Override
 	public Boolean isSatisfy(StockInfo info) throws Exception {
@@ -21,23 +25,14 @@ public class TrendRule implements Rule {
 			for (int i = 0; i < list.size(); i++) {
 				DailyPriceVO day = info.getDailyPrice().get(list.get(i));
 				DailyPriceVO lastDay = info.getDailyPrice().get(list.get(i + 1));
-				if (day.getEndPrice() < day.getStartPrice()) {
+				if (day.getEndPrice() > day.getStartPrice()) {
 					return false;
 				} else if (day.getEndPrice().equals(day.getStartPrice())
-						&& day.getEndPrice() < lastDay.getEndPrice() * 1.09) { //limit up
+						&& day.getEndPrice() > lastDay.getEndPrice() * 0.89) { //limit down
 					return false;
 				}
 			}
 			DailyPriceVO today = info.getDailyPrice().get(list.get(0));
-			DailyPriceVO lastDay = info.getDailyPrice().get(list.get(1));
-			if ((today.getEndPrice() - lastDay.getEndPrice())/lastDay.getEndPrice() < 0.05) {
-				return false;
-			}
-			Double range = lastDay.getEndPrice() * 0.1 * 2;
-			if (!today.getEndPrice().equals(today.getStartPrice())
-					&&((today.getEndPrice() - today.getStartPrice()) / range) <= 0.5) {
-				return false;
-			}
 			if (today.getEndPrice() > 20) {
 				return false;
 			}

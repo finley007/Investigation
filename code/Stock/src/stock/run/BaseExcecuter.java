@@ -13,7 +13,7 @@ import stock.db.impl.DBQueryImpl;
 import stock.http.HTTPQuery;
 import stock.rule.Rule;
 import stock.util.StockConstants;
-import stock.util.StockUtils;
+import stock.util.CommonUtils;
 import stock.vo.Stock;
 import stock.vo.StockInfo;
 
@@ -44,7 +44,7 @@ public abstract class BaseExcecuter {
 	}
 
 	private void solveResult(DBQuery query, List<StockInfo> resultSet) throws Exception {
-		String historyId = StockUtils.createTransactionId(this.getRuleId());
+		String historyId = CommonUtils.createTransactionId(this.getRuleId());
 		for (StockInfo info : resultSet) {
 			logger.info(info.toString());
 			query.addRuleResult(historyId, info.getCode());

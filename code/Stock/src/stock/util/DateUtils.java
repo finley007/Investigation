@@ -1,7 +1,9 @@
 package stock.util;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class DateUtils {
 	
@@ -47,5 +49,21 @@ public class DateUtils {
 		} else {
 			return false;
 		}
+	}
+	
+	public static List<String> getRecentDate() {
+		List<String> result = new ArrayList<String>();
+		int beforeDays = 0;
+		if (DateUtils.isOverCloseTime(new Date())) {
+			beforeDays --;
+		}
+		for (int i = 0; i < StockConstants.HISTORY_DAILY_INFO_SIZE + 1; i++) { //StockConstants.HISTORY_DAILY_INFO_SIZE + 1: Count more 1 day for judging limit up
+			Date date = null;
+			do {
+				date = DateUtils.getDayBeforeNDays(new Date(), ++beforeDays);
+			} while (DateUtils.isWeekEnd(date));
+			result.add(StockConstants.sdf_date.format(date));
+		}
+		return result;
 	}
 }

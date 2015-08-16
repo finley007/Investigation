@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 
 public class StockConstants {
 	
-	public static final Integer HISTORY_DAILY_INFO_SIZE = 3;
+	public static final Integer HISTORY_DAILY_INFO_SIZE = 5;
 	
 	public static final Integer RESULT_STATUS_SUCCESS = 0;
 	public static final Integer RESULT_STATUS_FAIL = 1;
@@ -26,4 +26,8 @@ public class StockConstants {
 	public static final Integer FIRST_DAY_RESULT = 1;
 	public static final Integer SECOND_DAY_RESULT = 2;
 	public static final Integer THIRD_DAY_RESULT = 3;
+	
+	public static final Integer REACH_LIMIT_UP = 1;
+	public static final Integer REACH_LIMIT_DOWN = -1;
+	public static final Integer NO_REACH_LIMIT = 0;
 }

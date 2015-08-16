@@ -3,7 +3,7 @@ package stock.vo;
 import java.util.Date;
 
 import stock.timer.TimerConstants;
-import stock.util.StockUtils;
+import stock.util.CommonUtils;
 
 public class MyStockInfo extends StockInfo {
 	
@@ -91,8 +91,8 @@ public class MyStockInfo extends StockInfo {
 
 	private void caculateProfit() {
 		try {
-			this.profit = StockUtils.round(this.quantity * (this.currentPrice - this.buyingPrice), 2);
-			this.profitRate = StockUtils.round((this.profit * 100) / (this.quantity * this.buyingPrice), 2);
+			this.profit = CommonUtils.round(this.quantity * (this.currentPrice - this.buyingPrice), 2);
+			this.profitRate = CommonUtils.round((this.profit * 100) / (this.quantity * this.buyingPrice), 2);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

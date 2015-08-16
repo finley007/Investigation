@@ -1,40 +1,26 @@
 package stock.util;
 
-import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class StockUtils {
 	
-	/**
-	 * This method is used for create transaction id:
-	 * yyyymmddhhmissstockcode
-	 * 
-	 * @return
-	 */
-	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHMMssSSS");
+	private static final Double STAMP_TAX_RATE = 0.001;
 	
-	private static final SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:MM:ss");
+	private static final Double TRANSFER_FEE_RATE = 0.0006;
 	
-	public static String createTransactionId(String stockCode) {
-		return sdf.format(new Date()) + stockCode;
-		
-	}
+	private static final Double COMMISSION_RATE = 0.0003;
 	
-	public static String getDateString(Date date) {
-		return sdf1.format(date);
-	}
+	private static final Double COMMISSION_MIN = 5.0;
 	
-	public static String objToStr(Object obj) {
-		if (obj != null) {
-			return obj.toString();
-		} else {
-			return "";
+	public static Double caculateFee(Integer action, Integer quantity, Double price) {
+		Double fee = 0.0;
+		if (StockConstants.ACTION_TYPE_SELL == action) {
+			fee += quantity * price * STAMP_TAX_RATE;
 		}
+		fee += quantity * TRANSFER_FEE_RATE;
+		if (COMMISSION_RATE * quantity * price > COMMISSION_MIN) {
+			fee += COMMISSION_RATE * quantity * price;
+		} else {
+			fee += COMMISSION_MIN;
+		}
+		return fee;
 	}
-	
-	public static double round(double source, int scale) {
-		return new BigDecimal(source).setScale(scale, BigDecimal.ROUND_HALF_UP).doubleValue();
-	}
-
 }

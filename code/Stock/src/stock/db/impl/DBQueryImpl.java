@@ -17,7 +17,7 @@ import stock.db.DBQuery;
 import stock.db.connect.DBConnector;
 import stock.timer.TimerConstants;
 import stock.util.StockConstants;
-import stock.util.StockUtils;
+import stock.util.CommonUtils;
 import stock.vo.AlertVO;
 import stock.vo.MyStockInfo;
 import stock.vo.Stock;
@@ -125,13 +125,13 @@ public class DBQueryImpl implements DBQuery {
 	public void addMyStock(MyStockInfo info) throws Exception {
 		Connection conn = getConnection();
 		PreparedStatement statement = conn.prepareStatement("insert into my_stock values (?,?,?,?,?,?,?)");
-		String transId = StockUtils.createTransactionId(info.getCode());
+		String transId = CommonUtils.createTransactionId(info.getCode());
 		info.setTransId(transId);
 		statement.setString(1, transId);
 		statement.setString(2, info.getCode());
 		statement.setDouble(3, info.getBuyingPrice());
 		statement.setInt(4, info.getQuantity());
-		statement.setTimestamp(5, Timestamp.valueOf(StockUtils.getDateString(info.getBuyingTime())));
+		statement.setTimestamp(5, Timestamp.valueOf(CommonUtils.getDateString(info.getBuyingTime())));
 		statement.setInt(6, StockConstants.MY_STOCK_STATUS_IN);
 		statement.setInt(7, TimerConstants.NOT_MONITOR);
 		statement.execute();
@@ -145,7 +145,7 @@ public class DBQueryImpl implements DBQuery {
 		statement.setString(2, UUID.randomUUID().toString());
 		statement.setInt(3, info.getQuantity());
 		statement.setDouble(4, info.getBuyingPrice());
-		statement.setTimestamp(5, Timestamp.valueOf(StockUtils.getDateString(info.getBuyingTime())));
+		statement.setTimestamp(5, Timestamp.valueOf(CommonUtils.getDateString(info.getBuyingTime())));
 		statement.setInt(6, action);
 		statement.execute();
 	}
@@ -213,7 +213,7 @@ public class DBQueryImpl implements DBQuery {
 		statement.setString(3, stockCode);
 		statement.setString(4, message);
 		statement.setInt(5, StockConstants.ALERT_STATUS_TO_NOTICE);
-		statement.setTimestamp(6, Timestamp.valueOf(StockUtils.getDateString(new Date())));
+		statement.setTimestamp(6, Timestamp.valueOf(CommonUtils.getDateString(new Date())));
 		statement.execute();
 		conn.close();
 	}
@@ -257,7 +257,7 @@ public class DBQueryImpl implements DBQuery {
 		PreparedStatement statement = conn.prepareStatement("insert into rule_run_history values (?,?,?,?,?,?)");
 		statement.setString(1, historyId);
 		statement.setString(2, ruleId);
-		statement.setTimestamp(3, Timestamp.valueOf(StockUtils.getDateString(new Date())));
+		statement.setTimestamp(3, Timestamp.valueOf(CommonUtils.getDateString(new Date())));
 		statement.setInt(4, result);
 		statement.setLong(5, timeCost);
 		statement.setInt(6, stockNum);
