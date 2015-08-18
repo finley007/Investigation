@@ -32,7 +32,7 @@ public class StatisticAnalysis implements StockAnalysis {
 			HTTPQuery httpQuery = new SinaHTTPHistoryQuery();
 			httpQuery.richStockInfo(info);
 			DailyPriceVO todayPriceVO = info.getDailyPrice().get(StockConstants.sdf_date.format(new Date()));
-			DailyPriceVO yesterdayPriceVO = info.getDailyPrice().get(StockConstants.sdf_date.format(DateUtils.getDayBeforeNDays(new Date(), 1)));
+			DailyPriceVO yesterdayPriceVO = info.getDailyPrice().get(StockConstants.sdf_date.format(getLastTransactionDay()));
 			if (todayPriceVO != null && yesterdayPriceVO != null) {
 				Double profit = (todayPriceVO.getEndPrice() - yesterdayPriceVO.getEndPrice())/yesterdayPriceVO.getEndPrice();
 				if (profit > 0) {
@@ -44,6 +44,14 @@ public class StatisticAnalysis implements StockAnalysis {
 		System.out.println("Total stock number: " + list.size());
 		System.out.println("Rise number: " + riseNum);
 		System.out.println("Rise rate: " + (riseNum * 100) / list.size() + "%");
+	}
+	
+	private Date getLastTransactionDay() {
+		int n = 1;
+		while (DateUtils.isWeekEnd(DateUtils.getDayBeforeNDays(new Date(), n))) {
+			n++;
+		}
+		return DateUtils.getDayBeforeNDays(new Date(), n);
 	}
 
 }

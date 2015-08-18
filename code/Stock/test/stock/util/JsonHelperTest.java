@@ -1,8 +1,10 @@
 package stock.util;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Test;
 
-import stock.util.JsonHelper;
 import stock.vo.MyStockInfo;
 
 public class JsonHelperTest {
@@ -13,6 +15,11 @@ public class JsonHelperTest {
 		info.setCode("code");
 		info.setTransId("transId");
 		System.out.println(JsonHelper.toJson(info));
+		
+		Map map = new HashMap();
+		map.put("totalPrice", 0.0);
+		map.put("fee", 0.0);
+		System.out.println(JsonHelper.toJson(map));
 	}
 
 }

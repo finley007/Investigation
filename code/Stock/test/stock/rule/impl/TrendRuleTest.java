@@ -22,7 +22,7 @@ public class TrendRuleTest {
 	public void testIsSatisfy() {
 		try { 
 			StockInfo stock = new StockInfo();
-			stock.setCode("sh600628");
+			stock.setCode("sh600081");
 			MyHTTPQuery httpQuery = new MyHTTPQuery();
 			httpQuery.richStockInfo(stock);
 			TrendRule rule = new TrendRule();

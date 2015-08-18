@@ -9,7 +9,6 @@ import org.json.JSONObject;
 public class JsonHelper {
 	
 	private static Map toMap(Object javaBean) {
-
         Map result = new HashMap();
         for(Class<?> clazz = javaBean.getClass() ; clazz != Object.class ; clazz = clazz.getSuperclass()) { 
         	 Method[] methods = clazz.getDeclaredMethods();
@@ -30,8 +29,13 @@ public class JsonHelper {
         return result;
     }
 	
-	public static String toJson(Object javaBean) {
-		JSONObject obj = new JSONObject(toMap(javaBean)); 
+	public static String toJson(Object object) {
+		JSONObject obj = null;
+		if (object instanceof Map) {
+			obj = new JSONObject((Map)object);
+		} else {
+			obj = new JSONObject(toMap(object));
+		}
 		return obj.toString();
 	}
    

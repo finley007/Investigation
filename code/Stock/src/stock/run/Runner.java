@@ -5,15 +5,15 @@ import java.util.Date;
 import stock.analysis.StockAnalysis;
 import stock.analysis.impl.ShowDiagram;
 import stock.analysis.impl.StatisticAnalysis;
-import stock.run.impl.FallTrendAnalysisExecuter;
+import stock.run.impl.TrendAnalysisExecuter;
 
 
 public class Runner {
 
 	public static void main(String[] args) {
-		executeRule();
+//		executeRule();
 //		checkStocks();
-//		doAnalysis();
+		doAnalysis();
 	}
 
 	private static void doAnalysis() {
@@ -21,7 +21,7 @@ public class Runner {
 		try {
 			int size = 10;
 			int init = 7;
-			analysis.doAnalysis("20150813100845591RULE_HISTORY_1", init * size + 1, size);
+			analysis.doAnalysis("20150816100825801RULE_HISTORY_1", init * size + 1, size);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -33,7 +33,7 @@ public class Runner {
 		try {
 			int size = 0;
 			int init = 0;
-			analysis.doAnalysis("20150813100845591RULE_HISTORY_1", init * size + 1, size);
+			analysis.doAnalysis("20150816100825801RULE_HISTORY_1", init * size + 1, size);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -41,7 +41,7 @@ public class Runner {
 	}
 
 	private static void executeRule() {
-		BaseExcecuter executer = new FallTrendAnalysisExecuter();
+		BaseExcecuter executer = new TrendAnalysisExecuter();
 		Date start = new Date();
 		executer.run();
 		Date end = new Date();
