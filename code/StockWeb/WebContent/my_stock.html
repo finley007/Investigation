@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<link href="./css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
+<link href="./css/jquery.confirm.css" rel="stylesheet" type="text/css"/>
+
+<script src="./js/jquery-1.11.1.min.js" type="text/javascript">//</script>
+<script src="./js/jquery.dataTables.min.js" type="text/javascript">//</script>
+<script src="./js/jquery.confirm.js" type="text/javascript">//</script>
+
+<script type="text/javascript">
+	var selected = [];
+	$(document).ready(function() {
+    	$('#my_stock').dataTable( {
+        	"ajax": './mystock',
+        	"fnCreatedRow": function( nRow, aData, iDataIndex ) { 
+        	    var isMonitor = aData[10];
+        	    var transId = aData[0];
+        	    var stockCode = aData[1];
+        	    if (isMonitor === 'true') {
+		        	$('td:eq(10)', nRow).html( '<span><button id="' + transId + '" code="' + stockCode + '" onclick="monitorSwitch(this)">Stop</button></span>' );
+		        	$('#M_'+ stockCode).click(function(){
+		        		alert(stockCode);
+		        	});
+		        } else {
+		        	$('td:eq(10)', nRow).html( '<span><button id="' + transId + '" code="' + stockCode + '" onclick="monitorSwitch(this)">Start</button></span>' );
+		        }
+		    } 
+    	});
+    	
+    	$('#my_stock tbody').on('click', 'tr', function () {
+    	    //alert($(this).children("td:first-child").text());
+    	    selected = [];
+	        var transId = $(this).children("td:first-child").text();
+	        var code = $(this).children().eq(1).text();
+	        var item = {
+	        	transId : transId,
+	        	code : code
+	        };
+	        var index = $.inArray(item, selected);
+	        if ( index === -1 ) {
+	            selected.push( item );
+	        } 
+	        $(this).parents().children('tr').removeClass('selected');
+	        $(this).toggleClass('selected');
+	    }).on('dblclick', 'tr', function () {
+	        window.open("http://finance.sina.com.cn/realstock/company/" + $(this).children().eq(1).text() + "/nc.shtml");
+	    });
+	    
+	    $('#buy').click(function(){
+			var elem = $(this).closest('.item');
+			$.confirm({
+				'title'		: 'Confirmation',
+				'message'	: 'You want to buy a new stock <br /> Continue?',
+				'buttons'	: {
+					'Yes'	: {
+						'class'	: 'blue',
+						'action': function(){
+							location.href = "./buy_stock.html";
+						}
+					},
+					'No'	: {
+						'class'	: 'gray',
+					}
+				}
+			});
+		});
+		
+		$('#sell').click(function(){
+		    if (selected.length === 0) {
+		    	var elem = $(this).closest('.item');
+				$.confirm({
+					'title'		: 'Alert',
+					'message'	: 'You should select one stock first!',
+					'buttons'	: {
+						'Confirm'	: {
+							'class'	: 'blue'
+						}
+					}
+				});
+		    } else {
+		    	$.confirm({
+					'title'		: 'Confirmation',
+					'message'	: 'You want to sell current stock ' + selected[0].code + '<br /> Continue?',
+					'buttons'	: {
+						'Yes'	: {
+							'class'	: 'blue',
+							'action': function(){
+								location.href = "./sell_stock.html?transId=" + selected[0].transId;
+							}
+						},
+						'No'	: {
+							'class'	: 'gray',
+						}
+					}
+				});
+		    }
+		});
+		
+		$('#refresh').click(function(){
+			location.href = "./my_stock.html";
+		});
+		
+	});
+	
+	function monitorSwitch(bt) {
+		$.ajax({     
+            	type: 'Post',     
+            	url:  './timer?action=' + $(bt).text() + '&transId=' + $(bt).attr('id') + '&stockCode=' + $(bt).attr('code'),     
+            	contentType: 'application/json; charset=utf-8',     
+	            success: function() {
+	            	location.href = "./my_stock.html";
+	            },     
+	            error: function(err) {     
+	                alert(err);     
+	            }     
+   			}); 
+	}
+	
+	var es = new EventSource('events');
+	es.onmessage = function(e) {
+	    alert(e.data);
+	};
+</script>
+<title>My Stock</title>
+</head>
+<body>
+	<table id="my_stock" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+            	<th>Transaction</th>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Buy Price</th>
+                <th>Current Price</th>
+                <th>Quantity</th>
+                <th>Profit</th>
+                <th>Profit Rate</th>
+                <th>Buy Time</th>
+                <th>Own days</th>
+                <th>Monitor</th>
+            </tr>
+        </thead>
+    </table>
+    <span><button id="buy">Buy</button></span>
+    <span><button id="sell">Sell</button></span>
+    <span><button id="refresh">Refresh</button></span>
+</body>
+</html>
