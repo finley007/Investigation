@@ -1,0 +1,9 @@
+@CHARSET "ISO-8859-1";
+
+#theme {
+    background:url('../img/theme.png') no-repeat right;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    height: 500px;
+    width: 100%;
+}
