@@ -9,7 +9,7 @@ public class MainInputFlowRule implements Rule {
 
 	public Boolean isSatisfy(StockInfo info) throws Exception {
 		// TODO Auto-generated method stub
-		if (info.getMainInflow() > 2 * info.getMainOutflow()
+		if (info.getMainInflow() > 1.5 * info.getMainOutflow()
 				&& info.getMainInflow() > level) {
 			return true;
 		} else {
