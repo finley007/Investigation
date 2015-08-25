@@ -165,7 +165,7 @@ public class DBQueryImpl implements DBQuery {
 			if (info.getQuantity().equals(curInfo.getQuantity())) { //Sold out, then buying price will save the profit
 				status = StockConstants.MY_STOCK_STATUS_OUT;
 				quantity = 0;
-				buyingPrice = ((curInfo.getBuyingPrice() * curInfo.getQuantity() - info.getBuyingPrice() * info.getQuantity()));
+				buyingPrice = ((info.getBuyingPrice() * info.getQuantity() - curInfo.getBuyingPrice() * curInfo.getQuantity()));
 			} else {
 				quantity = curInfo.getQuantity() - info.getQuantity();
 				buyingPrice = ((curInfo.getBuyingPrice() * curInfo.getQuantity() - info.getBuyingPrice() * info.getQuantity())) / quantity;

@@ -8,10 +8,14 @@
 <script src="./js/bootstrap.js" type="text/javascript">//</script>
 <script src="./js/jquery-ui.min.js" type="text/javascript">//</script>
 <script type="text/javascript">
-	var selected = [];
 	$(document).ready(function() {
-    	$('#content').load('my_stock.html');
+    	loadMyStock();
 	});
+	
+	function loadMyStock() {
+		$('#content').load('my_stock.html');
+	}
+	
 </script>
 <title>Main</title>
 </head>
@@ -19,7 +23,7 @@
 	<div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span12">
-			<h2>title</h2>
+			<h2>Stock Analysis System</h2>
 		</div>
 	</div>
 	<div class="row-fluid">
@@ -27,11 +31,14 @@
 			<div class="accordion" id="accordion-455159">
 				<div class="accordion-group">
 					<div class="accordion-heading">
-						 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-455159" href="#accordion-element-555364">Trend</a>
+						 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-455159" href="#accordion-element-555364">Transaction</a>
 					</div>
 					<div id="accordion-element-555364" class="accordion-body in collapse">
 						<div class="accordion-inner">
-							Trend
+							My Stock
+						</div>
+						<div class="accordion-inner">
+							History
 						</div>
 					</div>
 				</div>

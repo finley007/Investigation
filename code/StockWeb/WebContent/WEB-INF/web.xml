@@ -29,12 +29,6 @@
 	</servlet>
 	<servlet>
 		<description></description>
-		<display-name>SellStockServlet</display-name>
-		<servlet-name>SellStockServlet</servlet-name>
-		<servlet-class>stock.servlet.SellStockServlet</servlet-class>
-	</servlet>
-	<servlet>
-		<description></description>
 		<display-name>QueryServlet</display-name>
 		<servlet-name>QueryServlet</servlet-name>
 		<servlet-class>stock.servlet.QueryServlet</servlet-class>
@@ -69,7 +63,7 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>TimerServlet</servlet-name>
-		<url-pattern>/query</url-pattern>
+		<url-pattern>/timer</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>StockEventServlet</servlet-name>
