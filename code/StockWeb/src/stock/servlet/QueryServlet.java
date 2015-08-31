@@ -14,7 +14,7 @@ public class QueryServlet extends BaseStockServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String serviceCode = request.getParameter("serviceCode");
-			String result =StockServiceManager.dispatchRequest(serviceCode, createParams(request));
+			String result = StockServiceManager.dispatchRequest(serviceCode, createParams(request));
 			System.out.println(result);
 			response.getOutputStream().println(result);
 		} catch (Exception e) {

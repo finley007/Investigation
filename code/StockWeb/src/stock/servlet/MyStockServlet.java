@@ -5,28 +5,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import stock.db.DBQuery;
-import stock.db.connect.DBConnector;
-import stock.db.connect.impl.MysqlConnector;
-import stock.db.impl.DBQueryImpl;
 import stock.http.HTTPQuery;
 import stock.http.impl.MyHTTPQuery;
 import stock.util.CommonUtils;
 import stock.vo.MyStockInfo;
 
-public class MyStockServlet extends HttpServlet {
+public class MyStockServlet extends DataTableServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			DBConnector connector = new MysqlConnector();
-			DBQuery query = new DBQueryImpl();
-			query.setConn(connector);
-			List<MyStockInfo> result = query.getMyStock();
+			List<MyStockInfo> result = getDBQuery().getMyStock();
 			richStockInfo(result);
 			response.getOutputStream().println(createResponse(result));
 		} catch (Exception e) {
@@ -49,48 +41,29 @@ public class MyStockServlet extends HttpServlet {
 	}
 	
 	String createResponse(List<MyStockInfo> info) {
-		List infoList = new ArrayList();
+		List<String[]> strs = new ArrayList<String[]>(); 
 		if (info == null) {
 			info = new ArrayList<MyStockInfo>();
 		}
 		if (info.size() == 0) {
 			info.add(new MyStockInfo());
 		}
-		StringBuffer sb = new StringBuffer("{ \"data\": [");
 		for (int i = 0; i < info.size(); i++) {
-			sb.append(" [ " );
-			sb.append(addQuotes(info.get(i).getTransId()));
-			sb.append(addQuotes(info.get(i).getCode()));
-			sb.append(addQuotes(info.get(i).getName()));
-			sb.append(addQuotes(CommonUtils.objToStr(info.get(i).getBuyingPrice())));
-			sb.append(addQuotes(CommonUtils.objToStr(info.get(i).getCurrentPrice())));
-			sb.append(addQuotes(CommonUtils.objToStr(info.get(i).getQuantity())));
-			sb.append(addQuotes(CommonUtils.objToStr(info.get(i).getProfit())));
-			sb.append(addQuotes(CommonUtils.objToStr(info.get(i).getProfitRate()) + "%"));
-			sb.append(addQuotes(CommonUtils.objToStr(info.get(i).getBuyingTime())));
-			sb.append(addQuotes(""));
-			sb.append(addQuotes(CommonUtils.objToStr(info.get(i).getIsMonitor()), true));
-			if (i == info.size() - 1) {
-				sb.append(" ] ");
-			} else {
-				sb.append(" ], ");
-			}
+			StringBuffer sb = new StringBuffer();
+			sb.append(addSeparator(info.get(i).getTransId()));
+			sb.append(addSeparator(info.get(i).getCode()));
+			sb.append(addSeparator(info.get(i).getName()));
+			sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getBuyingPrice())));
+			sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getCurrentPrice())));
+			sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getQuantity())));
+			sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getProfit())));
+			sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getProfitRate()) + "%"));
+			sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getBuyingTime())));
+			sb.append(addSeparator(""));
+			sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getIsMonitor())));
+			strs.add(sb.toString().split("\\|"));
 		}
-		sb.append(" ] }");
-		String result = sb.toString();
-		System.out.println(result);
-		return result;
+		return createDataTableInfo(strs);
 	}
 	
-	private String addQuotes(String str, boolean isLast) {
-		if (isLast) {
-			return "\"" + str + "\"";
-		} else {
-			return addQuotes(str);
-		}
-	}
-	
-	private String addQuotes(String str) {
-		return "\"" + str + "\"" + ",";
-	}
 }

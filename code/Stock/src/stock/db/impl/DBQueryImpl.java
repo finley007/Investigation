@@ -16,10 +16,11 @@ import java.util.UUID;
 import stock.db.DBQuery;
 import stock.db.connect.DBConnector;
 import stock.timer.TimerConstants;
-import stock.util.StockConstants;
 import stock.util.CommonUtils;
+import stock.util.StockConstants;
 import stock.vo.AlertVO;
 import stock.vo.MyStockInfo;
+import stock.vo.RuleItemVO;
 import stock.vo.Stock;
 
 public class DBQueryImpl implements DBQuery {
@@ -315,8 +316,66 @@ public class DBQueryImpl implements DBQuery {
 		statement.setString(3, stockCode);
 		statement.execute();
 		conn.close();
-		
 	}
 	
+	public List<RuleItemVO> getRuleItemByType(Integer type) throws Exception {
+		List<RuleItemVO> result = new ArrayList<RuleItemVO>();
+		Connection conn = getConnection();
+		String sql = "select * from rule_item t where t.TYPE = ? order by t.ID";
+		PreparedStatement statement = conn.prepareStatement(sql);
+		statement.setInt(1, type);
+		ResultSet rs = statement.executeQuery();  
+		while (rs.next()) {
+			RuleItemVO ruleItem = new RuleItemVO();
+			ruleItem.setId(rs.getString("id"));
+			ruleItem.setName(rs.getString("name"));
+			ruleItem.setType(rs.getInt("type"));
+			ruleItem.setImplClz(rs.getString("impl_class"));
+			ruleItem.setDesp(rs.getString("description"));
+			result.add(ruleItem);
+		}  
+		return result;
+	}
+	
+	public void saveOrUpdateRuleItem(RuleItemVO ruleItem) throws Exception {
+		if (ruleItem != null && ruleItem.getId() != null 
+				&& !"".equals(ruleItem.getId())) {
+			Connection conn = getConnection();
+			String sql = "select count(*) from rule_item t where t.id = ?";
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, ruleItem.getId());
+			ResultSet rs = statement.executeQuery();
+			if (rs.next() && rs.getInt(0) > 0) {
+				String update = "update rule_item t set t.name = ?, t.impl_class = ?, t.description = ? where t.id = ?";
+				statement = conn.prepareStatement(update);
+				statement.setString(1, ruleItem.getName());
+				statement.setString(2, ruleItem.getImplClz());
+				statement.setString(3, ruleItem.getDesp());
+				statement.setString(4, ruleItem.getId());
+				statement.execute();
+			} else {
+				String insert = "insert into rule_item t values (?, ?, ?, ?)";
+				statement = conn.prepareStatement(insert);
+				statement.setString(1, ruleItem.getId());
+				statement.setString(2, ruleItem.getName());
+				statement.setString(3, ruleItem.getImplClz());
+				statement.setString(4, ruleItem.getDesp());
+				statement.execute();
+			}
+		} else {
+			throw new Exception("Rule item is null");
+		}
+	}
+	
+	public void deleteRuleItem(RuleItemVO ruleItem) throws Exception {
+		if (ruleItem != null && ruleItem.getId() != null 
+				&& !"".equals(ruleItem.getId())) {
+			Connection conn = getConnection();
+			String sql = "delete from rule_item t where t.id = ?";
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, ruleItem.getId());
+			statement.execute();
+		}
+	}
 }
  

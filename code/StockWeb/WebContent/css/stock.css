@@ -1,9 +1,21 @@
 @CHARSET "ISO-8859-1";
 
 #theme {
-    background:url('../img/theme.png') no-repeat right;
+    background:	url('../img/theme.png') no-repeat right;
     background-size: 100%;
     background-repeat: no-repeat;
     height: 500px;
     width: 100%;
 }
+
+.function-menu {
+	color:	#000000;
+	font-size: 12px;
+}
+
+.function-menu:hover {
+	text-decoration: none;
+	color:	#000000;
+	cursor: pointer;
+}
+

@@ -45,6 +45,12 @@
 		<servlet-name>StockEventServlet</servlet-name>
 		<servlet-class>stock.servlet.StockEventServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<description></description>
+		<display-name>RuleItemServlet</display-name>
+		<servlet-name>RuleItemServlet</servlet-name>
+		<servlet-class>stock.servlet.RuleItemServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>MyStockServlet</servlet-name>
 		<url-pattern>/mystock</url-pattern>
@@ -68,6 +74,10 @@
 	<servlet-mapping>
 		<servlet-name>StockEventServlet</servlet-name>
 		<url-pattern>/events</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>RuleItemServlet</servlet-name>
+		<url-pattern>/ruleitem</url-pattern>
 	</servlet-mapping>
 	<filter> 
     <filter-name>alertPush</filter-name> 
