@@ -30,8 +30,14 @@ public class QueryTransactionFee implements StockService {
 		if (params.get(ParamName.STOCK_PRICE) == null) {
 			throw new Exception("Parameter: " + ParamName.STOCK_PRICE + " is required!!");
 		}
-		Integer action = Integer.valueOf(params.get(ParamName.TRANSACTION_ACTION).toString());
-		Integer quantity = Integer.valueOf(params.get(ParamName.TRANSACTION_QUANTITY).toString());
+		Integer action = 0;
+		if (!"".equals(params.get(ParamName.TRANSACTION_ACTION).toString())) {
+			action = Integer.valueOf(params.get(ParamName.TRANSACTION_ACTION).toString());
+		}
+		Integer quantity = 0;
+		if (!"".equals(params.get(ParamName.TRANSACTION_QUANTITY).toString())) {
+			quantity =	Integer.valueOf(params.get(ParamName.TRANSACTION_QUANTITY).toString());
+		}
 		Double price = Double.valueOf(params.get(ParamName.STOCK_PRICE).toString());
 		Double fee = CommonUtils.round(StockUtils.caculateFee(action, quantity, price), 2);
 		Double totalPrice = CommonUtils.round(quantity * price, 2);

@@ -2,14 +2,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
+<!--
 <link href="./css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
 <link href="./css/jquery.confirm.css" rel="stylesheet" type="text/css"/>
+<link href="./css/bootstrap.css" rel="stylesheet" type="text/css"/>
+<link href="./css/form.css" rel="stylesheet" type="text/css"/>
+<link href="./css/jquery-ui-timepicker-addon.css" type="text/css" />
+<link href="./css/timepicker.css" rel="stylesheet" type="text/css" />
+<link href="./css/jquery-ui.css" rel="stylesheet" type="text/css" />
 
-<script src="./js/jquery-1.11.1.min.js" type="text/javascript">//</script>
 <script src="./js/jquery.dataTables.min.js" type="text/javascript">//</script>
 <script src="./js/jquery.confirm.js" type="text/javascript">//</script>
-
+<script src="./js/jquery.form.js" type="text/javascript">//</script>
+<script src="./js/jquery-ui-timepicker-addon.js" type="text/javascript"></script>
+<script src="./js/form.js" type="text/javascript">//</script>
+-->
 <script type="text/javascript">
 	var selected = [];
 	$(document).ready(function() {
@@ -49,53 +56,66 @@
 	        window.open("http://finance.sina.com.cn/realstock/company/" + $(this).children().eq(1).text() + "/nc.shtml");
 	    });
 	    
-	    $('#buy').click(function(){
-			var elem = $(this).closest('.item');
-			$.confirm({
-				'title'		: 'Confirmation',
-				'message'	: 'You want to buy a new stock <br /> Continue?',
-				'buttons'	: {
-					'Yes'	: {
-						'class'	: 'blue',
-						'action': function(){
-							location.href = "./buy_stock.html";
-						}
-					},
-					'No'	: {
-						'class'	: 'gray',
-					}
-				}
-			});
+		$('#buy').click(function(){
+		    $('#modal-container-220546').modal('show');
+		    $('#submit').text('Buy it').click(function() {
+		    	 $.ajax({     
+		           	type: 'Post',     
+		           	url:  './buystock',     
+		           	data: {
+		           		'code' : $('input[name="code"]').val(), 
+		           		'price' : $('input[name="price"]').val(), 
+		           		'quantity' : $('input[name="quantity"]').val(), 
+		           		'time' : $('input[name="time"]').val(), 
+		           	},
+		           	//contentType: 'application/json; charset=utf-8',     
+		           	//dataType: 'json',     
+		            success: loadMyStock,     
+		            error: function(err) {     
+		                alert(err);     
+		            }     
+	 			});  
+	 			$('#modal-container-220546').modal('hide');
+		    });
+		    $('#myModalLabel').text('Buy stock');
 		});
 		
 		$('#sell').click(function(){
 		    if (selected.length === 0) {
 		    	var elem = $(this).closest('.item');
-				$.confirm({
-					'title'		: 'Alert',
-					'message'	: 'You should select one stock first!',
-					'buttons'	: {
-						'Confirm'	: {
-							'class'	: 'blue'
-						}
-					}
-				});
+		    	$('#modal-promote').modal('show');
 		    } else {
-		    	$.confirm({
-					'title'		: 'Confirmation',
-					'message'	: 'You want to sell current stock ' + selected[0].code + '<br /> Continue?',
-					'buttons'	: {
-						'Yes'	: {
-							'class'	: 'blue',
-							'action': function(){
-								location.href = "./sell_stock.html?transId=" + selected[0].transId;
-							}
-						},
-						'No'	: {
-							'class'	: 'gray',
-						}
-					}
-				});
+		    	$('#modal-container-220546').modal('show');
+		    	$('#submit').text('Sell it').click(function() {
+			    	 $.ajax({     
+			           	type: 'Post',     
+			           	url:  './sellstock',     
+			           	data: {
+			           		'code' : $('input[name="code"]').val(), 
+			           		'price' : $('input[name="price"]').val(), 
+			           		'quantity' : $('input[name="quantity"]').val(), 
+			           		'time' : $('input[name="time"]').val(), 
+			           	},
+			           	//contentType: 'application/json; charset=utf-8',     
+			           	//dataType: 'json',     
+			            success: loadMyStock,     
+			            error: function(err) {     
+			                alert(err);     
+			            }     
+		 			});  
+		 			$('#modal-container-220546').modal('hide');
+			    });
+			    $('#myModalLabel').text('Sell stock');
+			    $.ajax({     
+	            	type: 'Post',     
+	            	url:  './query?serviceCode=queryStockInfo&transactionId=' + selected[0].transId,     
+	            	contentType: 'application/json; charset=utf-8',     
+	            	dataType: 'json',     
+		            success: initForm,     
+		            error: function(err) {     
+		                alert(err);     
+		            }     
+	   			}); 
 		    }
 		});
 		
@@ -103,6 +123,7 @@
 			loadMyStock();
 		});
 		
+		initComp();
 	});
 	
 	function monitorSwitch(bt) {
@@ -144,8 +165,45 @@
             </tr>
         </thead>
     </table>
-    <span><button id="buy">Buy</button></span>
-    <span><button id="sell">Sell</button></span>
-    <span><button id="refresh">Refresh</button></span>
+    <div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<a id="buy" role="button" class="btn" data-toggle="modal">Buy</a>
+			<a id="sell" role="button" class="btn" data-toggle="modal">Sell</a>
+			<a id="refresh" role="button" class="btn" data-toggle="modal">Refresh</a>
+			<div id="modal-container-220546" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h3 id="myModalLabel"></h3>
+				</div>
+				<div class="modal-body">
+					<form class="form">
+			          <span><label>Stock code</label><input type="text" name="code" id="code"/></span>
+			          <span><label>Price</label><input type="text" name="price" id="price"/></span>
+			          <span><label>Quantity</label><input type="text" name="quantity" id="quantity"/></span>
+			          <span><label>Time</label><input type="text" name="time" id="time"/></span>
+			          <span><label>Total value:<text id="totalPrice"></text>&nbsp&nbspFee:<text id="fee"></text></label></span>
+			      </form>
+				</div>
+				<div class="modal-footer">
+					 <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button> 
+					 <button id="submit" class="btn btn-primary"></button>
+				</div>
+			</div>
+			<div id="modal-promote" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h3 id="myModalLabel">Promote</h3>
+				</div>
+				<div class="modal-body">
+					You should select one stock first!!
+				</div>
+				<div class="modal-footer">
+					 <button class="btn" data-dismiss="modal" aria-hidden="true">Confirm</button> 
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 </body>
 </html>

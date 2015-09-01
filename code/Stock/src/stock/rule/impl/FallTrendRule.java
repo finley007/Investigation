@@ -22,13 +22,13 @@ public class FallTrendRule implements Rule {
 		List<String> list = DateUtils.getRecentDate();
 		//TODO Consider limit up first
 		if (list != null && list.size() > 0) {
-			for (int i = 0; i < list.size(); i++) {
+			for (int i = 0; i < list.size() - 1; i++) {
 				DailyPriceVO day = info.getDailyPrice().get(list.get(i));
 				DailyPriceVO lastDay = info.getDailyPrice().get(list.get(i + 1));
 				if (day.getEndPrice() > day.getStartPrice()) {
 					return false;
 				} else if (day.getEndPrice().equals(day.getStartPrice())
-						&& day.getEndPrice() > lastDay.getEndPrice() * 0.89) { //limit down
+						&& day.getEndPrice() > lastDay.getEndPrice() * 0.91) { //limit down
 					return false;
 				}
 			}
