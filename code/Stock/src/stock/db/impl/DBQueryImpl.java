@@ -341,25 +341,28 @@ public class DBQueryImpl implements DBQuery {
 		if (ruleItem != null && ruleItem.getId() != null 
 				&& !"".equals(ruleItem.getId())) {
 			Connection conn = getConnection();
-			String sql = "select count(*) from rule_item t where t.id = ?";
+			String sql = "select * from rule_item t where t.id = ? and t.type = ?";
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, ruleItem.getId());
+			statement.setInt(2, ruleItem.getType());
 			ResultSet rs = statement.executeQuery();
-			if (rs.next() && rs.getInt(0) > 0) {
-				String update = "update rule_item t set t.name = ?, t.impl_class = ?, t.description = ? where t.id = ?";
+			if (rs.next()) {
+				String update = "update rule_item t set t.name = ?, t.impl_class = ?, t.description = ? where t.id = ? and t.type = ?";
 				statement = conn.prepareStatement(update);
 				statement.setString(1, ruleItem.getName());
 				statement.setString(2, ruleItem.getImplClz());
 				statement.setString(3, ruleItem.getDesp());
 				statement.setString(4, ruleItem.getId());
+				statement.setInt(5, ruleItem.getType());
 				statement.execute();
 			} else {
-				String insert = "insert into rule_item t values (?, ?, ?, ?)";
+				String insert = "insert into rule_item values (?, ?, ?, ?, ?)";
 				statement = conn.prepareStatement(insert);
 				statement.setString(1, ruleItem.getId());
 				statement.setString(2, ruleItem.getName());
-				statement.setString(3, ruleItem.getImplClz());
-				statement.setString(4, ruleItem.getDesp());
+				statement.setInt(3, ruleItem.getType());
+				statement.setString(4, ruleItem.getImplClz());
+				statement.setString(5, ruleItem.getDesp());
 				statement.execute();
 			}
 		} else {
@@ -371,9 +374,10 @@ public class DBQueryImpl implements DBQuery {
 		if (ruleItem != null && ruleItem.getId() != null 
 				&& !"".equals(ruleItem.getId())) {
 			Connection conn = getConnection();
-			String sql = "delete from rule_item t where t.id = ?";
+			String sql = "delete from rule_item where id = ? and type = ?";
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, ruleItem.getId());
+			statement.setInt(2, ruleItem.getType());
 			statement.execute();
 		}
 	}

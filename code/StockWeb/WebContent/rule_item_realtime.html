@@ -1,21 +1,142 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<!--
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- 
 <link href="./css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
 <link href="./css/jquery.confirm.css" rel="stylesheet" type="text/css"/>
+<link href="./css/bootstrap.css" rel="stylesheet" type="text/css"/>
+<link href="./css/form.css" rel="stylesheet" type="text/css"/>
 
 <script src="./js/jquery-1.11.1.min.js" type="text/javascript">//</script>
 <script src="./js/jquery.dataTables.min.js" type="text/javascript">//</script>
 <script src="./js/jquery.confirm.js" type="text/javascript">//</script>
+<script src="./js/bootstrap.js" type="text/javascript">//</script>
 <script src="./js/stock.js" type="text/javascript">//</script>
 -->
 <script type="text/javascript">
+	var ruleType_1 = 2;
+	var selected_1 = [];
 	$(document).ready(function() {
     	$('#rule_item_realtime').dataTable( {
-        	"ajax": './ruleitem?ruleType=2',
+        	"ajax": './ruleitem?ruleType=' + ruleType_1,
     	});
+    	
+    	$('#rule_item_realtime tbody').on('click', 'tr', function () {
+    	    //alert($(this).children("td:first-child").text());
+    	    selected_1 = [];
+	        var id = $(this).children("td:first-child").text();
+	        var name = $(this).children().eq(1).text();
+	        var implClz = $(this).children().eq(2).text();
+	        var desp = $(this).children().eq(3).text();
+	        var item = {
+	        	id : id,
+	        	name : name,
+	        	implClz : implClz,
+	        	desp : desp,
+	        };
+	        var index = $.inArray(item, selected_1);
+	        if ( index === -1 ) {
+	            selected_1.push( item );
+	        } 
+	        $(this).parents().children('tr').removeClass('selected');
+	        $(this).toggleClass('selected');
+	    })
+    	
+    	$('#add_1').click(function() {
+		    $('#modal-container-220547').modal('show');
+		    $('#rule_id_1').val('').attr('readonly', false);
+		    $('#rule_name_1').val('');
+			$('#impl_clz_1').val('');
+			$('#desp_1').val('');
+		    $('#submit_1').text('Add').click(function() {
+		    	 $.ajax({     
+		           	type: 'Post',     
+		           	url:  './saverule',     
+		           	data: {
+		           		'type' : ruleType_1, 
+		           		'id' : $('input[name="rule_id_1"]').val(), 
+		           		'name' : $('input[name="rule_name_1"]').val(), 
+		           		'implClz' : $('input[name="impl_clz_1"]').val(), 
+		           		'desp' : $('textarea[name="desp_1"]').val(), 
+		           	},
+		           	//contentType: 'application/json; charset=utf-8',     
+		           	//dataType: 'json',     
+		            success: loadRule(2),     
+		            error: function(err) {     
+		                alert(err);     
+		            }     
+	 			});  
+	 			$('#modal-container-220547').modal('hide');
+		    });
+		    $('#myModalLabel_1').text('Add New Rule');
+		});
+		
+    	$('#edit_1').click(function() {
+    		if (selected_1.length === 0) {
+		    	var elem = $(this).closest('.item');
+		    	$('#modal-promote_1').modal('show');
+		    	$('#promote-content_1').text('You should select rule first!!');
+		    	$('#cancel-bt_1').attr('display', 'none');
+		    } else {
+			    $('#modal-container-220547').modal('show');
+			    $('#rule_id_1').val(selected_1[0]['id']).attr('readonly', true);
+			    $('#rule_name_1').val(selected_1[0]['name']);
+			    $('#impl_clz_1').val(selected_1[0]['implClz']);
+			    $('#desp_1').val(selected_1[0]['desp']);
+			    $('#submit_1').text('Edit').click(function() {
+			    	 $.ajax({     
+			           	type: 'Post',     
+			           	url:  './saverule',     
+			           	data: {
+			           		'type' : ruleType_1, 
+			           		'id' : $('input[name="rule_id_1"]').val(), 
+			           		'name' : $('input[name="rule_name_1"]').val(), 
+			           		'implClz' : $('input[name="impl_clz_1"]').val(), 
+			           		'desp' : $('textarea[name="desp_1"]').val(), 
+			           	},
+			           	//contentType: 'application/json; charset=utf-8',     
+			           	//dataType: 'json',     
+			            success: loadRule(2),     
+			            error: function(err) {     
+			                alert(err);     
+			            }     
+		 			});  
+		 			$('#modal-container-220547').modal('hide');
+			    });
+			    $('#myModalLabel_1').text('Edit Rule');
+			}
+		});
+		
+    	$('#delete_1').click(function() {
+    		if (selected_1.length === 0) {
+		    	var elem = $(this).closest('.item');
+		    	$('#modal-promote_1').modal('show');
+		    	$('#promote-content_1').text('You should select rule first!!');
+		    	$('#cancel-bt_1').attr('display', 'none');
+		    } else {
+			    $('#modal-promote_1').modal('show');
+		    	$('#promote-content_1').text('Confirm to delete this rule?');
+		    	$('#cancel-bt_1').show();
+		    	$('#confirm-bt_1').click(function() {
+		    		 $.ajax({     
+			           	type: 'Post',     
+			           	url:  './deleterule',     
+			           	data: {
+			           		'type' : ruleType_1, 
+			           		'id' : selected_1[0]['id'], 
+			           	},
+			           	//contentType: 'application/json; charset=utf-8',     
+			           	//dataType: 'json',     
+			            success: loadRule(2),     
+			            error: function(err) {     
+			                alert(err);     
+			            }     
+		 			});  
+		    	});
+			}
+		});
+    	
 	});
 </script>
 <title>Insert title here</title>
@@ -31,8 +152,43 @@
             </tr>
         </thead>
     </table>
-    <span><button id="buy">Add</button></span>
-    <span><button id="sell">Delete</button></span>
-    <span><button id="refresh">Edit</button></span>
+     <div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<a id="add_1" role="button" class="btn" data-toggle="modal">Add</a>
+			<a id="edit_1" role="button" class="btn" data-toggle="modal">Edit</a>
+			<a id="delete_1" role="button" class="btn" data-toggle="modal">Delete</a>
+			<div id="modal-container-220547" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel_1" aria-hidden="true">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h3 id="myModalLabel_1"></h3>
+				</div>
+				<div class="modal-body">
+					<form class="form">
+			          <span><label>Id</label><input type="text" name="rule_id_1" id="rule_id_1"/></span>
+			          <span><label>Name</label><input type="text" name="rule_name_1" id="rule_name_1"/></span>
+			          <span><label>Implement Class</label><input type="text" name="impl_clz_1" id="impl_clz_1"/></span>
+			          <span><label>Description</label><textarea name="desp_1" id="desp_1"/></span>
+			      </form>
+				</div>
+				<div class="modal-footer">
+					 <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button> 
+					 <button id="submit_1" class="btn btn-primary"></button>
+				</div>
+			</div>
+			<div id="modal-promote_1" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel_1" aria-hidden="true">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h3 id="myModalLabel_1">Promote</h3>
+				</div>
+				<div class="modal-body" id="promote-content_1"></div>
+				<div class="modal-footer">
+					 <button class="btn" data-dismiss="modal" aria-hidden="true" style="display:none" id="cancel-bt_1">Cancel</button> 
+					 <button class="btn" data-dismiss="modal" aria-hidden="true" id="confirm-bt_1">Confirm</button> 
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 </body>
 </html>

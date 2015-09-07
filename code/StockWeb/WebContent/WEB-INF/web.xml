@@ -51,6 +51,18 @@
 		<servlet-name>RuleItemServlet</servlet-name>
 		<servlet-class>stock.servlet.RuleItemServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<description></description>
+		<display-name>SaveRuleServlet</display-name>
+		<servlet-name>SaveRuleServlet</servlet-name>
+		<servlet-class>stock.servlet.SaveRuleServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description></description>
+		<display-name>DeleteRuleServlet</display-name>
+		<servlet-name>DeleteRuleServlet</servlet-name>
+		<servlet-class>stock.servlet.DeleteRuleServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>MyStockServlet</servlet-name>
 		<url-pattern>/mystock</url-pattern>
@@ -78,6 +90,14 @@
 	<servlet-mapping>
 		<servlet-name>RuleItemServlet</servlet-name>
 		<url-pattern>/ruleitem</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>SaveRuleServlet</servlet-name>
+		<url-pattern>/saverule</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DeleteRuleServlet</servlet-name>
+		<url-pattern>/deleterule</url-pattern>
 	</servlet-mapping>
 	<filter> 
     <filter-name>alertPush</filter-name> 

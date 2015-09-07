@@ -34,6 +34,14 @@
 		$('#content').load('my_stock.html');
 	}
 	
+	function loadRule(index) {
+		if (index === 1) {
+			$('#panel-488404').load('rule_item_history.html');
+		} else {
+			$('#panel-964241').load('rule_item_realtime.html');
+		}
+	}
+	
 </script>
 <title>Main</title>
 </head>

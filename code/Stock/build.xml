@@ -20,7 +20,7 @@
 			<fileset dir="${dir.src}" excludes="**/*.java" />
 		</copy>
 
-		<jar destfile="E:/project/MRP/workspace/migration/StockWeb/WebContent/WEB-INF/lib/stock.jar" basedir="${dir.bin}">
+		<jar destfile="E:/project/finley/Investigation/code/StockWeb/WebContent/WEB-INF/lib/stock.jar" basedir="${dir.bin}">
 			<include name="**/*" />
 		</jar>
 	</target>
