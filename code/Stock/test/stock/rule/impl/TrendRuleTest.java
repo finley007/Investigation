@@ -14,7 +14,13 @@ public class TrendRuleTest {
 	@Test
 	public void testGetRecentDate() {
 		TrendRule rule = new TrendRule();
-		List<String> list = DateUtils.getRecentDate();
+		List<String> list = null;
+		try {
+			list = DateUtils.getRecentDate();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println(list.toString());
 	}
 	
@@ -22,7 +28,7 @@ public class TrendRuleTest {
 	public void testIsSatisfy() {
 		try { 
 			StockInfo stock = new StockInfo();
-			stock.setCode("sh600103");
+			stock.setCode("sh603939");
 			MyHTTPQuery httpQuery = new MyHTTPQuery();
 			httpQuery.richStockInfo(stock);
 			TrendRule rule = new TrendRule();

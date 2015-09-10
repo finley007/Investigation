@@ -1,5 +1,6 @@
 package stock.db;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import stock.db.connect.DBConnector;
 import stock.vo.AlertVO;
 import stock.vo.MyStockInfo;
 import stock.vo.RuleItemVO;
+import stock.vo.RuleRunHistoryVO;
 import stock.vo.Stock;
 
 /**
@@ -56,4 +58,16 @@ public interface DBQuery {
 	public void saveOrUpdateRuleItem(RuleItemVO ruleItem) throws Exception;
 	
 	public void deleteRuleItem(RuleItemVO ruleItem) throws Exception;
+	
+	public RuleItemVO getRuleItemById(String ruleId) throws Exception;
+	
+	public void clearCalendar(Date start, Date end) throws Exception;
+	
+	public void insertCalendar(Date date, Integer status) throws Exception;
+	
+	public Map<String, Integer> initDateStatus() throws Exception;
+	
+	public List<RuleRunHistoryVO> getRuleRunHistoryByRuleId(String ruleId) throws Exception;
+	
+	public List<Stock> getRuleResultByRuleHisId(String ruleId) throws Exception;
 }

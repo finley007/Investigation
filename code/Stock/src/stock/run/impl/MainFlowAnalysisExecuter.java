@@ -4,14 +4,14 @@ import stock.http.HTTPQuery;
 import stock.http.impl.tencent.TencentHTTPFlowQuery;
 import stock.rule.Rule;
 import stock.rule.impl.MainInputFlowRule;
-import stock.run.BaseExcecuter;
+import stock.run.BaseExecuter;
 
 /**
  * @author liuli
  *
  * This executer is used for list all the stocks that have big main inflow
  */
-public class MainFlowAnalysisExecuter extends BaseExcecuter {
+public class MainFlowAnalysisExecuter extends BaseExecuter {
 	
 	protected HTTPQuery getHTTPQuery() {
 		return new TencentHTTPFlowQuery();

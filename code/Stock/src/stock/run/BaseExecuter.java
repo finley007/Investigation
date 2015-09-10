@@ -18,9 +18,9 @@ import stock.vo.Stock;
 import stock.vo.StockInfo;
 
 
-public abstract class BaseExcecuter {
+public abstract class BaseExecuter {
 	
-	private static Logger logger = LogManager.getLogger(BaseExcecuter.class);
+	private static Logger logger = LogManager.getLogger(BaseExecuter.class);
 	
 	private void init() {
 	}

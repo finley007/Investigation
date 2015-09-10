@@ -17,3 +17,27 @@ QueryString = {
         return this.data[key];  
     }  
 }  
+
+RuleInfo = {
+	selectedRuleId: "",
+	selectedRuleName: "",
+	selectedRuleHisId: "",
+	setRuleId: function(ruleId) {
+		this.selectedRuleId = ruleId;
+	},
+	getRuleId: function() {
+		return this.selectedRuleId;
+	},
+	setRuleName: function(ruleName) {
+		this.selectedRuleName = ruleName;
+	},
+	getRuleName: function() {
+		return this.selectedRuleName;
+	},
+	setRuleHisId: function(hisId) {
+		this.selectedRuleHisId = hisId;
+	},
+	getRuleHisId: function() {
+		return this.selectedRuleHisId;
+	}
+}

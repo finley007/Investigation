@@ -18,6 +18,19 @@
 		$('#panel-488404').load('rule_item_history.html');
 		$('#panel-964241').load('rule_item_realtime.html');
 	}
+	
+	function runRule(bt) {
+		$.ajax({     
+            	type: 'Post',     
+            	url:  './runrule?action=' + $(bt).text() + '&ruleId=' + $(bt).attr('id'),     
+            	contentType: 'application/json; charset=utf-8',     
+	            success: function() {
+	            },     
+	            error: function(err) {     
+	                alert(err);     
+	            }     
+   			}); 
+	}
 </script>
 <title>Insert title here</title>
 </head>

@@ -63,6 +63,24 @@
 		<servlet-name>DeleteRuleServlet</servlet-name>
 		<servlet-class>stock.servlet.DeleteRuleServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<description></description>
+		<display-name>RunRuleServlet</display-name>
+		<servlet-name>RunRuleServlet</servlet-name>
+		<servlet-class>stock.servlet.RunRuleServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description></description>
+		<display-name>ShowRuleHistoryServlet</display-name>
+		<servlet-name>ShowRuleHistoryServlet</servlet-name>
+		<servlet-class>stock.servlet.ShowRuleHistoryServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description></description>
+		<display-name>ShowRuleResultServlet</display-name>
+		<servlet-name>ShowRuleResultServlet</servlet-name>
+		<servlet-class>stock.servlet.ShowRuleResultServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>MyStockServlet</servlet-name>
 		<url-pattern>/mystock</url-pattern>
@@ -98,6 +116,18 @@
 	<servlet-mapping>
 		<servlet-name>DeleteRuleServlet</servlet-name>
 		<url-pattern>/deleterule</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>RunRuleServlet</servlet-name>
+		<url-pattern>/runrule</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ShowRuleHistoryServlet</servlet-name>
+		<url-pattern>/showrulerunhis</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ShowRuleResultServlet</servlet-name>
+		<url-pattern>/showruleresult</url-pattern>
 	</servlet-mapping>
 	<filter> 
     <filter-name>alertPush</filter-name> 

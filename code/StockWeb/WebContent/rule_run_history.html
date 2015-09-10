@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!--  
+<link href="./css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
+<link href="./css/jquery.confirm.css" rel="stylesheet" type="text/css"/>
+<link href="./css/bootstrap.css" rel="stylesheet" type="text/css"/>
+<link href="./css/form.css" rel="stylesheet" type="text/css"/>
+
+<script src="./js/jquery-1.11.1.min.js" type="text/javascript">//</script>
+<script src="./js/jquery.dataTables.min.js" type="text/javascript">//</script>
+<script src="./js/jquery.confirm.js" type="text/javascript">//</script>
+<script src="./js/bootstrap.js" type="text/javascript">//</script>
+<script src="./js/stock.js" type="text/javascript">//</script>
+-->
+
+<script type="text/javascript">
+	$(document).ready(function() {
+	    var ruleId = RuleInfo.getRuleId();
+	    var ruleName = RuleInfo.getRuleName();
+	    $('#rule_name').text(ruleName);
+    	$('#rule_run_history').dataTable( {
+        	"ajax": './showrulerunhis?ruleId=' + ruleId,
+    	});
+    	
+    	$('#rule_run_history tbody').on('dblclick', 'tr', function () {
+	    	var id = $(this).children("td:first-child").text();
+	        RuleInfo.setRuleHisId(id);
+	        loadRuleResult();
+	    });
+    });
+</script>
+<title>Insert title here</title>
+</head>
+<body>
+	<h4 id="rule_name"></h4>
+	<table id="rule_run_history" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Time</th>
+                <th>Stock Number</th>
+            </tr>
+        </thead>
+    </table>
+    <button onclick="loadRule()">return</button>
+</body>
+</html>

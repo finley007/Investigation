@@ -21,6 +21,10 @@
 	$(document).ready(function() {
     	$('#rule_item_history').dataTable( {
         	"ajax": './ruleitem?ruleType=' + ruleType,
+        	"fnCreatedRow": function( nRow, aData, iDataIndex ) { 
+        	    var ruleId = aData[0];
+		        $('td:eq(4)', nRow).html( '<div style="text-align:center"><button id="' + ruleId + '" onclick="runRule(this)">Run</button></div>' );
+		    } 
     	});
     	
     	$('#rule_item_history tbody').on('click', 'tr', function () {
@@ -42,7 +46,13 @@
 	        } 
 	        $(this).parents().children('tr').removeClass('selected');
 	        $(this).toggleClass('selected');
-	    })
+	    }).on('dblclick', 'tr', function () {
+	    	var id = $(this).children("td:first-child").text();
+	    	var name = $(this).children().eq(1).text();
+	        RuleInfo.setRuleId(id);
+	        RuleInfo.setRuleName(name);
+	        loadRuleRunHistory();
+	    });
     	
     	$('#add').click(function() {
 		    $('#modal-container-220546').modal('show');
@@ -150,6 +160,7 @@
                 <th>Name</th>
                 <th>Implement Class</th>
                 <th>Description</th>
+                <th>Run</th>
             </tr>
         </thead>
     </table>

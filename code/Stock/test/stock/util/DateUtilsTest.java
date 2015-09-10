@@ -23,6 +23,19 @@ public class DateUtilsTest {
 			e.printStackTrace();
 		}
 	}
+	
+	@Test
+	public void testGetDayAfterNDays() {
+		try {
+			Date date = StockConstants.sdf_date.parse("2015-08-06");
+			Date newDate = DateUtils.getDayAfterNDays(date, 3);
+			Assert.assertEquals("2015-08-09", StockConstants.sdf_date.format(newDate));
+			newDate = DateUtils.getDayAfterNDays(date, 31);
+			Assert.assertEquals("2015-09-06", StockConstants.sdf_date.format(newDate));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Test
 	public void testGetWeekDay() {
@@ -55,6 +68,17 @@ public class DateUtilsTest {
 		try {
 			Date date = new Date();
 			Assert.assertTrue(DateUtils.isOverCloseTime(date));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testClearTime() {
+		try {
+			Date date = StockConstants.sdf_time.parse("2015-09-08 21:18:20");
+			date = DateUtils.clearTime(date);
+			Assert.assertEquals("2015-09-08 00:00:00", StockConstants.sdf_time.format(date));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

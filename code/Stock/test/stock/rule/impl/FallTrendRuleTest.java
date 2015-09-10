@@ -14,7 +14,13 @@ public class FallTrendRuleTest {
 	@Test
 	public void testGetRecentDate() {
 		TrendRule rule = new TrendRule();
-		List<String> list = DateUtils.getRecentDate();
+		List<String> list = null;
+		try {
+			list = DateUtils.getRecentDate();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println(list.toString());
 	}
 	

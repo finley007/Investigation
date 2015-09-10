@@ -21,7 +21,7 @@
 -->
 
 <script type="text/javascript">
-	var selected = [];
+	var selectedStock = [];
 	$(document).ready(function() {
     	$('#my_stock').dataTable( {
         	"ajax": './mystock',
@@ -30,28 +30,28 @@
         	    var transId = aData[0];
         	    var stockCode = aData[1];
         	    if (isMonitor === 'true') {
-		        	$('td:eq(10)', nRow).html( '<span><button id="' + transId + '" code="' + stockCode + '" onclick="monitorSwitch(this)">Stop</button></span>' );
+		        	$('td:eq(10)', nRow).html( '<div style="text-align:center"><button id="' + transId + '" code="' + stockCode + '" onclick="monitorSwitch(this)">Stop</button></div>' );
 		        	$('#M_'+ stockCode).click(function(){
 		        		alert(stockCode);
 		        	});
 		        } else {
-		        	$('td:eq(10)', nRow).html( '<span><button id="' + transId + '" code="' + stockCode + '" onclick="monitorSwitch(this)">Start</button></span>' );
+		        	$('td:eq(10)', nRow).html( '<div style="text-align:center"><button id="' + transId + '" code="' + stockCode + '" onclick="monitorSwitch(this)">Start</button></div>' );
 		        }
 		    } 
     	});
     	
     	$('#my_stock tbody').on('click', 'tr', function () {
     	    //alert($(this).children("td:first-child").text());
-    	    selected = [];
+    	    selectedStock = [];
 	        var transId = $(this).children("td:first-child").text();
 	        var code = $(this).children().eq(1).text();
 	        var item = {
 	        	transId : transId,
 	        	code : code,
 	        };
-	        var index = $.inArray(item, selected);
+	        var index = $.inArray(item, selectedStock);
 	        if ( index === -1 ) {
-	            selected.push( item );
+	            selectedStock.push( item );
 	        } 
 	        $(this).parents().children('tr').removeClass('selected');
 	        $(this).toggleClass('selected');
@@ -84,7 +84,7 @@
 		});
 		
 		$('#sell').click(function(){
-		    if (selected.length === 0) {
+		    if (selectedStock.length === 0) {
 		    	var elem = $(this).closest('.item');
 		    	$('#modal-promote').modal('show');
 		    } else {
@@ -94,6 +94,7 @@
 			           	type: 'Post',     
 			           	url:  './sellstock',     
 			           	data: {
+			           	    'transId' : selectedStock[0].transId,
 			           		'code' : $('input[name="code"]').val(), 
 			           		'price' : $('input[name="price"]').val(), 
 			           		'quantity' : $('input[name="quantity"]').val(), 
@@ -111,7 +112,7 @@
 			    $('#myModalLabel').text('Sell stock');
 			    $.ajax({     
 	            	type: 'Post',     
-	            	url:  './query?serviceCode=queryStockInfo&transactionId=' + selected[0].transId,     
+	            	url:  './query?serviceCode=queryStockInfo&transactionId=' + selectedStock[0].transId,     
 	            	contentType: 'application/json; charset=utf-8',     
 	            	dataType: 'json',     
 		            success: initForm,     

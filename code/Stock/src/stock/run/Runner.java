@@ -11,8 +11,8 @@ import stock.run.impl.FallTrendAnalysisExecuter;
 public class Runner {
 
 	public static void main(String[] args) {
-		executeRule();
-//		checkStocks();
+//		executeRule();
+		checkStocks();
 //		doAnalysis();
 	}
 
@@ -33,7 +33,7 @@ public class Runner {
 		try {
 			int size = 0;
 			int init = 0;
-			analysis.doAnalysis("20150820110803569RULE_HISTORY_1", init * size + 1, size);
+			analysis.doAnalysis("20150908110903337RULE_HISTORY_1", init * size + 1, size);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -41,7 +41,7 @@ public class Runner {
 	}
 
 	private static void executeRule() {
-		BaseExcecuter executer = new FallTrendAnalysisExecuter();
+		BaseExecuter executer = new FallTrendAnalysisExecuter();
 		Date start = new Date();
 		executer.run();
 		Date end = new Date();

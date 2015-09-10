@@ -1,5 +1,6 @@
 package stock.db;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +16,8 @@ import stock.vo.Stock;
 import stock.vo.StockInfo;
 
 public class DBQueryImplTest {
+	
+	public static final SimpleDateFormat sdf_date = new SimpleDateFormat("yyyy-MM-dd");
 	
 	private DBQuery query;
 
@@ -63,6 +66,27 @@ public class DBQueryImplTest {
 			stock.setQuantity(800);
 			stock.setBuyingTime(new Date());
 			query.addMyStock(stock);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testClearCalendar() {
+		try {
+			Date start = sdf_date.parse("2015-09-02"); 
+			Date end = sdf_date.parse("2015-09-03"); 
+			query.clearCalendar(start, end);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testInsertCalendar() {
+		try {
+			Date date = sdf_date.parse("2015-09-08"); 
+			query.insertCalendar(date, 1);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

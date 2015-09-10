@@ -21,6 +21,7 @@ import stock.util.StockConstants;
 import stock.vo.AlertVO;
 import stock.vo.MyStockInfo;
 import stock.vo.RuleItemVO;
+import stock.vo.RuleRunHistoryVO;
 import stock.vo.Stock;
 
 public class DBQueryImpl implements DBQuery {
@@ -380,6 +381,85 @@ public class DBQueryImpl implements DBQuery {
 			statement.setInt(2, ruleItem.getType());
 			statement.execute();
 		}
+	}
+	
+	public RuleItemVO getRuleItemById(String ruleId) throws Exception {
+		RuleItemVO ruleItem = new RuleItemVO();
+		Connection conn = getConnection();
+		String sql = "select * from rule_item t where t.id = ?";
+		PreparedStatement statement = conn.prepareStatement(sql);
+		statement.setString(1, ruleId);
+		ResultSet rs = statement.executeQuery();  
+		if (rs.next()) {
+			ruleItem.setId(rs.getString("id"));
+			ruleItem.setName(rs.getString("name"));
+			ruleItem.setType(rs.getInt("type"));
+			ruleItem.setImplClz(rs.getString("impl_class"));
+			ruleItem.setDesp(rs.getString("description"));
+		}  
+		return ruleItem;
+	}
+	
+	public void clearCalendar(Date start, Date end) throws Exception {
+		String sql = "delete from calendar where date >= ? and date <= ?";
+		Connection conn = getConnection();
+		PreparedStatement statement = conn.prepareStatement(sql);
+		statement.setDate(1, new java.sql.Date(start.getTime()));
+		statement.setDate(2, new java.sql.Date(end.getTime()));
+		statement.execute();
+	}
+	
+	public void insertCalendar(Date date, Integer status) throws Exception {
+		String sql = "insert into calendar values (?, ?)";
+		Connection conn = getConnection();
+		PreparedStatement statement = conn.prepareStatement(sql);
+		statement.setDate(1, new java.sql.Date(date.getTime()));
+		statement.setInt(2, status);
+		statement.execute();
+	}
+	
+	public Map<String, Integer> initDateStatus() throws Exception {
+		Map<String, Integer> result = new HashMap<String, Integer>();
+		String sql = "select * from calendar order by date";
+		Connection conn = getConnection();
+		PreparedStatement statement = conn.prepareStatement(sql);
+		ResultSet rs = statement.executeQuery();  
+		if (rs.next()) {
+			result.put(StockConstants.sdf_date.format(rs.getDate(1)), rs.getInt(2));
+		}
+		return result;
+	}
+	
+	public List<RuleRunHistoryVO> getRuleRunHistoryByRuleId(String ruleId) throws Exception {
+		List<RuleRunHistoryVO> result = new ArrayList<RuleRunHistoryVO>();
+		String sql = "select * from rule_run_history t where t.rule_id = ? order by t.run_time desc";
+		Connection conn = getConnection();
+		PreparedStatement statement = conn.prepareStatement(sql);
+		statement.setString(1, ruleId);
+		ResultSet rs = statement.executeQuery();  
+		while (rs.next()) {
+			RuleRunHistoryVO vo = new RuleRunHistoryVO();
+			vo.setId(rs.getString("id"));
+			vo.setTime(rs.getDate("run_time"));
+			vo.setStockNum(rs.getInt("stock_num"));
+			result.add(vo);
+		}
+		return result;
+	}
+	
+	public List<Stock> getRuleResultByRuleHisId(String hisId) throws Exception {
+		List<Stock> result = new ArrayList<Stock>();
+		String sql = "select * from rule_result t where t.history_id = ? order by t.stock_code";
+		Connection conn = getConnection();
+		PreparedStatement statement = conn.prepareStatement(sql);
+		statement.setString(1, hisId);
+		ResultSet rs = statement.executeQuery();  
+		while (rs.next()) {
+			Stock stock = new Stock();
+			stock.setCode(rs.getString("stock_code"));
+			result.add(stock);
+		}
+		return result;
 	}
 }
  

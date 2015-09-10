@@ -8,35 +8,45 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import stock.vo.RuleItemVO;
+import stock.util.CommonUtils;
+import stock.util.StockConstants;
+import stock.vo.RuleRunHistoryVO;
 
-public class RuleItemServlet extends DataTableServlet {
+public class ShowRuleHistoryServlet extends DataTableServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			Integer type = Integer.valueOf(request.getParameter("ruleType"));
-			List<RuleItemVO> result = getDBQuery().getRuleItemByType(type);
+			String ruleId = request.getParameter("ruleId");
+			List<RuleRunHistoryVO> result = getDBQuery().getRuleRunHistoryByRuleId(ruleId);
 			response.getOutputStream().println(createResponse(result));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
 	
-	String createResponse(List<RuleItemVO> info) {
+	String createResponse(List<RuleRunHistoryVO> info) {
 		List<String[]> strs = new ArrayList<String[]>(); 
+		if (info == null) {
+			info = new ArrayList<RuleRunHistoryVO>();
+		}
+		if (info.size() == 0) {
+			info.add(new RuleRunHistoryVO());
+		}
 		for (int i = 0; i < info.size(); i++) {
-			StringBuffer sb = new StringBuffer("");
+			StringBuffer sb = new StringBuffer();
 			sb.append(addSeparator(info.get(i).getId()));
-			sb.append(addSeparator(info.get(i).getName()));
-			sb.append(addSeparator(info.get(i).getImplClz()));
-			sb.append(addSeparator(""));
-			sb.append(addSeparator(""));
+			if (info.get(i).getTime() != null) {
+				sb.append(addSeparator(StockConstants.sdf_time.format(info.get(i).getTime())));
+			} else {
+				sb.append(addSeparator(""));
+			}
+			sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getStockNum())));
 			strs.add(sb.toString().split("\\|"));
 		}
 		return createDataTableInfo(strs);

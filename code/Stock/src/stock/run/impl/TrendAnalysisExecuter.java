@@ -4,14 +4,14 @@ import stock.http.HTTPQuery;
 import stock.http.impl.MyHTTPQuery;
 import stock.rule.Rule;
 import stock.rule.impl.TrendRule;
-import stock.run.BaseExcecuter;
+import stock.run.BaseExecuter;
 
 /**
  * @author liuli
  *
  * This executer is used for list all the stocks that have rise trend
  */
-public class TrendAnalysisExecuter extends BaseExcecuter{
+public class TrendAnalysisExecuter extends BaseExecuter{
 	
 	protected HTTPQuery getHTTPQuery() {
 		return new MyHTTPQuery();

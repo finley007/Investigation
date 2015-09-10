@@ -8,34 +8,39 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import stock.vo.RuleItemVO;
+import stock.util.CommonUtils;
+import stock.util.StockConstants;
+import stock.vo.Stock;
 
-public class RuleItemServlet extends DataTableServlet {
+public class ShowRuleResultServlet extends DataTableServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			Integer type = Integer.valueOf(request.getParameter("ruleType"));
-			List<RuleItemVO> result = getDBQuery().getRuleItemByType(type);
+			String hisId = request.getParameter("hisId");
+			List<Stock> result = getDBQuery().getRuleResultByHistoryId(hisId);
 			response.getOutputStream().println(createResponse(result));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
 	
-	String createResponse(List<RuleItemVO> info) {
+	String createResponse(List<Stock> info) {
 		List<String[]> strs = new ArrayList<String[]>(); 
+		if (info == null) {
+			info = new ArrayList<Stock>();
+		}
+		if (info.size() == 0) {
+			info.add(new Stock());
+		}
 		for (int i = 0; i < info.size(); i++) {
-			StringBuffer sb = new StringBuffer("");
-			sb.append(addSeparator(info.get(i).getId()));
-			sb.append(addSeparator(info.get(i).getName()));
-			sb.append(addSeparator(info.get(i).getImplClz()));
-			sb.append(addSeparator(""));
+			StringBuffer sb = new StringBuffer();
+			sb.append(addSeparator(info.get(i).getCode()));
 			sb.append(addSeparator(""));
 			strs.add(sb.toString().split("\\|"));
 		}

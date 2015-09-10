@@ -3,7 +3,14 @@ package stock.util;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import stock.db.DBQuery;
+import stock.db.connect.DBConnector;
+import stock.db.connect.impl.MysqlConnector;
+import stock.db.impl.DBQueryImpl;
 
 public class DateUtils {
 	
@@ -13,12 +20,40 @@ public class DateUtils {
 	private static final Integer CLOSE_HOUR = 15;
 	private static final Integer CLOSE_MIN = 30;
 	
+	private static DBQuery query;
+	
+	private static DBQuery getDBQuery() {
+		if (query == null) {
+			DBConnector connector = new MysqlConnector();
+			query = new DBQueryImpl();
+			query.setConn(connector);
+		}
+		return query;
+	}
+	
+	private static Map<String, Integer> dateStatus;
+	
+	private static Map<String, Integer> getDateStatus() throws Exception {
+		if (dateStatus == null) {
+			dateStatus = getDBQuery().initDateStatus();
+		}
+		return dateStatus;
+	}
+	
 	public static Date getDayBeforeNDays(Date date, int n) {
 		Calendar c = Calendar.getInstance();  
         c.setTime(date);  
         int day = c.get(Calendar.DATE);  
         c.set(Calendar.DATE, day - n);  
         return c.getTime();
+	}
+	
+	public static Date getDayAfterNDays(Date date, int n) {
+		Calendar c = Calendar.getInstance();  
+		c.setTime(date);  
+		int day = c.get(Calendar.DATE);  
+		c.set(Calendar.DATE, day + n);  
+		return c.getTime();
 	}
 
 	public static Integer getWeekDay(Date date) {
@@ -51,19 +86,35 @@ public class DateUtils {
 		}
 	}
 	
-	public static List<String> getRecentDate() {
+	public static List<String> getRecentDate() throws Exception {
 		List<String> result = new ArrayList<String>();
 		int beforeDays = 0;
-		if (DateUtils.isOverCloseTime(new Date())) {
+		if (isOverCloseTime(new Date())) {
 			beforeDays --;
 		}
 		for (int i = 0; i < StockConstants.HISTORY_DAILY_INFO_SIZE + 1; i++) { //StockConstants.HISTORY_DAILY_INFO_SIZE + 1: Count more 1 day for judging limit up
 			Date date = null;
 			do {
-				date = DateUtils.getDayBeforeNDays(new Date(), ++beforeDays);
-			} while (DateUtils.isWeekEnd(date));
+				date = getDayBeforeNDays(new Date(), ++beforeDays);
+			} while (isInvalidDay(date));
 			result.add(StockConstants.sdf_date.format(date));
 		}
 		return result;
+	}
+	
+	public static Boolean isInvalidDay(Date date) throws Exception {
+		if (isWeekEnd(date)) {
+			return true;
+		} 
+		return getDateStatus().get(StockConstants.sdf_date.format(date)) == StockConstants.INVALID_DAY;
+	}
+	
+	public static Date clearTime(Date date) {
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		c.set(Calendar.HOUR_OF_DAY, 0);
+		c.set(Calendar.MINUTE, 0);
+		c.set(Calendar.SECOND, 0);
+		return c.getTime();
 	}
 }

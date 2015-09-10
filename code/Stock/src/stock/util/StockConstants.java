@@ -30,4 +30,7 @@ public class StockConstants {
 	public static final Integer REACH_LIMIT_UP = 1;
 	public static final Integer REACH_LIMIT_DOWN = -1;
 	public static final Integer NO_REACH_LIMIT = 0;
+	
+	public static final Integer VALID_DAY = 1; 
+	public static final Integer INVALID_DAY = 0; 
 }
