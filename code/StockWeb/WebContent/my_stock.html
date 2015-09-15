@@ -22,6 +22,7 @@
 
 <script type="text/javascript">
 	var selectedStock = [];
+	var myStockAutoRefresh;
 	$(document).ready(function() {
     	$('#my_stock').dataTable( {
         	"ajax": './mystock',
@@ -29,6 +30,7 @@
         	    var isMonitor = aData[10];
         	    var transId = aData[0];
         	    var stockCode = aData[1];
+        	    var profitRate = aData[7].substring(0, aData[7].length - 1);
         	    if (isMonitor === 'true') {
 		        	$('td:eq(10)', nRow).html( '<div style="text-align:center"><button id="' + transId + '" code="' + stockCode + '" onclick="monitorSwitch(this)">Stop</button></div>' );
 		        	$('#M_'+ stockCode).click(function(){
@@ -36,6 +38,15 @@
 		        	});
 		        } else {
 		        	$('td:eq(10)', nRow).html( '<div style="text-align:center"><button id="' + transId + '" code="' + stockCode + '" onclick="monitorSwitch(this)">Start</button></div>' );
+		        }
+		        if (profitRate > 0) {
+		        	$(nRow).css('background-color', '#AFEEEE');
+		        } else if (profitRate > -5 && profitRate <= 0){
+		        	$(nRow).css('background-color', '#FFD39B');
+		        } else if (profitRate > -10 && profitRate <= -5){
+		        	$(nRow).css('background-color', '#FF7F50');
+		        } else if (profitRate <= -10){
+		        	$(nRow).css('background-color', '#FF0000');
 		        }
 		    } 
     	});
@@ -128,6 +139,21 @@
 		});
 		
 		initComp();
+		
+		if (myStockAutoRefresh != null) {
+			$('#my_stock_auto_refresh').attr('checked', true)
+		}
+		$('#my_stock_auto_refresh').click(function(){
+			var state = $(this).is(':checked');
+			if (state == true) {
+				myStockAutoRefresh = setInterval(loadMyStock, 30000);
+			} else {
+				if (myStockAutoRefresh != null) {
+					clearInterval(myStockAutoRefresh);
+					myStockAutoRefresh = null;
+				}
+			}
+		});
 	});
 	
 	function monitorSwitch(bt) {
@@ -152,6 +178,8 @@
 <title>My Stock</title>
 </head>
 <body>
+	<label class="checkbox">Auto Refresh<input type="checkbox" id="my_stock_auto_refresh"/></label>
+	</br>
 	<table id="my_stock" class="display" cellspacing="0" width="100%">
         <thead>
             <tr>

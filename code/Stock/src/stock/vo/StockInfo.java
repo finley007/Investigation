@@ -34,6 +34,17 @@ public class StockInfo extends Stock {
 	
 	protected Double currentPrice = 0.0;
 	
+	//Price earning ratio
+	protected Double per = 0.0;
+	
+	public Double getPer() {
+		return per;
+	}
+
+	public void setPer(Double per) {
+		this.per = per;
+	}
+
 	protected Map<String, DailyPriceVO> dailyPrice = new HashMap<String, DailyPriceVO>();
 
 	public Double getCurrentPrice() {

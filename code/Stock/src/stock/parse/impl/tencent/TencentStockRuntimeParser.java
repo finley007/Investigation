@@ -14,6 +14,7 @@ public class TencentStockRuntimeParser implements InfoParser {
 		logger.debug(info);
 		String[] params = info.split("~");
 		stock.setCurrentPrice(Double.valueOf(params[3]));
+		stock.setPer(Double.valueOf(params[39]));
 	}
 	
 }

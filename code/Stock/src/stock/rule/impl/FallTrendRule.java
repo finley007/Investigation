@@ -36,6 +36,9 @@ public class FallTrendRule implements Rule {
 			if (today.getEndPrice() > 20) {
 				return false;
 			}
+			if (info.getPer() > 20) {
+				return false;
+			}
 		}
 		return true;
 	}
