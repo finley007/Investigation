@@ -47,12 +47,11 @@ public class StockCache {
 	}
 	
 	public static String getNameByCode(String code) throws Exception {
-//		String name = getIns().getStock().get(code);
-//		if (name == null) {
-//			name = "";
-//		}
-//		return name;
-		return code;
+		String name = getIns().getStock().get(code);
+		if (name == null) {
+			name = "";
+		}
+		return name;
 	}
 
 }

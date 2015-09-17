@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import stock.cache.StockCache;
 import stock.db.DBQuery;
 import stock.db.connect.DBConnector;
 import stock.timer.TimerConstants;
@@ -81,15 +82,17 @@ public class DBQueryImpl implements DBQuery {
 		return result;
 	}
 
-	private MyStockInfo initStock(ResultSet rs) throws SQLException {
+	private MyStockInfo initStock(ResultSet rs) throws Exception {
 		MyStockInfo stock = new MyStockInfo();
 		String code = rs.getString("stock_code");
+		String name = StockCache.getNameByCode(code);
 		String transId = rs.getString("transaction_id");
 		Double price = rs.getDouble("buy_price");
 		Integer quantity = rs.getInt("quantity");
 		Date date = rs.getDate("buy_time");
 		Integer isMonitor = rs.getInt("is_monitor");
 		stock.setCode(code);
+		stock.setName(name);
 		stock.setTransId(transId);
 		stock.setBuyingPrice(price);
 		stock.setQuantity(quantity);
