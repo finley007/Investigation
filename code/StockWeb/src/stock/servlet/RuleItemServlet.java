@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import stock.vo.RuleItemVO;
 
-public class RuleItemServlet extends DataTableServlet {
-
+public class RuleItemServlet extends JSONServlet {
+	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
@@ -28,7 +28,7 @@ public class RuleItemServlet extends DataTableServlet {
 		doGet(request, response);
 	}
 	
-	String createResponse(List<RuleItemVO> info) {
+	String createResponse(List<RuleItemVO> info) throws Exception {
 		List<String[]> strs = new ArrayList<String[]>(); 
 		for (int i = 0; i < info.size(); i++) {
 			StringBuffer sb = new StringBuffer("");
@@ -39,7 +39,7 @@ public class RuleItemServlet extends DataTableServlet {
 			sb.append(addSeparator(""));
 			strs.add(sb.toString().split("\\|"));
 		}
-		return createDataTableInfo(strs);
+		return getJSONEnvelop().envelop(strs);
 	}
 	
 }

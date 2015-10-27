@@ -68,4 +68,12 @@ public class BaseStockServlet extends HttpServlet {
 		stock.setTransId(transId);
 		return stock;
 	}
+	
+	protected String addSeparator(String str) {
+		if ("".equals(str)) {
+			return " |";
+		} else {
+			return str + "|";
+		}
+	}
 }

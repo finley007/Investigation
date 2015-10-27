@@ -41,3 +41,29 @@ RuleInfo = {
 		return this.selectedRuleHisId;
 	}
 }
+
+TransInfo = {
+	selectedStock: "*",
+	transId: "",
+	setStock: function(stockCode) {
+		this.selectedStock = stockCode;
+	},
+	getStock: function() {
+		return this.selectedStock;
+	},
+	setTransId: function(transId) {
+		this.transId = transId;
+	},
+	getTransId: function() {
+		return this.transId;
+	}
+}
+
+function getStockDiagramUrl(stockCode) {
+	var stockCode = TransInfo.getStock().toString();
+	if (stockCode == '*') {
+		return 'http://q.stock.sohu.com/qp/index.html?zs_000001';
+	} else {
+		return 'http://q.stock.sohu.com/qp/index.html?cn_' + stockCode.substring(2);
+	}
+}

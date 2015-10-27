@@ -6,15 +6,16 @@
 <link href="./css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
 
 <script src="./js/jquery-1.11.1.min.js" type="text/javascript">//</script>
-<script src="./js/jquery.dataTables.min.js" type="text/javascript">//</script>
+<script src="./js/jquery.dataTables.js" type="text/javascript">//</script>
 <script type="text/javascript">
 	$(document).ready(function() {
     	$('#example').dataTable( {
-        	"ajax": './data/arrays.txt'
+        	"ajax": './data/arrays.txt',
+        	"order": [[3, "desc"]]
     	} );
 	} );
 </script>
-<title>My Stock</title>
+<title>example</title>
 </head>
 <body>
 	<table id="example" class="display" cellspacing="0" width="100%">
@@ -28,7 +29,6 @@
                 <th>Salary</th>
             </tr>
         </thead>
- 
         <tfoot>
             <tr>
                 <th>Name</th>

@@ -9,16 +9,32 @@
 <script src="./js/bootstrap.js" type="text/javascript">//</script>
 -->
 <script type="text/javascript">
+	var my_transaction_table = null;
 	$(document).ready(function() {
 		$.ajax({     
-            	type: 'Post',     
-            	url:  './stockcategory',     
-            	contentType: 'application/json; charset=utf-8',     
-	            success: showStockCategory,     
-	            error: function(err) {     
-	                alert(err);     
-	            }     
-   			}); 
+           	type: 'Post',     
+           	url:  './stockcategory',     
+           	contentType: 'application/json; charset=utf-8',     
+            success: showStockCategory,     
+            error: function(err) {     
+                alert(err);     
+            }     
+   		}); 
+   		$('#transaction_list').load('transaction_history.html');
+	});
+	
+	$('#jstree_demo_div').on("changed.jstree", function (e, data) {
+		//if (data.selected == 'j1_1') {
+	  	//	my_transaction_table.ajax.url( './mystock?stockCode=*').load();
+		//} else {
+	  	//	my_transaction_table.ajax.url( './mystock?stockCode=' + data.selected ).load();
+		//} 
+		if (data.selected == 'j1_1') {
+			TransInfo.setStock('*');
+		} else {
+			TransInfo.setStock(data.selected);
+		}
+		$('#transaction_list').load('transaction_history.html');
 	});
 	
 	function showStockCategory(data) {
@@ -39,6 +55,10 @@
 	   		'core' : jsonData  
 		}); 
 	}
+	
+	function seeTransactionDetail() {
+		$('#transaction_list').load('action_history.html');
+	}
 </script>
 <title>Insert title here</title>
 </head>
@@ -48,13 +68,7 @@
 			<div class="span3 stock-tree-list">
 				<div id="jstree_demo_div"></div>
 			</div>
-			<div class="span9 right-section">
-				<form>
-					<fieldset>
-						 <legend>Alert Configuration</legend> 
-						 <button type="submit" class="btn">Submit</button>
-					</fieldset>
-				</form>
+			<div class="span9 right-section" id="transaction_list">
 			</div>
 		</div>
 	</div>

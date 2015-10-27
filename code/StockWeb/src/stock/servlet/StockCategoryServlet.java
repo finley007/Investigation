@@ -8,48 +8,47 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import stock.util.CommonUtils;
-import stock.util.StockConstants;
-import stock.vo.RuleRunHistoryVO;
+import stock.envelop.json.JSONEnvelop;
+import stock.envelop.json.impl.JTreeJSONEnvelop;
+import stock.vo.MyStockInfo;
+import stock.vo.Stock;
 
-public class ShowRuleHistoryServlet extends JSONServlet {
+public class StockCategoryServlet extends JSONServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			String ruleId = request.getParameter("ruleId");
-			List<RuleRunHistoryVO> result = getDBQuery().getRuleRunHistoryByRuleId(ruleId);
+			List<Stock> result = getDBQuery().getStockCategory();
 			response.getOutputStream().println(createResponse(result));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
+	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
 	
-	String createResponse(List<RuleRunHistoryVO> info) throws Exception {
+	String createResponse(List<Stock> info) throws Exception {
 		List<String[]> strs = new ArrayList<String[]>(); 
 		if (info == null) {
-			info = new ArrayList<RuleRunHistoryVO>();
+			info = new ArrayList<Stock>();
 		}
 		if (info.size() == 0) {
-			info.add(new RuleRunHistoryVO());
+			info.add(new MyStockInfo());
 		}
 		for (int i = 0; i < info.size(); i++) {
 			StringBuffer sb = new StringBuffer();
-			sb.append(addSeparator(info.get(i).getId()));
-			if (info.get(i).getTime() != null) {
-				sb.append(addSeparator(StockConstants.sdf_time.format(info.get(i).getTime())));
-			} else {
-				sb.append(addSeparator(""));
-			}
-			sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getStockNum())));
+			sb.append(addSeparator(info.get(i).getCode()));
+			sb.append(addSeparator(info.get(i).getName()));
 			strs.add(sb.toString().split("\\|"));
 		}
 		return getJSONEnvelop().envelop(strs);
 	}
+	
+	protected JSONEnvelop getJSONEnvelop() {
+		return new JTreeJSONEnvelop();
+	} 
 	
 }

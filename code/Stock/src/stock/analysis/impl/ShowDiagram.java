@@ -1,6 +1,5 @@
 package stock.analysis.impl;
 
-import java.text.MessageFormat;
 import java.util.List;
 
 import stock.analysis.StockAnalysis;
@@ -9,6 +8,7 @@ import stock.db.connect.DBConnector;
 import stock.db.connect.impl.MysqlConnector;
 import stock.db.impl.DBQueryImpl;
 import stock.util.BrowserOpener;
+import stock.util.StockUtils;
 import stock.vo.Stock;
 
 public class ShowDiagram implements StockAnalysis {
@@ -25,12 +25,8 @@ public class ShowDiagram implements StockAnalysis {
 			init = 0;
 		}
 		for (int i = init; i < init + size; i++) {
-			BrowserOpener.open(getURL(list.get(i)));
+			BrowserOpener.open(StockUtils.getURL(list.get(i).getCode().substring(2)));
 		}
 	}
 	
-	private String getURL(Stock stock) {
-		return MessageFormat.format("http://q.stock.sohu.com/cn/{0}/index.shtml", new Object[]{stock.getCode().substring(2)});
-	}
-
 }

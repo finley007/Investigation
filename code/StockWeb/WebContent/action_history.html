@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#my_action').DataTable( {
+        	'ajax': './myaction?transId=' + TransInfo.getTransId(),
+        	"order": [[3, "asc"]],
+        	"iDisplayLength": 5
+    	});
+    	
+	    $('#stock_diagram').attr('src', getStockDiagramUrl(TransInfo.getStock()));
+	})
+</script>
+</head>
+<body>
+	<table id="my_action" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+            	<th>Action Id</th>
+                <th>Prize</th>
+                <th>Quantity</th>
+                <th>Time</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+    </table>
+	<div class="row-fluid" width="100%">
+		<div class="span9"><iframe id="stock_diagram"></iframe></div>
+		<div class="span1">
+			Parameter:
+			Comments:
+		</div>
+	</div>
+</body>
+</html>

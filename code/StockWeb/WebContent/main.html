@@ -10,27 +10,39 @@
 <link href="./css/jquery-ui-timepicker-addon.css" type="text/css" />
 <link href="./css/timepicker.css" rel="stylesheet" type="text/css" />
 <link href="./css/jquery-ui.css" rel="stylesheet" type="text/css" />
+<link href="./css/jstree.css" rel="stylesheet" type="text/css" />
 
 <script src="./js/jquery-1.11.1.min.js" type="text/javascript">//</script>
 <script src="./js/jquery-ui.min.js" type="text/javascript">//</script>
-<script src="./js/jquery.dataTables.min.js" type="text/javascript">//</script>
+<script src="./js/jquery.dataTables.js" type="text/javascript">//</script>
 <script src="./js/jquery.confirm.js" type="text/javascript">//</script>
 <script src="./js/jquery.form.js" type="text/javascript">//</script>
 <script src="./js/jquery-ui-timepicker-addon.js" type="text/javascript"></script>
 <script src="./js/bootstrap.js" type="text/javascript">//</script>
 <script src="./js/form.js" type="text/javascript">//</script>
 <script src="./js/stock.js" type="text/javascript"></script>
+<script src="./js/jstree.min.js" type="text/javascript"></script>
 <script type="text/javascript">
+
+	var myStockAutoRefresh;
+	
 	$(document).ready(function() {
     	loadMyStock();
     	$("a[name='my_stock']").click(function() {
             $('#content').load('my_stock.html');
+            changeItem();
         });
         $("a[name='rule']").click(function() {
             $('#content').load('rule.html');
+            changeItem();
         });
         $("a[name='alert_config']").click(function() {
             $('#content').load('stock_alert.html');
+            changeItem();
+        });
+        $("a[name='my_trans']").click(function() {
+            $('#content').load('my_transaction.html');
+            changeItem();
         });
 	});
 	
@@ -57,6 +69,13 @@
 	function loadRuleResult() {
 		$('#content').load('rule_run_result.html');
 	}
+	
+	function changeItem() {
+		if (myStockAutoRefresh != null) {
+			clearInterval(myStockAutoRefresh);
+			myStockAutoRefresh = null;
+		}
+	}
 </script>
 <title>Main</title>
 </head>
@@ -79,7 +98,7 @@
 							<a name="my_stock" class="function-menu">My Stock</a>
 						</div>
 						<div class="accordion-inner">
-							<a name="trans_history" class="function-menu">Transaction History</a>
+							<a name="my_trans" class="function-menu">My Transaction</a>
 						</div>
 					</div>
 				</div>

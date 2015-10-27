@@ -1,5 +1,9 @@
 package stock.util;
 
+import java.text.MessageFormat;
+
+import stock.vo.Stock;
+
 public class StockUtils {
 	
 	private static final Double STAMP_TAX_RATE = 0.001;
@@ -22,5 +26,9 @@ public class StockUtils {
 			fee += COMMISSION_MIN;
 		}
 		return fee;
+	}
+	
+	public static String getURL(String stockCode) {
+		return MessageFormat.format("http://q.stock.sohu.com/cn/{0}/index.shtml", new Object[]{stockCode});
 	}
 }

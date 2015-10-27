@@ -22,6 +22,7 @@
 	    $('#rule_name').text(ruleName);
     	$('#rule_run_history').dataTable( {
         	"ajax": './showrulerunhis?ruleId=' + ruleId,
+        	"order": [[1, "desc"]]
     	});
     	
     	$('#rule_run_history tbody').on('dblclick', 'tr', function () {

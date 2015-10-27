@@ -12,7 +12,7 @@ import stock.util.CommonUtils;
 import stock.util.StockConstants;
 import stock.vo.Stock;
 
-public class ShowRuleResultServlet extends DataTableServlet {
+public class ShowRuleResultServlet extends JSONServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,7 +30,7 @@ public class ShowRuleResultServlet extends DataTableServlet {
 		doGet(request, response);
 	}
 	
-	String createResponse(List<Stock> info) {
+	String createResponse(List<Stock> info) throws Exception {
 		List<String[]> strs = new ArrayList<String[]>(); 
 		if (info == null) {
 			info = new ArrayList<Stock>();
@@ -44,7 +44,7 @@ public class ShowRuleResultServlet extends DataTableServlet {
 			sb.append(addSeparator(""));
 			strs.add(sb.toString().split("\\|"));
 		}
-		return createDataTableInfo(strs);
+		return getJSONEnvelop().envelop(strs);
 	}
 	
 }

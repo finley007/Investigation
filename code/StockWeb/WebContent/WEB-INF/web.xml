@@ -81,6 +81,18 @@
 		<servlet-name>ShowRuleResultServlet</servlet-name>
 		<servlet-class>stock.servlet.ShowRuleResultServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<description></description>
+		<display-name>StockCategoryServlet</display-name>
+		<servlet-name>StockCategoryServlet</servlet-name>
+		<servlet-class>stock.servlet.StockCategoryServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description></description>
+		<display-name>MyActionServlet</display-name>
+		<servlet-name>MyActionServlet</servlet-name>
+		<servlet-class>stock.servlet.MyActionServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>MyStockServlet</servlet-name>
 		<url-pattern>/mystock</url-pattern>
@@ -128,6 +140,14 @@
 	<servlet-mapping>
 		<servlet-name>ShowRuleResultServlet</servlet-name>
 		<url-pattern>/showruleresult</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>StockCategoryServlet</servlet-name>
+		<url-pattern>/stockcategory</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>MyActionServlet</servlet-name>
+		<url-pattern>/myaction</url-pattern>
 	</servlet-mapping>
 	<filter> 
     <filter-name>alertPush</filter-name> 

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import stock.db.connect.DBConnector;
+import stock.vo.ActionVO;
 import stock.vo.AlertVO;
 import stock.vo.MyStockInfo;
 import stock.vo.RuleItemVO;
@@ -26,6 +27,8 @@ public interface DBQuery {
 	public List<Stock> getStockList() throws Exception;
 	
 	public List<MyStockInfo> getMyStock() throws Exception;
+
+	public List<MyStockInfo> getMyStockByStockCode(String stockCode) throws Exception;
 	
 	public MyStockInfo getMyStockByTransId(String transId) throws Exception;
 	
@@ -70,4 +73,8 @@ public interface DBQuery {
 	public List<RuleRunHistoryVO> getRuleRunHistoryByRuleId(String ruleId) throws Exception;
 	
 	public List<Stock> getRuleResultByRuleHisId(String ruleId) throws Exception;
+	
+	public List<Stock> getStockCategory() throws Exception;
+	
+	public List<ActionVO> getActionByTransId(String transId) throws Exception;
 }

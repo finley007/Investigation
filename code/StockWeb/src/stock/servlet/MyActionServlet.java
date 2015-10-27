@@ -10,46 +10,51 @@ import javax.servlet.http.HttpServletResponse;
 
 import stock.util.CommonUtils;
 import stock.util.StockConstants;
-import stock.vo.RuleRunHistoryVO;
+import stock.vo.ActionVO;
 
-public class ShowRuleHistoryServlet extends JSONServlet {
-
+public class MyActionServlet extends JSONServlet {
+	
+	private static final String ACTION_BUY = "Buy";
+	
+	private static final String ACTION_SELL = "Sell";
+	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			String ruleId = request.getParameter("ruleId");
-			List<RuleRunHistoryVO> result = getDBQuery().getRuleRunHistoryByRuleId(ruleId);
-			response.getOutputStream().println(createResponse(result));
+			String transId = request.getParameter("transId");
+			response.getOutputStream().println(createResponse(getDBQuery().getActionByTransId(transId)));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
+	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
 	
-	String createResponse(List<RuleRunHistoryVO> info) throws Exception {
+	String createResponse(List<ActionVO> info) throws Exception {
 		List<String[]> strs = new ArrayList<String[]>(); 
 		if (info == null) {
-			info = new ArrayList<RuleRunHistoryVO>();
+			info = new ArrayList<ActionVO>();
 		}
 		if (info.size() == 0) {
-			info.add(new RuleRunHistoryVO());
+			info.add(new ActionVO());
 		}
 		for (int i = 0; i < info.size(); i++) {
 			StringBuffer sb = new StringBuffer();
-			sb.append(addSeparator(info.get(i).getId()));
-			if (info.get(i).getTime() != null) {
-				sb.append(addSeparator(StockConstants.sdf_time.format(info.get(i).getTime())));
+			sb.append(addSeparator(info.get(i).getActionId()));
+			sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getPrize())));
+			sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getQuantity())));
+			sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getTime())));
+			if (StockConstants.ACTION_TYPE_BUY == info.get(i).getType()) {
+				sb.append(addSeparator(ACTION_BUY));
 			} else {
-				sb.append(addSeparator(""));
+				sb.append(addSeparator(ACTION_SELL));
 			}
-			sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getStockNum())));
 			strs.add(sb.toString().split("\\|"));
 		}
 		return getJSONEnvelop().envelop(strs);
 	}
-	
+
 }

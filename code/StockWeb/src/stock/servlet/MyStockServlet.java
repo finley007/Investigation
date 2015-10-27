@@ -13,14 +13,20 @@ import stock.http.impl.MyHTTPQuery;
 import stock.util.CommonUtils;
 import stock.vo.MyStockInfo;
 
-public class MyStockServlet extends DataTableServlet {
+public class MyStockServlet extends JSONServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			List<MyStockInfo> result = getDBQuery().getMyStock();
-			richStockInfo(result);
-			response.getOutputStream().println(createResponse(result));
+			String stockCode = request.getParameter("stockCode");
+			if (stockCode != null && !"".equals(stockCode)) {
+				List<MyStockInfo> result = getDBQuery().getMyStockByStockCode(stockCode);
+				response.getOutputStream().println(createResponse(result, false));
+			} else {
+				List<MyStockInfo> result = getDBQuery().getMyStock();
+				richStockInfo(result);
+				response.getOutputStream().println(createResponse(result, true));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -40,7 +46,7 @@ public class MyStockServlet extends DataTableServlet {
 		doGet(request, response);
 	}
 	
-	String createResponse(List<MyStockInfo> info) {
+	String createResponse(List<MyStockInfo> info, Boolean currentStock) throws Exception {
 		List<String[]> strs = new ArrayList<String[]>(); 
 		if (info == null) {
 			info = new ArrayList<MyStockInfo>();
@@ -53,17 +59,24 @@ public class MyStockServlet extends DataTableServlet {
 			sb.append(addSeparator(info.get(i).getTransId()));
 			sb.append(addSeparator(info.get(i).getCode()));
 			sb.append(addSeparator(info.get(i).getName()));
-			sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getBuyingPrice())));
-			sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getCurrentPrice())));
-			sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getQuantity())));
-			sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getProfit())));
-			sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getProfitRate()) + "%"));
-			sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getBuyingTime())));
-			sb.append(addSeparator(""));
-			sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getIsMonitor())));
+			if (currentStock) {
+				sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getBuyingPrice())));
+				sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getCurrentPrice())));
+				sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getQuantity())));
+				sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getProfit())));
+				sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getProfitRate()) + "%"));
+				sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getBuyingTime())));
+				sb.append(addSeparator(""));
+				sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getIsMonitor())));
+			} else {
+				sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getProfit())));
+				sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getProfitRate()) + "%"));
+				sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getBuyingTime())));
+				sb.append(addSeparator(""));
+			}
 			strs.add(sb.toString().split("\\|"));
 		}
-		return createDataTableInfo(strs);
+		return getJSONEnvelop().envelop(strs);
 	}
 	
 }

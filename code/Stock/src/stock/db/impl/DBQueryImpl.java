@@ -3,7 +3,6 @@ package stock.db.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -19,6 +18,7 @@ import stock.db.connect.DBConnector;
 import stock.timer.TimerConstants;
 import stock.util.CommonUtils;
 import stock.util.StockConstants;
+import stock.vo.ActionVO;
 import stock.vo.AlertVO;
 import stock.vo.MyStockInfo;
 import stock.vo.RuleItemVO;
@@ -81,6 +81,28 @@ public class DBQueryImpl implements DBQuery {
 		conn.close();
 		return result;
 	}
+	
+	public List<MyStockInfo> getMyStockByStockCode(String stockCode) throws Exception {
+		List<MyStockInfo> result = new ArrayList<MyStockInfo>();
+		Connection conn = getConnection();
+		StringBuffer sb = new StringBuffer("select * from my_stock t where t.status = 0 ");
+		if (!StockConstants.ASTERISK.equals(stockCode)) {		
+			sb.append("and t.stock_code = ? ");
+		}
+		sb.append("order by t.buy_time desc");
+		PreparedStatement statement = conn.prepareStatement(sb.toString());
+		if (!StockConstants.ASTERISK.equals(stockCode)) {		
+			statement.setString(1, stockCode);
+		}
+		ResultSet rs = statement.executeQuery();  
+		while (rs.next()) {
+			MyStockInfo stock = initStock(rs);
+			result.add(stock);
+		}  
+		rs.close();  
+		conn.close();
+		return result;
+	}
 
 	private MyStockInfo initStock(ResultSet rs) throws Exception {
 		MyStockInfo stock = new MyStockInfo();
@@ -91,6 +113,8 @@ public class DBQueryImpl implements DBQuery {
 		Integer quantity = rs.getInt("quantity");
 		Date date = rs.getDate("buy_time");
 		Integer isMonitor = rs.getInt("is_monitor");
+		Double profit = rs.getDouble("profit");
+		Double profitRate = rs.getDouble("profit_rate");
 		stock.setCode(code);
 		stock.setName(name);
 		stock.setTransId(transId);
@@ -98,6 +122,8 @@ public class DBQueryImpl implements DBQuery {
 		stock.setQuantity(quantity);
 		stock.setBuyingTime(date);
 		stock.setIsMonitor(isMonitor);
+		stock.setProfit(profit);
+		stock.setProfitRate(profitRate);
 		return stock;
 	}
 	
@@ -129,7 +155,7 @@ public class DBQueryImpl implements DBQuery {
 	
 	public void addMyStock(MyStockInfo info) throws Exception {
 		Connection conn = getConnection();
-		PreparedStatement statement = conn.prepareStatement("insert into my_stock values (?,?,?,?,?,?,?)");
+		PreparedStatement statement = conn.prepareStatement("insert into my_stock values (?,?,?,?,?,?,?,?,?)");
 		String transId = CommonUtils.createTransactionId(info.getCode());
 		info.setTransId(transId);
 		statement.setString(1, transId);
@@ -139,6 +165,8 @@ public class DBQueryImpl implements DBQuery {
 		statement.setTimestamp(5, Timestamp.valueOf(CommonUtils.getDateString(info.getBuyingTime())));
 		statement.setInt(6, StockConstants.MY_STOCK_STATUS_IN);
 		statement.setInt(7, TimerConstants.NOT_MONITOR);
+		statement.setDouble(8, 0);
+		statement.setDouble(9, 0);
 		statement.execute();
 		addAction(conn, info, StockConstants.ACTION_TYPE_BUY);
 		conn.close();
@@ -159,27 +187,40 @@ public class DBQueryImpl implements DBQuery {
 		Connection conn = getConnection();
 		addAction(conn, info, action);
 		MyStockInfo curInfo = getMyStockByTransId(info.getTransId());
-		PreparedStatement statement = conn.prepareStatement("update my_stock t set t.buy_price = ?, t.quantity = ?, t.status = ? where t.transaction_id = ?");
+		
 		int status = StockConstants.MY_STOCK_STATUS_IN;
 		int quantity = 0;
-		double buyingPrice = 0.0;
+		double newPrice = 0.0;
+		double profitRate = 0.0;
+		String sql = "";
 		if (action == StockConstants.ACTION_TYPE_BUY) {
+			sql = "update my_stock t set t.buy_price = ?, t.quantity = ?, t.status = ? where t.transaction_id = ?";
 			quantity = info.getQuantity() + curInfo.getQuantity();
-			buyingPrice = (info.getBuyingPrice() * info.getQuantity() + curInfo.getBuyingPrice() * curInfo.getQuantity()) / quantity;
+			newPrice = (info.getBuyingPrice() * info.getQuantity() + curInfo.getBuyingPrice() * curInfo.getQuantity()) / quantity;
 		} else {
 			if (info.getQuantity().equals(curInfo.getQuantity())) { //Sold out, then buying price will save the profit
+				sql = "update my_stock t set t.profit = ?, t.quantity = ?, t.status = ?, t.profit_rate = ? where t.transaction_id = ?";
 				status = StockConstants.MY_STOCK_STATUS_OUT;
 				quantity = 0;
-				buyingPrice = ((info.getBuyingPrice() * info.getQuantity() - curInfo.getBuyingPrice() * curInfo.getQuantity()));
+				newPrice = ((info.getBuyingPrice() * info.getQuantity() - curInfo.getBuyingPrice() * curInfo.getQuantity()));
+				profitRate = newPrice * 100 / (curInfo.getBuyingPrice() * curInfo.getQuantity());
 			} else {
+				sql = "update my_stock t set t.buy_price = ?, t.quantity = ?, t.status = ? where t.transaction_id = ?";
 				quantity = curInfo.getQuantity() - info.getQuantity();
-				buyingPrice = ((curInfo.getBuyingPrice() * curInfo.getQuantity() - info.getBuyingPrice() * info.getQuantity())) / quantity;
+				newPrice = ((curInfo.getBuyingPrice() * curInfo.getQuantity() - info.getBuyingPrice() * info.getQuantity())) / quantity;
 			}
 		}
-		statement.setDouble(1, buyingPrice);
+		PreparedStatement statement = conn.prepareStatement(sql);
+		statement.setDouble(1, newPrice);
 		statement.setInt(2, quantity);
 		statement.setInt(3, status);
-		statement.setString(4, info.getTransId());
+		if (status == StockConstants.MY_STOCK_STATUS_OUT) {
+			statement.setDouble(4, profitRate);
+			statement.setString(5, info.getTransId());
+		} else {
+			statement.setString(4, info.getTransId());
+		}
+		
 		statement.execute();
 		conn.close();
 	}
@@ -459,8 +500,45 @@ public class DBQueryImpl implements DBQuery {
 		ResultSet rs = statement.executeQuery();  
 		while (rs.next()) {
 			Stock stock = new Stock();
-			stock.setCode(rs.getString("stock_code"));
+			String code = rs.getString("stock_code");
+			stock.setCode(code);
+			stock.setName(StockCache.getNameByCode(code));
 			result.add(stock);
+		}
+		return result;
+	}
+	
+	public List<Stock> getStockCategory() throws Exception {
+		List<Stock> result = new ArrayList<Stock>();
+		String sql = "select distinct t.stock_code from my_stock t order by t.stock_code";
+		Connection conn = getConnection();
+		PreparedStatement statement = conn.prepareStatement(sql);
+		ResultSet rs = statement.executeQuery();  
+		while (rs.next()) {
+			Stock stock = new Stock();
+			String code = rs.getString("stock_code");
+			stock.setCode(code);
+			stock.setName(StockCache.getNameByCode(code));
+			result.add(stock);
+		}
+		return result;
+	}
+	
+	public List<ActionVO> getActionByTransId(String transId) throws Exception {
+		List<ActionVO> result = new ArrayList<ActionVO>();
+		Connection conn = getConnection();
+		String sql = "select * from my_action t where t.TRANSACTION_ID = ? order by t.TIME";
+		PreparedStatement statement = conn.prepareStatement(sql);
+		statement.setString(1, transId);
+		ResultSet rs = statement.executeQuery();
+		while (rs.next()) {
+			ActionVO vo = new ActionVO();
+			vo.setActionId(rs.getString("action_id"));
+			vo.setPrize(rs.getDouble("prize"));
+			vo.setQuantity(rs.getInt("quantity"));
+			vo.setTime(rs.getDate("time"));
+			vo.setType(rs.getInt("action_type"));
+			result.add(vo);
 		}
 		return result;
 	}

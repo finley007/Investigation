@@ -28,7 +28,7 @@ public class FallTrendRuleTest {
 	public void testIsSatisfy() {
 		try { 
 			StockInfo stock = new StockInfo();
-			stock.setCode("sh600137");
+			stock.setCode("sh600010");
 			MyHTTPQuery httpQuery = new MyHTTPQuery();
 			httpQuery.richStockInfo(stock);
 			FallTrendRule rule = new FallTrendRule();
