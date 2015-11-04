@@ -6,7 +6,8 @@ public class StockConstants {
 	
 	public static final String ASTERISK = "*";
 	
-	public static final Integer HISTORY_DAILY_INFO_SIZE = 2;
+	public static final Integer CACHE_DATA_WINDOW_SIZE = 30;
+	public static final Integer TREND_WINDOW_SIZE = 2;
 	
 	public static final Integer RESULT_STATUS_SUCCESS = 0;
 	public static final Integer RESULT_STATUS_FAIL = 1;

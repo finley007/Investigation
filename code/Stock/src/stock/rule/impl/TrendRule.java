@@ -4,17 +4,25 @@ import java.util.List;
 
 import stock.rule.Rule;
 import stock.util.DateUtils;
+import stock.util.StockConstants;
 import stock.vo.DailyPriceVO;
 import stock.vo.StockInfo;
 
+/**
+ * @author liuli
+ * 
+ * 1. Continuous n days end price is larger than start price.
+ * 2. Rise smaller than half of max rise limit(10%). 
+ * 3. Input flow should larger than 1.5 output flow.
+ */
 public class TrendRule implements Rule {
 	
 	@Override
 	public Boolean isSatisfy(StockInfo info) throws Exception {
 		// TODO Auto-generated method stub
-		List<String> list = DateUtils.getRecentDate();
-		//TODO Consider limit up first
+		List<String> list = DateUtils.getRecentDate(StockConstants.TREND_WINDOW_SIZE);
 		if (list != null && list.size() > 0) {
+			// #1
 			for (int i = 0; i < list.size() - 1; i++) {
 				DailyPriceVO day = info.getDailyPrice().get(list.get(i));
 				DailyPriceVO lastDay = info.getDailyPrice().get(list.get(i + 1));
@@ -25,14 +33,14 @@ public class TrendRule implements Rule {
 					return false;
 				}
 			}
+			// #2
 			DailyPriceVO today = info.getDailyPrice().get(list.get(0));
 			DailyPriceVO lastDay = info.getDailyPrice().get(list.get(1));
 			if ((today.getEndPrice() - lastDay.getEndPrice())/lastDay.getEndPrice() < 0.05) {
 				return false;
 			}
-			Double range = lastDay.getEndPrice() * 0.1 * 2;
-			if ((today.getEndPrice() < lastDay.getEndPrice() * 1.09)
-					&& ((today.getEndPrice() - today.getStartPrice()) / range) <= 0.4) {
+			// #3
+			if (info.getMainInflow() < 1.5 * info.getMainOutflow()) {
 				return false;
 			}
 			if (today.getEndPrice() > 20) {

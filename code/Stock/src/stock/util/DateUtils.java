@@ -86,13 +86,13 @@ public class DateUtils {
 		}
 	}
 	
-	public static List<String> getRecentDate() throws Exception {
+	public static List<String> getRecentDate(int days) throws Exception {
 		List<String> result = new ArrayList<String>();
 		int beforeDays = 0;
 		if (isOverCloseTime(new Date())) {
 			beforeDays --;
 		}
-		for (int i = 0; i < StockConstants.HISTORY_DAILY_INFO_SIZE + 1; i++) { //StockConstants.HISTORY_DAILY_INFO_SIZE + 1: Count more 1 day for judging limit up
+		for (int i = 0; i < days + 1; i++) { //StockConstants.HISTORY_DAILY_INFO_SIZE + 1: Count more 1 day for judging limit up
 			Date date = null;
 			do {
 				date = getDayBeforeNDays(new Date(), ++beforeDays);

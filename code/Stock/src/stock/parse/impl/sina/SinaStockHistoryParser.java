@@ -22,7 +22,7 @@ public class SinaStockHistoryParser implements InfoParser {
 	public void parseStockInfo(StockInfo stock, String info) throws Exception {
 		// TODO Auto-generated method stub
 		stock.clearDailyPrice();
-		int size = StockConstants.HISTORY_DAILY_INFO_SIZE + 1;
+		int size = StockConstants.CACHE_DATA_WINDOW_SIZE + 1;
         Matcher matcher = pattern.matcher(info);
         while (matcher.find() && size > 0) {
         	String target = matcher.group();

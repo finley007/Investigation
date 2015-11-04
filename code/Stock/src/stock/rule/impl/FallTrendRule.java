@@ -5,9 +5,14 @@ import java.util.List;
 
 import stock.rule.Rule;
 import stock.util.DateUtils;
+import stock.util.StockConstants;
 import stock.vo.DailyPriceVO;
 import stock.vo.StockInfo;
 
+/**
+ * @author liuli
+ * Continuous n days fall
+ */
 public class FallTrendRule implements Rule {
 	
 	private Boolean isOverCloseTime = false;
@@ -19,18 +24,15 @@ public class FallTrendRule implements Rule {
 	@Override
 	public Boolean isSatisfy(StockInfo info) throws Exception {
 		// TODO Auto-generated method stub
-		List<String> list = DateUtils.getRecentDate();
+		List<String> list = DateUtils.getRecentDate(StockConstants.TREND_WINDOW_SIZE);
 		//TODO Consider limit up first
 		if (list != null && list.size() > 0) {
 			for (int i = 0; i < list.size() - 1; i++) {
 				DailyPriceVO day = info.getDailyPrice().get(list.get(i));
 				DailyPriceVO lastDay = info.getDailyPrice().get(list.get(i + 1));
-				if (day.getEndPrice() > day.getStartPrice()) {
+				if (day.getEndPrice() >= lastDay.getEndPrice()) {
 					return false;
-				} else if (day.getEndPrice().equals(day.getStartPrice())
-						&& day.getEndPrice() > lastDay.getEndPrice() * 0.91) { //limit down
-					return false;
-				}
+				} 
 			}
 			DailyPriceVO today = info.getDailyPrice().get(list.get(0));
 			if (today.getEndPrice() > 20) {
