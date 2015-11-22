@@ -14,6 +14,7 @@ import stock.db.impl.DBQueryImpl;
 import stock.vo.MyStockInfo;
 import stock.vo.Stock;
 import stock.vo.StockInfo;
+import stock.vo.TransInfoVO;
 
 public class DBQueryImplTest {
 	
@@ -87,6 +88,16 @@ public class DBQueryImplTest {
 		try {
 			Date date = sdf_date.parse("2015-09-08"); 
 			query.insertCalendar(date, 1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testQueryTransInfo() {
+		try {
+			TransInfoVO vo = query.queryTransInfo("");
+			System.out.println(vo.getAvgProfit());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

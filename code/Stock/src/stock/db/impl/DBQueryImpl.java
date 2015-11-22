@@ -24,6 +24,7 @@ import stock.vo.MyStockInfo;
 import stock.vo.RuleItemVO;
 import stock.vo.RuleRunHistoryVO;
 import stock.vo.Stock;
+import stock.vo.TransInfoVO;
 
 public class DBQueryImpl implements DBQuery {
 	
@@ -89,7 +90,7 @@ public class DBQueryImpl implements DBQuery {
 		if (!StockConstants.ASTERISK.equals(stockCode)) {		
 			sb.append("and t.stock_code = ? ");
 		}
-		sb.append("order by t.buy_time desc");
+		sb.append("order by t.open_time desc");
 		PreparedStatement statement = conn.prepareStatement(sb.toString());
 		if (!StockConstants.ASTERISK.equals(stockCode)) {		
 			statement.setString(1, stockCode);
@@ -111,7 +112,7 @@ public class DBQueryImpl implements DBQuery {
 		String transId = rs.getString("transaction_id");
 		Double price = rs.getDouble("buy_price");
 		Integer quantity = rs.getInt("quantity");
-		Date date = rs.getDate("buy_time");
+		Date date = rs.getDate("open_time");
 		Integer isMonitor = rs.getInt("is_monitor");
 		Double profit = rs.getDouble("profit");
 		Double profitRate = rs.getDouble("profit_rate");
@@ -541,6 +542,52 @@ public class DBQueryImpl implements DBQuery {
 			result.add(vo);
 		}
 		return result;
+	}
+	
+	public TransInfoVO queryTransInfo(String stockCode) throws Exception {
+		TransInfoVO result = new TransInfoVO();
+		Connection conn = getConnection();
+		String sql = "select count(*) as count, sum(t.PROFIT) as total_profit, avg(t.PROFIT) as avg_profit, avg(t.PROFIT_RATE) as avg_profit_rate, " +
+				"max(t.PROFIT) as max_profit, max(t.PROFIT_RATE) as max_profit_rate, " +
+					"min(t.PROFIT) as min_profit, min(t.PROFIT_RATE) as min_profit_rate, avg(t.CLOSE_TIME - t.OPEN_TIME) as days " +
+						"from my_stock t where t.`STATUS` = 0 " + filterByStockCode(stockCode);
+		PreparedStatement statement = conn.prepareStatement(sql);
+		ResultSet rs = statement.executeQuery();
+		Integer totalCount = 0;
+		Integer gainCount = 0;
+		if (rs.next()) {
+			totalCount = rs.getInt("count");
+			result.setTotalProfit(rs.getDouble("total_profit"));
+			result.setAvgProfit(rs.getDouble("avg_profit"));
+			result.setAvgProfitRate(rs.getDouble("avg_profit_rate"));
+			result.setMaxProfit(rs.getDouble("max_profit"));
+			result.setMaxProfitRate(rs.getDouble("max_profit_rate"));
+			result.setMaxLoss(rs.getDouble("min_profit"));
+			result.setMaxLossRate(rs.getDouble("min_profit_rate"));
+			result.setDays(rs.getInt("days"));
+		}
+		sql = "select count(*) as count from my_stock t where t.`STATUS` = 0 and t.profit > 0 " + filterByStockCode(stockCode);
+		statement = conn.prepareStatement(sql);
+		rs = statement.executeQuery();
+		if (rs.next()) {
+			gainCount = rs.getInt("count");
+		}
+		result.setTotalCount(totalCount);
+		result.setGainCount(gainCount);
+		if (totalCount > gainCount) {
+			result.setLossCount(totalCount - gainCount);
+		} else {
+			result.setLossCount(0);
+		}
+		return result;
+	}
+	
+	private String filterByStockCode(String stockCode) {
+		if (stockCode != null && !"".equals(stockCode)) {
+			return " and t.STOCK_CODE = '" + stockCode + "' ";
+		} else {
+			return "";
+		}
 	}
 }
  

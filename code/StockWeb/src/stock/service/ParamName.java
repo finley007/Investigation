@@ -7,5 +7,6 @@ public class ParamName {
 	public static final String TRANSACTION_QUANTITY = "transactionQuantity";
 	public static final String STOCK_PRICE = "stockPrice";
 	public static final String RULE_TYPE = "ruleType";
+	public static final String STOCK_CODE = "stockCode";
 
 }

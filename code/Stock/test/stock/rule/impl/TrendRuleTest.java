@@ -16,7 +16,7 @@ public class TrendRuleTest {
 		TrendRule rule = new TrendRule();
 		List<String> list = null;
 		try {
-			list = DateUtils.getRecentDate();
+			list = DateUtils.getRecentDate(5);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

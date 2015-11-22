@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script type="text/javascript">
+	$(document).ready(function() {
+		$.ajax({     
+            	type: 'Post',     
+            	url:  './query?serviceCode=queryTransInfo',     
+            	contentType: 'application/json; charset=utf-8',     
+	            success: showTransInfo,     
+	            error: function(err) {     
+	                alert(err);     
+	            }     
+   			}); 
+	});
+	
+	function showTransInfo(data) {
+	    var info = JSON.parse(data);
+		$("#trans_count").val(info.totalCount);
+		$("#gain_count").val(info.gainCount);
+		$("#loss_count").val(info.lossCount);
+		$("#total_profit").val(info.totalProfit);
+		$("#average_profit").val(info.avgProfit);
+		$("#average_profit_rate").val(info.avgProfitRate);
+		$("#max_gain").val(info.maxProfit);
+		$("#max_gain_rate").val(info.maxProfitRate);
+		$("#max_loss").val(info.maxLoss);
+		$("#max_loss_rate").val(info.maxLossRate);
+		$("#average_dates").val(info.days);
+	}
+</script>
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container-fluid">
+	<div class="row-fluid" width="100%">
+		<div class="span6">
+			<form class="form-horizontal">
+				<div class="control-group">
+					<label class="control-label" for="trans_count">Transaction Count:</label>
+					<div class="controls">
+						<input id="trans_count" type="text" data-bind="maxProfit"/>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="gain_count">Gain Count:</label>
+					<div class="controls">
+						<input id="gain_count" type="text" />
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="loss_count">Loss Count:</label>
+					<div class="controls">
+						<input id="loss_count" type="text" />
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="total_profit">Total Profit:</label>
+					<div class="controls">
+						<input id="total_profit" type="text" />
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="average_profit">Average Profit:</label>
+					<div class="controls">
+						<input id="average_profit" type="text" />
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="average_profit_rate">Average Profit Rate:</label>
+					<div class="controls">
+						<input id="average_profit_rate" type="text" />
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="span6">
+			<form class="form-horizontal">
+				<div class="control-group">
+					<label class="control-label" for="max_gain">Max Gain:</label>
+					<div class="controls">
+						<input id="max_gain" type="text" />
+					</div>
+				</div>
+				<div class="control-group">
+					 <label class="control-label" for="max_gain_rate">Max Gain Rate:</label>
+					<div class="controls">
+						<input id="max_gain_rate" type="text" />
+					</div>
+				</div>
+				<div class="control-group">
+					 <label class="control-label" for="max_loss">Max Loss:</label>
+					<div class="controls">
+						<input id="max_loss" type="text" />
+					</div>
+				</div>
+				<div class="control-group">
+					 <label class="control-label" for="max_loss_rate">Max Loss Rate:</label>
+					<div class="controls">
+						<input id="max_loss_rate" type="text" />
+					</div>
+				</div>
+				<div class="control-group">
+					 <label class="control-label" for="average_dates">Average Date:</label>
+					<div class="controls">
+						<input id="average_dates" type="text" />
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+</body>
+</html>

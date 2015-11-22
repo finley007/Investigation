@@ -11,6 +11,7 @@ import stock.vo.MyStockInfo;
 import stock.vo.RuleItemVO;
 import stock.vo.RuleRunHistoryVO;
 import stock.vo.Stock;
+import stock.vo.TransInfoVO;
 
 /**
  * @author liuli
@@ -77,4 +78,6 @@ public interface DBQuery {
 	public List<Stock> getStockCategory() throws Exception;
 	
 	public List<ActionVO> getActionByTransId(String transId) throws Exception;
+	
+	public TransInfoVO queryTransInfo(String stockCode) throws Exception;
 }
