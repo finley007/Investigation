@@ -2,11 +2,11 @@ package stock.rule.impl;
 
 import java.util.List;
 
+import stock.model.Stock;
 import stock.rule.Rule;
 import stock.util.DateUtils;
 import stock.util.StockConstants;
 import stock.vo.DailyPriceVO;
-import stock.vo.StockInfo;
 
 /**
  * @author liuli
@@ -18,7 +18,7 @@ import stock.vo.StockInfo;
 public class TrendRule implements Rule {
 	
 	@Override
-	public Boolean isSatisfy(StockInfo info) throws Exception {
+	public Boolean isSatisfy(Stock info) throws Exception {
 		// TODO Auto-generated method stub
 		List<String> list = DateUtils.getRecentDate(StockConstants.TREND_WINDOW_SIZE);
 		if (list != null && list.size() > 0) {

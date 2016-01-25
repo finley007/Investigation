@@ -2,14 +2,14 @@ package stock.service.impl;
 
 import java.util.Map;
 
-import stock.db.DBQuery;
-import stock.db.connect.impl.MysqlConnector;
-import stock.db.impl.DBQueryImpl;
-import stock.http.HTTPQuery;
-import stock.http.impl.MyHTTPQuery;
+import stock.context.StockAppContext;
+import stock.feed.InfoFeeder;
+import stock.feed.http.tencent.TencentHTTPRuntimeFeeder;
+import stock.manager.StockManager;
+import stock.model.MyStock;
 import stock.service.ParamName;
 import stock.service.StockService;
-import stock.vo.MyStockInfo;
+import stock.util.JsonHelper;
 
 /**
  * 
@@ -27,12 +27,14 @@ public class QueryStockInfo implements StockService {
 			throw new Exception("Parameter: " + ParamName.TRANSACTION_ID + " is required!!");
 		}
 		String transId = params.get(ParamName.TRANSACTION_ID).toString();
-		DBQuery query = new DBQueryImpl();
-		query.setConn(new MysqlConnector());
-		MyStockInfo stockInfo = query.getMyStockByTransId(transId);
-		HTTPQuery httpQuery = new MyHTTPQuery();
-		httpQuery.richStockInfo(stockInfo);
-		return stockInfo.toJson();
+		if ("".equals(transId)) {
+			return JsonHelper.createEmptyJson();
+		}
+		StockManager manager = (StockManager)StockAppContext.getBean("stockManager");
+		MyStock myStock = manager.getMyStockByTransId(transId);
+		InfoFeeder feeder = new TencentHTTPRuntimeFeeder();
+		feeder.feedInfo(myStock);
+		return myStock.getStock().toJson();
 	}
 
 }

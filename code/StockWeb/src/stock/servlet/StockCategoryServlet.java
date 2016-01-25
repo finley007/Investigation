@@ -8,17 +8,19 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import stock.context.StockAppContext;
 import stock.envelop.json.JSONEnvelop;
 import stock.envelop.json.impl.JTreeJSONEnvelop;
-import stock.vo.MyStockInfo;
-import stock.vo.Stock;
+import stock.manager.StockManager;
+import stock.model.Stock;
 
 public class StockCategoryServlet extends JSONServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			List<Stock> result = getDBQuery().getStockCategory();
+			StockManager stockManager = (StockManager)StockAppContext.getBean("stockManager");
+			List<Stock> result = stockManager.getStockCategory();
 			response.getOutputStream().println(createResponse(result));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -36,7 +38,7 @@ public class StockCategoryServlet extends JSONServlet {
 			info = new ArrayList<Stock>();
 		}
 		if (info.size() == 0) {
-			info.add(new MyStockInfo());
+			info.add(new Stock());
 		}
 		for (int i = 0; i < info.size(); i++) {
 			StringBuffer sb = new StringBuffer();

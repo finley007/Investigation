@@ -15,9 +15,9 @@ public class RunRuleServlet extends BaseStockServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String ruleId = request.getParameter("ruleId");
-			RuleItemVO rule = getDBQuery().getRuleItemById(ruleId);
-			BaseExecuter executor = (BaseExecuter)RunRuleServlet.class.forName(rule.getImplClz()).newInstance();
-			executor.excecute();
+//			RuleItemVO rule = getDBQuery().getRuleItemById(ruleId);
+//			BaseExecuter executor = (BaseExecuter)RunRuleServlet.class.forName(rule.getImplClz()).newInstance();
+//			executor.excecute();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

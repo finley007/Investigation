@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="stock.dao.IStockOperation" >
+  <resultMap id="MyStockMap" type="stock.model.MyStock" >
+    <id column="TRANSACTION_ID" property="transactionId" jdbcType="VARCHAR" />
+    <result column="BUY_PRICE" property="buyPrice" jdbcType="DOUBLE" />
+    <result column="QUANTITY" property="quantity" jdbcType="INTEGER" />
+    <result column="OPEN_TIME" property="openTime" jdbcType="TIMESTAMP" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="IS_MONITOR" property="isMonitor" jdbcType="INTEGER" />
+    <result column="PROFIT" property="profit" jdbcType="DOUBLE" />
+    <result column="PROFIT_RATE" property="profitRate" jdbcType="DOUBLE" />
+    <result column="CLOSE_TIME" property="closeTime" jdbcType="TIMESTAMP" />
+    
+    <association property="stock" javaType="stock.model.Stock">
+         <id property="code" column="code" />
+         <result property="name" column="name" />
+         <result property="label" column="label" />            
+     </association>  
+  </resultMap>
+  <sql id="Base_Column_List" >
+    TRANSACTION_ID, BUY_PRICE, QUANTITY, OPEN_TIME, STATUS, IS_MONITOR, PROFIT, 
+    PROFIT_RATE, CLOSE_TIME, CODE, NAME, LABEL
+  </sql>
+  
+  <select id="selectMyStockByPK" resultMap="MyStockMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from my_stock t1, all_stock t2
+    where t1.TRANSACTION_ID = #{transactionId,jdbcType=VARCHAR}
+    and t1.stock_code = t2.code 
+  </select>
+  
+  <select id="selectMyCurrentStock" resultMap="MyStockMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from my_stock t1, all_stock t2
+    where status = 1 
+    and t1.stock_code = t2.code
+    order by stock_code
+  </select>
+  
+  <select id="selectMyCurrentStockByCode" resultMap="MyStockMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from my_stock t1, all_stock t2
+    where status = 1 
+    and t1.stock_code = t2.code
+    and stock_code = #{stockCode,jdbcType=VARCHAR}
+    order by stock_code
+  </select>
+  
+  <select id="selectMyEverStockByCode" resultMap="MyStockMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from my_stock t1, all_stock t2
+    where STATUS = 0 
+    <if test="stockCode != null">
+    	and stock_code = #{stockCode,jdbcType=VARCHAR}
+    </if>
+    and t1.stock_code = t2.code
+    order by t1.open_time desc
+  </select>
+  
+  <delete id="deleteMyStockByPK" parameterType="java.lang.String" >
+    delete from my_stock
+    where TRANSACTION_ID = #{transactionId,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insertMyStock" parameterType="stock.model.MyStock" >
+    insert into my_stock (TRANSACTION_ID, STOCK_CODE, BUY_PRICE, 
+      QUANTITY, OPEN_TIME, STATUS, 
+      IS_MONITOR, PROFIT, PROFIT_RATE, 
+      CLOSE_TIME)
+    values (#{transactionId,jdbcType=VARCHAR}, #{stock.code,jdbcType=VARCHAR}, #{buyPrice,jdbcType=DOUBLE}, 
+      #{quantity,jdbcType=INTEGER}, #{openTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{isMonitor,jdbcType=INTEGER}, #{profit,jdbcType=DOUBLE}, #{profitRate,jdbcType=DOUBLE}, 
+      #{closeTime,jdbcType=TIMESTAMP})
+  </insert>
+
+  <insert id="insertSelectiveMyStock" parameterType="stock.model.MyStock" >
+    insert into my_stock
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="transactionId != null" >
+        TRANSACTION_ID,
+      </if>
+      <if test="stock.code != null" >
+        STOCK_CODE,
+      </if>
+      <if test="buyPrice != null" >
+        BUY_PRICE,
+      </if>
+      <if test="quantity != null" >
+        QUANTITY,
+      </if>
+      <if test="openTime != null" >
+        OPEN_TIME,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="isMonitor != null" >
+        IS_MONITOR,
+      </if>
+      <if test="profit != null" >
+        PROFIT,
+      </if>
+      <if test="profitRate != null" >
+        PROFIT_RATE,
+      </if>
+      <if test="closeTime != null" >
+        CLOSE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="transactionId != null" >
+        #{transactionId,jdbcType=VARCHAR},
+      </if>
+      <if test="stockCode != null" >
+        #{stockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="buyPrice != null" >
+        #{buyPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="openTime != null" >
+        #{openTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="isMonitor != null" >
+        #{isMonitor,jdbcType=INTEGER},
+      </if>
+      <if test="profit != null" >
+        #{profit,jdbcType=DOUBLE},
+      </if>
+      <if test="profitRate != null" >
+        #{profitRate,jdbcType=DOUBLE},
+      </if>
+      <if test="closeTime != null" >
+        #{closeTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateMyStockByPKSelective" parameterType="stock.model.MyStock" >
+    update my_stock
+    <set >
+      <if test="stock.code != null" >
+        STOCK_CODE = #{stock.code,jdbcType=VARCHAR},
+      </if>
+      <if test="buyPrice != null" >
+        BUY_PRICE = #{buyPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="quantity != null" >
+        QUANTITY = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="openTime != null" >
+        OPEN_TIME = #{openTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="isMonitor != null" >
+        IS_MONITOR = #{isMonitor,jdbcType=INTEGER},
+      </if>
+      <if test="profit != null" >
+        PROFIT = #{profit,jdbcType=DOUBLE},
+      </if>
+      <if test="profitRate != null" >
+        PROFIT_RATE = #{profitRate,jdbcType=DOUBLE},
+      </if>
+      <if test="closeTime != null" >
+        CLOSE_TIME = #{closeTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where TRANSACTION_ID = #{transactionId,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateMyStockByPK" parameterType="stock.model.MyStock" >
+    update my_stock
+    set STOCK_CODE = #{stock.code,jdbcType=VARCHAR},
+      BUY_PRICE = #{buyPrice,jdbcType=DOUBLE},
+      QUANTITY = #{quantity,jdbcType=INTEGER},
+      OPEN_TIME = #{openTime,jdbcType=TIMESTAMP},
+      STATUS = #{status,jdbcType=INTEGER},
+      IS_MONITOR = #{isMonitor,jdbcType=INTEGER},
+      PROFIT = #{profit,jdbcType=DOUBLE},
+      PROFIT_RATE = #{profitRate,jdbcType=DOUBLE},
+      CLOSE_TIME = #{closeTime,jdbcType=TIMESTAMP}
+    where TRANSACTION_ID = #{transactionId,jdbcType=VARCHAR}
+  </update>
+</mapper>

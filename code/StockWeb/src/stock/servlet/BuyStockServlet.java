@@ -6,24 +6,27 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import stock.context.StockAppContext;
+import stock.manager.StockManager;
+import stock.model.MyStock;
 import stock.util.StockConstants;
-import stock.vo.MyStockInfo;
 
 public class BuyStockServlet extends BaseStockServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			StockManager manager = (StockManager)StockAppContext.getBean("stockManager");
 			String code = request.getParameter("code");
-			MyStockInfo info = getDBQuery().getMyStockByCode(code);
-			MyStockInfo currentStockInfo = createStockInfo(request);
-			if (info == null) {
-				getDBQuery().addMyStock(currentStockInfo);
+			
+			MyStock myStock = manager.getMyCurrentStockByCode(code);
+			MyStock currentStock = createStockInfo(request);
+			if (myStock == null) {
+				manager.addMyStock(currentStock);
 			} else {
-				currentStockInfo.setTransId(info.getTransId());
-				getDBQuery().updateMyStock(currentStockInfo, StockConstants.ACTION_TYPE_BUY);
+				currentStock.setTransactionId(myStock.getTransactionId());
+				manager.updateMyStock(currentStock, StockConstants.ACTION_TYPE_BUY);
 			}
-//			response.sendRedirect(request.getContextPath() + "/my_stock.html");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

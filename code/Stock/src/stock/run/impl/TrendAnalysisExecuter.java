@@ -1,7 +1,7 @@
 package stock.run.impl;
 
-import stock.http.HTTPQuery;
-import stock.http.impl.MyHTTPQuery;
+import stock.feed.InfoFeeder;
+import stock.feed.http.MyStockInfoFeeder;
 import stock.rule.Rule;
 import stock.rule.impl.TrendRule;
 import stock.run.BaseExecuter;
@@ -13,8 +13,8 @@ import stock.run.BaseExecuter;
  */
 public class TrendAnalysisExecuter extends BaseExecuter{
 	
-	protected HTTPQuery getHTTPQuery() {
-		return new MyHTTPQuery();
+	protected InfoFeeder getInfoFeeder() {
+		return new MyStockInfoFeeder();
 	}
 	
 	protected Rule getRule() {

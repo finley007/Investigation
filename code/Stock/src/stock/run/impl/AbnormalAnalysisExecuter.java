@@ -1,7 +1,7 @@
 package stock.run.impl;
 
-import stock.http.HTTPQuery;
-import stock.http.impl.MyHTTPQuery;
+import stock.feed.InfoFeeder;
+import stock.feed.http.MyStockInfoFeeder;
 import stock.rule.Rule;
 import stock.rule.impl.AbnormalRule;
 import stock.run.BaseExecuter;
@@ -9,9 +9,9 @@ import stock.run.BaseExecuter;
 public class AbnormalAnalysisExecuter extends BaseExecuter {
 
 	@Override
-	protected HTTPQuery getHTTPQuery() {
+	protected InfoFeeder getInfoFeeder() {
 		// TODO Auto-generated method stub
-		return new MyHTTPQuery();
+		return new MyStockInfoFeeder();
 	}
 
 	@Override

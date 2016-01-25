@@ -8,10 +8,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import stock.http.HTTPQuery;
-import stock.http.impl.MyHTTPQuery;
+import stock.context.StockAppContext;
+import stock.manager.StockManager;
+import stock.model.MyStock;
 import stock.util.CommonUtils;
-import stock.vo.MyStockInfo;
 
 public class MyStockServlet extends JSONServlet {
 
@@ -19,61 +19,41 @@ public class MyStockServlet extends JSONServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String stockCode = request.getParameter("stockCode");
-			if (stockCode != null && !"".equals(stockCode)) {
-				List<MyStockInfo> result = getDBQuery().getMyStockByStockCode(stockCode);
-				response.getOutputStream().println(createResponse(result, false));
-			} else {
-				List<MyStockInfo> result = getDBQuery().getMyStock();
-				richStockInfo(result);
-				response.getOutputStream().println(createResponse(result, true));
-			}
+			StockManager stockManager = (StockManager)StockAppContext.getBean("stockManager");
+			List<MyStock> result = stockManager.getMyCurrentStock();
+			response.getOutputStream().println(createResponse(result));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	private void richStockInfo(List<MyStockInfo> list) throws Exception {
-		if (list != null && list.size() > 0) {
-			for (MyStockInfo info : list) {
-				HTTPQuery query = new MyHTTPQuery();
-				query.richStockInfo(info);
-			}
-		}
-	}
-
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
 	
-	String createResponse(List<MyStockInfo> info, Boolean currentStock) throws Exception {
+	String createResponse(List<MyStock> info) throws Exception {
 		List<String[]> strs = new ArrayList<String[]>(); 
 		if (info == null) {
-			info = new ArrayList<MyStockInfo>();
+			info = new ArrayList<MyStock>();
 		}
 		if (info.size() == 0) {
-			info.add(new MyStockInfo());
+			info.add(new MyStock());
 		}
 		for (int i = 0; i < info.size(); i++) {
 			StringBuffer sb = new StringBuffer();
-			sb.append(addSeparator(info.get(i).getTransId()));
-			sb.append(addSeparator(info.get(i).getCode()));
-			sb.append(addSeparator(info.get(i).getName()));
-			if (currentStock) {
-				sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getBuyingPrice())));
-				sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getCurrentPrice())));
-				sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getQuantity())));
-				sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getProfit())));
-				sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getProfitRate()) + "%"));
-				sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getBuyingTime())));
-				sb.append(addSeparator(""));
-				sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getIsMonitor())));
-			} else {
-				sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getProfit())));
-				sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getProfitRate()) + "%"));
-				sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getBuyingTime())));
-				sb.append(addSeparator(""));
-			}
+			MyStock myStock = info.get(i);
+			sb.append(addSeparator(myStock.getTransactionId()));
+			sb.append(addSeparator(myStock.getStock().getCode()));
+			sb.append(addSeparator(myStock.getStock().getName()));
+			sb.append(addSeparator(CommonUtils.objToStr(myStock.getBuyPrice())));
+			sb.append(addSeparator(CommonUtils.objToStr(myStock.getStock().getCurrentPrice())));
+			sb.append(addSeparator(CommonUtils.objToStr(myStock.getQuantity())));
+			sb.append(addSeparator(CommonUtils.objToStr(myStock.getProfit())));
+			sb.append(addSeparator(CommonUtils.objToStr(myStock.getProfitRate()) + "%"));
+			sb.append(addSeparator(CommonUtils.objToStr(myStock.getOpenTime())));
+			sb.append(addSeparator(""));
+			sb.append(addSeparator(CommonUtils.objToStr(myStock.getIsMonitor())));
 			strs.add(sb.toString().split("\\|"));
 		}
 		return getJSONEnvelop().envelop(strs);

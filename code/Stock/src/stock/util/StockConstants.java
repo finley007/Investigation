@@ -4,7 +4,12 @@ import java.text.SimpleDateFormat;
 
 public class StockConstants {
 	
+	public static final SimpleDateFormat sdf_time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	public static final SimpleDateFormat sdf_date = new SimpleDateFormat("yyyy-MM-dd");
+	
 	public static final String ASTERISK = "*";
+	
+	public static final Integer PRICE_SCALE = 2;
 	
 	public static final Integer CACHE_DATA_WINDOW_SIZE = 30;
 	public static final Integer TREND_WINDOW_SIZE = 2;
@@ -15,9 +20,6 @@ public class StockConstants {
 	public static final Integer MY_STOCK_STATUS_IN = 1;
 	public static final Integer MY_STOCK_STATUS_OUT = 0;
 
-	public static final SimpleDateFormat sdf_time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	public static final SimpleDateFormat sdf_date = new SimpleDateFormat("yyyy-MM-dd");
-	
 	public static final Integer ACTION_TYPE_BUY = 1;
 	public static final Integer ACTION_TYPE_SELL = 0;
 

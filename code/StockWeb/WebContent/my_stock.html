@@ -81,11 +81,9 @@
 		           		'quantity' : $('input[name="quantity"]').val(), 
 		           		'time' : $('input[name="time"]').val(), 
 		           	},
-		           	//contentType: 'application/json; charset=utf-8',     
-		           	//dataType: 'json',     
 		            success: loadMyStock,     
 		            error: function(err) {     
-		                alert(err);     
+		                alert(err.responseText);     
 		            }     
 	 			});  
 	 			$('#modal-container-220546').modal('hide');
@@ -110,11 +108,9 @@
 			           		'quantity' : $('input[name="quantity"]').val(), 
 			           		'time' : $('input[name="time"]').val(), 
 			           	},
-			           	//contentType: 'application/json; charset=utf-8',     
-			           	//dataType: 'json',     
 			            success: loadMyStock,     
 			            error: function(err) {     
-			                alert(err);     
+			                alert(err.responseText);     
 			            }     
 		 			});  
 		 			$('#modal-container-220546').modal('hide');
@@ -127,7 +123,7 @@
 	            	dataType: 'json',     
 		            success: initForm,     
 		            error: function(err) {     
-		                alert(err);     
+		                alert(err.responseText);     
 		            }     
 	   			}); 
 		    }
@@ -164,7 +160,7 @@
 	            	location.href = "./my_stock.html";
 	            },     
 	            error: function(err) {     
-	                alert(err);     
+	                alert(err.responseText);     
 	            }     
    			}); 
 	}

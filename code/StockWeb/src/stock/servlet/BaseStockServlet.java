@@ -11,16 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import stock.db.DBQuery;
-import stock.db.connect.DBConnector;
-import stock.db.connect.impl.MysqlConnector;
-import stock.db.impl.DBQueryImpl;
+import stock.model.MyStock;
+import stock.model.Stock;
 import stock.util.StockConstants;
-import stock.vo.MyStockInfo;
 
 public class BaseStockServlet extends HttpServlet {
 	
-	protected DBQuery query;
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,16 +35,7 @@ public class BaseStockServlet extends HttpServlet {
 		return requestMap;
 	}
 	
-	protected DBQuery getDBQuery() {
-		if (query == null) {
-			DBConnector connector = new MysqlConnector();
-			query = new DBQueryImpl();
-			query.setConn(connector);
-		}
-		return query;
-	}
-	
-	protected MyStockInfo createStockInfo(HttpServletRequest request) {
+	protected MyStock createStockInfo(HttpServletRequest request) {
 		String transId = request.getParameter("transId");
 		String code = request.getParameter("code");
 		Double price = Double.valueOf(request.getParameter("price"));
@@ -60,13 +47,14 @@ public class BaseStockServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		MyStockInfo stock = new MyStockInfo();
-		stock.setCode(code);
-		stock.setBuyingPrice(price);
-		stock.setQuantity(quantity);
-		stock.setBuyingTime(date);
-		stock.setTransId(transId);
-		return stock;
+		MyStock myStock = new MyStock();
+		Stock stock = new Stock(code);
+		myStock.setStock(stock);
+		myStock.setBuyPrice(price);
+		myStock.setQuantity(quantity);
+		myStock.setOpenTime(date);
+		myStock.setTransactionId(transId);
+		return myStock;
 	}
 	
 	protected String addSeparator(String str) {

@@ -1,7 +1,7 @@
 package stock.run.impl;
 
-import stock.http.HTTPQuery;
-import stock.http.impl.tencent.TencentHTTPFlowQuery;
+import stock.feed.InfoFeeder;
+import stock.feed.http.tencent.TencentHTTPFlowFeeder;
 import stock.rule.Rule;
 import stock.rule.impl.MainInputFlowRule;
 import stock.run.BaseExecuter;
@@ -13,8 +13,8 @@ import stock.run.BaseExecuter;
  */
 public class MainFlowAnalysisExecuter extends BaseExecuter {
 	
-	protected HTTPQuery getHTTPQuery() {
-		return new TencentHTTPFlowQuery();
+	protected InfoFeeder getInfoFeeder() {
+		return new TencentHTTPFlowFeeder();
 	}
 	
 	protected Rule getRule() {

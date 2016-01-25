@@ -2,8 +2,6 @@ package stock.util;
 
 import java.text.MessageFormat;
 
-import stock.vo.Stock;
-
 public class StockUtils {
 	
 	private static final Double STAMP_TAX_RATE = 0.001;

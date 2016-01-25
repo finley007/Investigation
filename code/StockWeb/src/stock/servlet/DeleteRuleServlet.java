@@ -3,11 +3,9 @@ package stock.servlet;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import stock.util.StockConstants;
 import stock.vo.RuleItemVO;
 
 public class DeleteRuleServlet extends BaseStockServlet {
@@ -20,7 +18,7 @@ public class DeleteRuleServlet extends BaseStockServlet {
 			RuleItemVO vo = new RuleItemVO();
 			vo.setType(Integer.valueOf(type));
 			vo.setId(id);
-			getDBQuery().deleteRuleItem(vo);
+//			getDBQuery().deleteRuleItem(vo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

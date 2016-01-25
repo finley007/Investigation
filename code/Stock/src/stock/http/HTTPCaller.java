@@ -28,11 +28,11 @@ public abstract class HTTPCaller {
 		this.method = method;
 	}
 	
-	public static HTTPCaller getIns(Method method) {
+	public static HTTPCaller getIns(Method method, String url) {
 		if (method == Method.Get) {
-			return new HTTPGetCaller(method);
+			return new HTTPGetCaller(method, url);
 		} else if (method == Method.Post) {
-			return new HTTPPostCaller(method);
+			return new HTTPPostCaller(method, url);
 		} else {
 			return null;
 		}

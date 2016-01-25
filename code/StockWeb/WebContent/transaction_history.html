@@ -6,7 +6,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#my_transaction').DataTable( {
-        	'ajax': './mystock?stockCode=' + TransInfo.getStock(),
+        	'ajax': './mytrans?stockCode=' + TransInfo.getStock(),
         	//Order property should use double quote here
         	"order": [[5, "desc"]],
         	"iDisplayLength": 5

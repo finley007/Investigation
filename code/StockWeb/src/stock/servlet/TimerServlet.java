@@ -29,11 +29,11 @@ public class TimerServlet extends BaseStockServlet {
 				job.getJobDataMap().put(TimerConstants.JOB_KEY_STOCK_CODE, stockCode);
 				Trigger trigger = Timer.createTrigger(stockCode, TimerConstants.JOB_GROUP_MONITOR, new Date(), TimerConstants.RUM_INTERVAL_1_MIN);
 				if (TimerConstants.TIMER_ACTION_START.equalsIgnoreCase(action)) {
-					getDBQuery().updateMonitorStatus(transId, TimerConstants.IS_MONITOR);
+//					getDBQuery().updateMonitorStatus(transId, TimerConstants.IS_MONITOR);
 					dbUpdated = true;
 					Timer.scheduleJob(job, trigger);
 				} else {
-					getDBQuery().updateMonitorStatus(transId, TimerConstants.NOT_MONITOR);
+//					getDBQuery().updateMonitorStatus(transId, TimerConstants.NOT_MONITOR);
 					dbUpdated = true;
 					Timer.unscheduleJob(trigger);
 				}
@@ -43,9 +43,9 @@ public class TimerServlet extends BaseStockServlet {
 			try {
 				if (dbUpdated) {
 					if (TimerConstants.TIMER_ACTION_START.equalsIgnoreCase(action)) {
-						getDBQuery().updateMonitorStatus(transId, TimerConstants.NOT_MONITOR);
+//						getDBQuery().updateMonitorStatus(transId, TimerConstants.NOT_MONITOR);
 					} else {
-						getDBQuery().updateMonitorStatus(transId, TimerConstants.IS_MONITOR);
+//						getDBQuery().updateMonitorStatus(transId, TimerConstants.IS_MONITOR);
 					}
 				}
 			} catch (Exception e1) {

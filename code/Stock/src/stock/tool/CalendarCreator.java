@@ -2,22 +2,18 @@ package stock.tool;
 
 import java.util.Date;
 
-import stock.db.DBQuery;
-import stock.db.connect.DBConnector;
-import stock.db.connect.impl.MysqlConnector;
-import stock.db.impl.DBQueryImpl;
+import stock.manager.StockManager;
+import stock.manager.impl.StockManagerImpl;
 import stock.util.DateUtils;
 import stock.util.StockConstants;
 
 public class CalendarCreator {
 	
-	private static DBQuery query;
+	private static StockManager query;
 	
-	private static DBQuery getDBQuery() {
+	private static StockManager getDBQuery() {
 		if (query == null) {
-			DBConnector connector = new MysqlConnector();
-			query = new DBQueryImpl();
-			query.setConn(connector);
+			query = new StockManagerImpl();
 		}
 		return query;
 	}

@@ -24,7 +24,7 @@ public class SaveRuleServlet extends BaseStockServlet {
 			vo.setName(name);
 			vo.setImplClz(implClz);
 			vo.setDesp(desp);
-			getDBQuery().saveOrUpdateRuleItem(vo);
+//			getDBQuery().saveOrUpdateRuleItem(vo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

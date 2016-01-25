@@ -93,6 +93,12 @@
 		<servlet-name>MyActionServlet</servlet-name>
 		<servlet-class>stock.servlet.MyActionServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<description></description>
+		<display-name>MyTransServlet</display-name>
+		<servlet-name>MyTransServlet</servlet-name>
+		<servlet-class>stock.servlet.MyTransServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>MyStockServlet</servlet-name>
 		<url-pattern>/mystock</url-pattern>
@@ -148,6 +154,10 @@
 	<servlet-mapping>
 		<servlet-name>MyActionServlet</servlet-name>
 		<url-pattern>/myaction</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>MyTransServlet</servlet-name>
+		<url-pattern>/mytrans</url-pattern>
 	</servlet-mapping>
 	<filter> 
     <filter-name>alertPush</filter-name> 

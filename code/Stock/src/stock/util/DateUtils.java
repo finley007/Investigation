@@ -3,14 +3,11 @@ package stock.util;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import stock.db.DBQuery;
-import stock.db.connect.DBConnector;
-import stock.db.connect.impl.MysqlConnector;
-import stock.db.impl.DBQueryImpl;
+import stock.manager.StockManager;
+import stock.manager.impl.StockManagerImpl;
 
 public class DateUtils {
 	
@@ -20,13 +17,11 @@ public class DateUtils {
 	private static final Integer CLOSE_HOUR = 15;
 	private static final Integer CLOSE_MIN = 30;
 	
-	private static DBQuery query;
+	private static StockManager query;
 	
-	private static DBQuery getDBQuery() {
+	private static StockManager getDBQuery() {
 		if (query == null) {
-			DBConnector connector = new MysqlConnector();
-			query = new DBQueryImpl();
-			query.setConn(connector);
+			query = new StockManagerImpl();
 		}
 		return query;
 	}

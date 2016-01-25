@@ -8,8 +8,9 @@ import java.util.Map;
 
 public class HTTPGetCaller extends HTTPCaller {
 	
-	protected HTTPGetCaller(Method method) {
+	protected HTTPGetCaller(Method method, String url) {
 		this.method = method;
+		this.url = url;
 	}
 	
 	public String callHTTPServ(Map params) throws Exception {

@@ -5,15 +5,15 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import stock.vo.MyStockInfo;
+import stock.model.MyStock;
 
 public class JsonHelperTest {
 
 	@Test
 	public void testToJson() {
-		MyStockInfo info = new MyStockInfo();
-		info.setCode("code");
-		info.setTransId("transId");
+		MyStock info = new MyStock();
+//		info.setCode("code");
+//		info.setTransId("transId");
 		System.out.println(JsonHelper.toJson(info));
 		
 		Map map = new HashMap();

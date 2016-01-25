@@ -8,9 +8,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import stock.context.StockAppContext;
+import stock.manager.StockManager;
+import stock.model.MyAction;
 import stock.util.CommonUtils;
 import stock.util.StockConstants;
-import stock.vo.ActionVO;
 
 public class MyActionServlet extends JSONServlet {
 	
@@ -22,7 +24,8 @@ public class MyActionServlet extends JSONServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String transId = request.getParameter("transId");
-			response.getOutputStream().println(createResponse(getDBQuery().getActionByTransId(transId)));
+			StockManager stockManager = (StockManager)StockAppContext.getBean("stockManager");
+			response.getOutputStream().println(createResponse(stockManager.getActionByTransId(transId)));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -33,21 +36,21 @@ public class MyActionServlet extends JSONServlet {
 		doGet(request, response);
 	}
 	
-	String createResponse(List<ActionVO> info) throws Exception {
+	String createResponse(List<MyAction> action) throws Exception {
 		List<String[]> strs = new ArrayList<String[]>(); 
-		if (info == null) {
-			info = new ArrayList<ActionVO>();
+		if (action == null) {
+			action = new ArrayList<MyAction>();
 		}
-		if (info.size() == 0) {
-			info.add(new ActionVO());
+		if (action.size() == 0) {
+			action.add(new MyAction());
 		}
-		for (int i = 0; i < info.size(); i++) {
+		for (int i = 0; i < action.size(); i++) {
 			StringBuffer sb = new StringBuffer();
-			sb.append(addSeparator(info.get(i).getActionId()));
-			sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getPrize())));
-			sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getQuantity())));
-			sb.append(addSeparator(CommonUtils.objToStr(info.get(i).getTime())));
-			if (StockConstants.ACTION_TYPE_BUY == info.get(i).getType()) {
+			sb.append(addSeparator(action.get(i).getActionId()));
+			sb.append(addSeparator(CommonUtils.objToStr(action.get(i).getPrize())));
+			sb.append(addSeparator(CommonUtils.objToStr(action.get(i).getQuantity())));
+			sb.append(addSeparator(CommonUtils.objToStr(action.get(i).getTime())));
+			if (StockConstants.ACTION_TYPE_BUY == action.get(i).getActionType()) {
 				sb.append(addSeparator(ACTION_BUY));
 			} else {
 				sb.append(addSeparator(ACTION_SELL));

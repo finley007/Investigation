@@ -38,4 +38,6 @@ function initForm(data) {
 	$('#price').val(data.currentPrice);
 	$('#quantityTitle').text('Quantity(max:' + data.quantity + ')');
 	$('#transId').val(data.transId);
+	$('#quantity').val('');
+	$('#time').val('');
 }

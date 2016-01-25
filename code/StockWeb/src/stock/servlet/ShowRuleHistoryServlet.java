@@ -18,8 +18,8 @@ public class ShowRuleHistoryServlet extends JSONServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String ruleId = request.getParameter("ruleId");
-			List<RuleRunHistoryVO> result = getDBQuery().getRuleRunHistoryByRuleId(ruleId);
-			response.getOutputStream().println(createResponse(result));
+//			List<RuleRunHistoryVO> result = getDBQuery().getRuleRunHistoryByRuleId(ruleId);
+//			response.getOutputStream().println(createResponse(result));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -5,9 +5,10 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import stock.http.impl.MyHTTPQuery;
+import stock.feed.http.MyStockInfoFeeder;
+import stock.model.MyStock;
+import stock.model.Stock;
 import stock.util.DateUtils;
-import stock.vo.StockInfo;
 
 public class FallTrendRuleTest {
 
@@ -27,10 +28,12 @@ public class FallTrendRuleTest {
 	@Test
 	public void testIsSatisfy() {
 		try { 
-			StockInfo stock = new StockInfo();
+			Stock stock = new Stock();
 			stock.setCode("sh600010");
-			MyHTTPQuery httpQuery = new MyHTTPQuery();
-			httpQuery.richStockInfo(stock);
+			MyStock myStock = new MyStock();
+			myStock.setStock(stock);
+			MyStockInfoFeeder feeder = new MyStockInfoFeeder();
+			feeder.feedInfo(myStock);
 			FallTrendRule rule = new FallTrendRule();
 			Assert.assertFalse(rule.isSatisfy(stock)) ;
 		} catch (Exception e) {

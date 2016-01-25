@@ -16,8 +16,8 @@ public class RuleItemServlet extends JSONServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			Integer type = Integer.valueOf(request.getParameter("ruleType"));
-			List<RuleItemVO> result = getDBQuery().getRuleItemByType(type);
-			response.getOutputStream().println(createResponse(result));
+//			List<RuleItemVO> result = getDBQuery().getRuleItemByType(type);
+//			response.getOutputStream().println(createResponse(result));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

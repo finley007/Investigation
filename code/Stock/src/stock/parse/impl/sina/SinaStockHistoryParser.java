@@ -5,10 +5,11 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import stock.model.MyStock;
+import stock.model.Stock;
 import stock.parse.InfoParser;
 import stock.util.StockConstants;
 import stock.vo.DailyPriceVO;
-import stock.vo.StockInfo;
 
 public class SinaStockHistoryParser implements InfoParser {
 	
@@ -19,22 +20,22 @@ public class SinaStockHistoryParser implements InfoParser {
 	private final Pattern pattern2 = Pattern.compile("([0-9]+\\.[0-9]+)|([0-9]{5,})");
 	
 	@Override
-	public void parseStockInfo(StockInfo stock, String info) throws Exception {
+	public void parseStockInfo(MyStock myStock, String info) throws Exception {
 		// TODO Auto-generated method stub
-		stock.clearDailyPrice();
+		myStock.getStock().clearDailyPrice();
 		int size = StockConstants.CACHE_DATA_WINDOW_SIZE + 1;
         Matcher matcher = pattern.matcher(info);
         while (matcher.find() && size > 0) {
         	String target = matcher.group();
         	String date = getDate(target);
         	if (!"".equals(date)) {
-	        	setDailyPriceInfo(stock, target, date);
+	        	setDailyPriceInfo(myStock.getStock(), target, date);
 	        	size--;
         	}
         }
 	}
 
-	private void setDailyPriceInfo(StockInfo stock, String target, String date) {
+	private void setDailyPriceInfo(Stock stock, String target, String date) {
 		DailyPriceVO vo = new DailyPriceVO(date);
 		Matcher matcher2 = pattern2.matcher(target);
 		List list = new ArrayList();

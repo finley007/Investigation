@@ -5,11 +5,11 @@ import org.junit.Test;
 
 public class HTTPGetCallerTest {
 	
-	private HTTPCaller caller = HTTPCaller.getIns(HTTPCaller.Method.Get);
+	private HTTPCaller caller;
 
 	@Before
 	public void setUp() throws Exception {
-		caller.setUrl("http://qt.gtimg.cn/q=ff_sh600278");
+		HTTPCaller.getIns(HTTPCaller.Method.Get, "http://qt.gtimg.cn/q=ff_sh600278");
 	}
 
 	@Test

@@ -6,16 +6,13 @@ import java.util.List;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import stock.db.DBQuery;
-import stock.db.connect.DBConnector;
-import stock.db.connect.impl.MysqlConnector;
-import stock.db.impl.DBQueryImpl;
-import stock.http.HTTPQuery;
+import stock.feed.InfoFeeder;
+import stock.manager.StockManager;
+import stock.manager.impl.StockManagerImpl;
+import stock.model.Stock;
 import stock.rule.Rule;
-import stock.util.StockConstants;
 import stock.util.CommonUtils;
-import stock.vo.Stock;
-import stock.vo.StockInfo;
+import stock.util.StockConstants;
 
 
 public abstract class BaseExecuter {
@@ -31,10 +28,8 @@ public abstract class BaseExecuter {
 	}
 	
 	public void excecute() {
-		DBConnector connector = new MysqlConnector();
-		DBQuery query = new DBQueryImpl();
-		query.setConn(connector);
-		List<StockInfo> resultSet = new ArrayList<StockInfo>();
+		StockManager query = new StockManagerImpl();
+		List<Stock> resultSet = new ArrayList<Stock>();
 		try {
 			executeRule(query, resultSet);
 			solveResult(query, resultSet);
@@ -43,9 +38,9 @@ public abstract class BaseExecuter {
 		}
 	}
 
-	private void solveResult(DBQuery query, List<StockInfo> resultSet) throws Exception {
+	private void solveResult(StockManager query, List<Stock> resultSet) throws Exception {
 		String historyId = CommonUtils.createTransactionId(this.getRuleId());
-		for (StockInfo info : resultSet) {
+		for (Stock info : resultSet) {
 			logger.info(info.toString());
 			query.addRuleResult(historyId, info.getCode());
 //			Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler http://finance.sina.com.cn/realstock/company/" + info.getCode() + "/nc.shtml");
@@ -53,20 +48,19 @@ public abstract class BaseExecuter {
 		query.addRuleHistory(this.getRuleId(), historyId, StockConstants.RESULT_STATUS_SUCCESS, 0l, resultSet.size());
 	}
 
-	private void executeRule(DBQuery query, List<StockInfo> resultSet)
+	private void executeRule(StockManager query, List<Stock> resultSet)
 			throws Exception {
 		List<Stock> stocks = query.getStockList();
 		if (stocks != null && stocks.size() > 0) {
 			for (Stock stock : stocks) {
 				logger.debug("Stock name: " + stock.getName() + " and code: " + stock.getCode());
-				HTTPQuery httpQuery = getHTTPQuery();
+				InfoFeeder infoFeeder = getInfoFeeder();
 				try {
-					StockInfo info = new StockInfo(stock);
-					httpQuery.richStockInfo(info);
-					logger.debug(info.toString());
+//					infoFeeder.feedInfo(stock);
+					logger.debug(stock.toString());
 					Rule rule = getRule();
-					if (rule.isSatisfy(info)) {
-						resultSet.add(info);
+					if (rule.isSatisfy(stock)) {
+						resultSet.add(stock);
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -78,7 +72,7 @@ public abstract class BaseExecuter {
 		logger.info("The stocks to be checked: ");
 	}
 	
-	protected abstract HTTPQuery getHTTPQuery();
+	protected abstract InfoFeeder getInfoFeeder();
 	
 	protected abstract Rule getRule();
 	

@@ -2,17 +2,17 @@ package stock.rule.impl;
 
 import java.util.List;
 
+import stock.model.Stock;
 import stock.rule.Rule;
 import stock.util.DateUtils;
 import stock.vo.DailyPriceVO;
-import stock.vo.StockInfo;
 
 public class AbnormalRule implements Rule {
 	
 	private static final Integer ABNORMAL_WINDOW_SIZE = 10;
 
 	@Override
-	public Boolean isSatisfy(StockInfo info) throws Exception {
+	public Boolean isSatisfy(Stock info) throws Exception {
 		// TODO Auto-generated method stub
 		List<String> list = DateUtils.getRecentDate(ABNORMAL_WINDOW_SIZE);
 		DailyPriceVO day = info.getDailyPrice().get(list.get(0));

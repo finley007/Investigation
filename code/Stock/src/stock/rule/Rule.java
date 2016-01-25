@@ -1,6 +1,6 @@
 package stock.rule;
 
-import stock.vo.StockInfo;
+import stock.model.Stock;
 
 /**
  * @author liuli
@@ -9,6 +9,6 @@ import stock.vo.StockInfo;
  */
 public interface Rule {
 	
-	public Boolean isSatisfy(StockInfo info) throws Exception;
+	public Boolean isSatisfy(Stock info) throws Exception;
 
 }

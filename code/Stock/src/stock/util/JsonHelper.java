@@ -38,5 +38,9 @@ public class JsonHelper {
 		}
 		return obj.toString();
 	}
+	
+	public static String createEmptyJson() {
+		return "{}";
+	}
    
 }

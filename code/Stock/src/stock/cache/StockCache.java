@@ -1,12 +1,13 @@
 package stock.cache;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import stock.db.DBQuery;
-import stock.db.connect.DBConnector;
-import stock.db.connect.impl.MysqlConnector;
-import stock.db.impl.DBQueryImpl;
+import stock.context.StockAppContext;
+import stock.dao.IStockOperation;
+import stock.manager.StockManager;
+import stock.model.Stock;
 
 /**
  * This class is used for dictionary cache
@@ -15,6 +16,8 @@ import stock.db.impl.DBQueryImpl;
  *
  */
 public class StockCache {
+	
+	private IStockOperation stockOperation = (IStockOperation)StockAppContext.getBean("stockMapper");
 	
 	private StockCache () throws Exception {
 		init();
@@ -25,10 +28,7 @@ public class StockCache {
 	private static StockCache ins;
 	
 	private void init() throws Exception {
-		DBConnector connector = new MysqlConnector();
-		DBQuery query = new DBQueryImpl();
-		query.setConn(connector);
-		stock = query.getStockCodeNamePair();
+		stock = getStockCodeNamePair();
 	}
 	
 	public Map<String, String> getStock() {
@@ -52,6 +52,17 @@ public class StockCache {
 			name = "";
 		}
 		return name;
+	}
+	
+	private Map<String, String> getStockCodeNamePair() throws Exception {
+		Map<String, String> result = new HashMap<String, String>();
+		List<Stock> allStocks = stockOperation.selectAllStock();
+		for (Stock stock : allStocks) {
+			String code = stock.getCode();
+			String name = stock.getName();
+			result.put(code, name);
+		}
+		return result;
 	}
 
 }

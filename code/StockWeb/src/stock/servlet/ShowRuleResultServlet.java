@@ -8,9 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import stock.util.CommonUtils;
-import stock.util.StockConstants;
-import stock.vo.Stock;
+import stock.model.Stock;
 
 public class ShowRuleResultServlet extends JSONServlet {
 
@@ -18,8 +16,8 @@ public class ShowRuleResultServlet extends JSONServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String hisId = request.getParameter("hisId");
-			List<Stock> result = getDBQuery().getRuleResultByHistoryId(hisId);
-			response.getOutputStream().println(createResponse(result));
+//			List<Stock> result = getDBQuery().getRuleResultByHistoryId(hisId);
+//			response.getOutputStream().println(createResponse(result));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

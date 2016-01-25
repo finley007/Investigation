@@ -1,10 +1,7 @@
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-
-import stock.db.connect.DBConnector;
-import stock.db.connect.impl.MysqlConnector;
-import stock.vo.Stock;
 
 public class Hanzi2pinyin {
 	
@@ -211,7 +208,7 @@ public class Hanzi2pinyin {
 	
 	public static void main(String[] args) {  
 		try {
-			DBConnector connector = new MysqlConnector();
+			MysqlConnector connector = new MysqlConnector();
 			Connection conn = connector.getConnection();
 			Statement statement = conn.createStatement();
 			ResultSet rs = statement.executeQuery("select * from all_stock");  
@@ -230,5 +227,20 @@ public class Hanzi2pinyin {
 			e.printStackTrace();
 		}
 	}  
+	
+	public static class MysqlConnector {
+		
+		private String driver = "com.mysql.jdbc.Driver";
+		private String url = "jdbc:mysql://127.0.0.1:3306/stock";
+		private String user = "root";
+		private String password = "";
+
+		public Connection getConnection() throws Exception {
+			// TODO Auto-generated method stub
+			Class.forName(driver);
+			return DriverManager.getConnection(url, user, password);
+		}
+
+	}
 
 }
