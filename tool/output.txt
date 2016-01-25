@@ -1,0 +1,13 @@
+Problem transaction:20150810210827865sh601618 infact profit:-231.9999999999991 and current profit:232.0
+Problem transaction:20150817230842703sh600006 infact profit:-679.9999999999995 and current profit:-680.0
+Problem transaction:20150828100857086sh601069 infact profit:-789.44 and current profit:-789.88
+Problem transaction:20150828110804129sh600081 infact profit:201.0 and current profit:200.0
+Problem transaction:20150901050917057sh600639 infact profit:249.00000000000023 and current profit:249.0
+Problem transaction:20150901050931003sh600500 infact profit:353.0 and current profit:355.0
+Problem transaction:20150901050957776sh600006 infact profit:-636.0000000000005 and current profit:-636.0
+Problem transaction:20150908210922521sh600098 infact profit:-413.9999999999998 and current profit:-414.0
+Problem transaction:20150915090924485sh600133 infact profit:231.99999999999955 and current profit:232.0
+Problem transaction:20150922020943538sh600006 infact profit:174.0 and current profit:176.0
+Problem transaction:20151021141025159sh600628 infact profit:385.9999999999991 and current profit:387.0
+Problem transaction:20151021141048041sh600773 infact profit:140.00000000000045 and current profit:140.0
+Problem transaction:20151022141031292sh600733 infact profit:107.0 and current profit:110.0
