@@ -11,13 +11,14 @@ import stock.feed.http.MyStockInfoFeeder;
 import stock.manager.StockManager;
 import stock.model.MyAction;
 import stock.model.MyStock;
+import stock.model.RuleItem;
+import stock.model.RuleRunHistory;
 import stock.model.Stock;
 import stock.timer.TimerConstants;
 import stock.util.CommonUtils;
 import stock.util.StockConstants;
 import stock.vo.AlertVO;
 import stock.vo.RuleItemVO;
-import stock.vo.RuleRunHistoryVO;
 import stock.vo.TransInfoVO;
 
 public class StockManagerImpl implements StockManager {
@@ -215,20 +216,7 @@ public class StockManagerImpl implements StockManager {
 	}
 	
 	public List<Stock> getRuleResultByHistoryId(String historyId) throws Exception {
-//		List<Stock> result = new ArrayList<Stock>();
-//		Connection conn = getConnection();
-//		PreparedStatement statement = conn.prepareStatement("select * from rule_result t where t.history_id = ? order by stock_code");
-//		statement.setString(1, historyId);
-//		ResultSet rs = statement.executeQuery();  
-//		while (rs.next()) {
-//			Stock stock = new Stock();
-//			stock.setCode(rs.getString("stock_code"));
-//			result.add(stock);
-//		}  
-//		rs.close();  
-//		conn.close();
-//		return result;
-		return null;
+		return stockOperation.selectRuleResultByHisoryId(historyId);
 	}
 	
 	public void updateRuleResultTrend(String historyId, String stockCode, Integer day, Double profit) throws Exception {
@@ -252,24 +240,8 @@ public class StockManagerImpl implements StockManager {
 //		conn.close();
 	}
 	
-	public List<RuleItemVO> getRuleItemByType(Integer type) throws Exception {
-//		List<RuleItemVO> result = new ArrayList<RuleItemVO>();
-//		Connection conn = getConnection();
-//		String sql = "select * from rule_item t where t.TYPE = ? order by t.ID";
-//		PreparedStatement statement = conn.prepareStatement(sql);
-//		statement.setInt(1, type);
-//		ResultSet rs = statement.executeQuery();  
-//		while (rs.next()) {
-//			RuleItemVO ruleItem = new RuleItemVO();
-//			ruleItem.setId(rs.getString("id"));
-//			ruleItem.setName(rs.getString("name"));
-//			ruleItem.setType(rs.getInt("type"));
-//			ruleItem.setImplClz(rs.getString("impl_class"));
-//			ruleItem.setDesp(rs.getString("description"));
-//			result.add(ruleItem);
-//		}  
-//		return result;
-		return null;
+	public List<RuleItem> getRuleItemByType(Integer type) throws Exception {
+		return stockOperation.selectRuleItemByType(type);
 	}
 	
 	public void saveOrUpdateRuleItem(RuleItemVO ruleItem) throws Exception {
@@ -317,22 +289,8 @@ public class StockManagerImpl implements StockManager {
 //		}
 	}
 	
-	public RuleItemVO getRuleItemById(String ruleId) throws Exception {
-//		RuleItemVO ruleItem = new RuleItemVO();
-//		Connection conn = getConnection();
-//		String sql = "select * from rule_item t where t.id = ?";
-//		PreparedStatement statement = conn.prepareStatement(sql);
-//		statement.setString(1, ruleId);
-//		ResultSet rs = statement.executeQuery();  
-//		if (rs.next()) {
-//			ruleItem.setId(rs.getString("id"));
-//			ruleItem.setName(rs.getString("name"));
-//			ruleItem.setType(rs.getInt("type"));
-//			ruleItem.setImplClz(rs.getString("impl_class"));
-//			ruleItem.setDesp(rs.getString("description"));
-//		}  
-//		return ruleItem;
-		return null;
+	public RuleItem getRuleItemById(String ruleId) throws Exception {
+		return stockOperation.selectRuleItemById(ruleId);
 	}
 	
 	public void clearCalendar(Date start, Date end) throws Exception {
@@ -366,22 +324,8 @@ public class StockManagerImpl implements StockManager {
 		return null;
 	}
 	
-	public List<RuleRunHistoryVO> getRuleRunHistoryByRuleId(String ruleId) throws Exception {
-//		List<RuleRunHistoryVO> result = new ArrayList<RuleRunHistoryVO>();
-//		String sql = "select * from rule_run_history t where t.rule_id = ? order by t.run_time desc";
-//		Connection conn = getConnection();
-//		PreparedStatement statement = conn.prepareStatement(sql);
-//		statement.setString(1, ruleId);
-//		ResultSet rs = statement.executeQuery();  
-//		while (rs.next()) {
-//			RuleRunHistoryVO vo = new RuleRunHistoryVO();
-//			vo.setId(rs.getString("id"));
-//			vo.setTime(rs.getDate("run_time"));
-//			vo.setStockNum(rs.getInt("stock_num"));
-//			result.add(vo);
-//		}
-//		return result;
-		return null;
+	public List<RuleRunHistory> getRuleRunHistoryByRuleId(String ruleId) throws Exception {
+		return stockOperation.selectRuleRunHistoryByRuleId(ruleId);
 	}
 	
 	public List<Stock> getRuleResultByRuleHisId(String hisId) throws Exception {

@@ -6,10 +6,11 @@ import java.util.Map;
 
 import stock.model.MyAction;
 import stock.model.MyStock;
+import stock.model.RuleItem;
+import stock.model.RuleRunHistory;
 import stock.model.Stock;
 import stock.vo.AlertVO;
 import stock.vo.RuleItemVO;
-import stock.vo.RuleRunHistoryVO;
 import stock.vo.TransInfoVO;
 
 /**
@@ -50,13 +51,13 @@ public interface StockManager {
 	
 	public void updateRuleResultTrend(String historyId, String stockCode, Integer day, Double profit) throws Exception;
 
-	public List<RuleItemVO> getRuleItemByType(Integer type) throws Exception;
+	public List<RuleItem> getRuleItemByType(Integer type) throws Exception;
 	
 	public void saveOrUpdateRuleItem(RuleItemVO ruleItem) throws Exception;
 	
 	public void deleteRuleItem(RuleItemVO ruleItem) throws Exception;
 	
-	public RuleItemVO getRuleItemById(String ruleId) throws Exception;
+	public RuleItem getRuleItemById(String ruleId) throws Exception;
 	
 	public void clearCalendar(Date start, Date end) throws Exception;
 	
@@ -64,7 +65,7 @@ public interface StockManager {
 	
 	public Map<String, Integer> initDateStatus() throws Exception;
 	
-	public List<RuleRunHistoryVO> getRuleRunHistoryByRuleId(String ruleId) throws Exception;
+	public List<RuleRunHistory> getRuleRunHistoryByRuleId(String ruleId) throws Exception;
 	
 	public List<Stock> getRuleResultByRuleHisId(String ruleId) throws Exception;
 	

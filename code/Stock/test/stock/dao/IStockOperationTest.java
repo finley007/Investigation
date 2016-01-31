@@ -13,6 +13,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import stock.model.MyAction;
 import stock.model.MyStock;
+import stock.model.RuleItem;
+import stock.model.RuleRunHistory;
 import stock.model.Stock;
 
 public class IStockOperationTest {
@@ -99,7 +101,6 @@ public class IStockOperationTest {
 	
 	@Test
 	public void testUpdateByPrimaryKeySelective() {
-		IStockOperation mapper = (IStockOperation)ctx.getBean("stockMapper"); 
 		MyStock myStock = mapper.selectMyStockByPK("aaaaaa");
 		Stock stock = new Stock();
 		stock.setCode("sh600081");
@@ -115,13 +116,11 @@ public class IStockOperationTest {
 	
 	@Test
 	public void testDeleteByPrimaryKey() {
-		IStockOperation mapper = (IStockOperation)ctx.getBean("stockMapper"); 
 		mapper.deleteMyStockByPK("aaaaaa");
 	}
 	
 	@Test
 	public void testSelectAllStock() {
-		IStockOperation mapper = (IStockOperation)ctx.getBean("stockMapper"); 
 		List<Stock> list = mapper.selectAllStock();
 		for (Stock stock : list) {
 			System.out.println(stock.getCode());
@@ -130,7 +129,6 @@ public class IStockOperationTest {
 	
 	@Test
 	public void testSelectActionByTransId() {
-		IStockOperation mapper = (IStockOperation)ctx.getBean("stockMapper"); 
 		List<MyAction> list = mapper.selectActionByTransId("20150805110855507sh600500");
 		for (MyAction action : list) {
 			System.out.println(action.getActionId());
@@ -148,5 +146,28 @@ public class IStockOperationTest {
 		action.setTransactionId("aa");
 		mapper.insertMyAction(action);
 	}
+	
+	@Test
+	public void testSelectRuleItemById() {
+		RuleItem ruleItem = mapper.selectRuleItemById("RULE_HISTORY_1");
+		assertEquals("TREND_RULE", ruleItem.getName());
+	}
+	
+	@Test
+	public void testSelectRuleItemByType() {
+		List<RuleItem> ruleItemList = mapper.selectRuleItemByType(3);
+		assertEquals(4, ruleItemList.size());
+	}
+	
+	@Test
+	public void testSelectRuleRunHistoryByRuleId() {
+		List<RuleRunHistory> ruleRunHistoryList = mapper.selectRuleRunHistoryByRuleId("RULE_HISTORY_1");
+		assertEquals(25, ruleRunHistoryList.size());
+	}
 
+	@Test
+	public void testSelectRuleResultByHisoryId() {
+		List<Stock> stockList = mapper.selectRuleResultByHisoryId("20150908110903337RULE_HISTORY_1");
+		System.out.println(stockList.get(0).getCode());
+	}
 }

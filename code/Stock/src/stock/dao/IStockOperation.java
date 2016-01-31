@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Param;
 
 import stock.model.MyAction;
 import stock.model.MyStock;
+import stock.model.RuleItem;
+import stock.model.RuleRunHistory;
 import stock.model.Stock;
 
 public interface IStockOperation {
@@ -32,7 +34,6 @@ public interface IStockOperation {
     int deleteMyStockByPK(String transactionId);
     
     
-    
     /**
      * all_stock operation
      */
@@ -44,6 +45,7 @@ public interface IStockOperation {
 
     int insertSelectiveStock(Stock record);
     
+    
     /**
      * my_action operation
      */
@@ -52,6 +54,23 @@ public interface IStockOperation {
     int insertMyAction(MyAction record);
     
     int insertSelectiveMyAction(MyAction record);
+    
+    /**
+     * rule_item operation
+     */
+    RuleItem selectRuleItemById(@Param("ruleId")String ruleId);
+    
+    List<RuleItem> selectRuleItemByType(@Param("ruleType")int ruleType);
+    
+    /**
+     * rule_run_history operation
+     */
+    List<RuleRunHistory> selectRuleRunHistoryByRuleId(@Param("ruleId")String ruleId);
+    
+    /**
+     * rule_result operation
+     */
+    List<Stock> selectRuleResultByHisoryId(@Param("historyId")String historyId);
     
     
 }

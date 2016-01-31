@@ -18,5 +18,9 @@
         <mapper resource="stock/model/MyStockMapper.xml"/>
         <mapper resource="stock/model/StockMapper.xml"/>
         <mapper resource="stock/model/MyActionMapper.xml"/>
+        <mapper resource="stock/model/RuleItemMapper.xml"/>
+        <mapper resource="stock/model/RuleResultMapper.xml"/>
+        <mapper resource="stock/model/RuleRunHistoryMapper.xml"/>
+        <mapper resource="stock/model/RuleTypeMapper.xml"/>
     </mappers>
 </configuration>

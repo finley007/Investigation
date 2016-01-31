@@ -8,6 +8,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import stock.context.StockAppContext;
+import stock.manager.StockManager;
 import stock.model.Stock;
 
 public class ShowRuleResultServlet extends JSONServlet {
@@ -16,8 +18,9 @@ public class ShowRuleResultServlet extends JSONServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String hisId = request.getParameter("hisId");
-//			List<Stock> result = getDBQuery().getRuleResultByHistoryId(hisId);
-//			response.getOutputStream().println(createResponse(result));
+			StockManager stockManager = (StockManager)StockAppContext.getBean("stockManager");
+			List<Stock> result = stockManager.getRuleResultByHistoryId(hisId);
+			response.getOutputStream().println(createResponse(result));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -39,7 +42,7 @@ public class ShowRuleResultServlet extends JSONServlet {
 		for (int i = 0; i < info.size(); i++) {
 			StringBuffer sb = new StringBuffer();
 			sb.append(addSeparator(info.get(i).getCode()));
-			sb.append(addSeparator(""));
+			sb.append(addSeparator(info.get(i).getName()));
 			strs.add(sb.toString().split("\\|"));
 		}
 		return getJSONEnvelop().envelop(strs);
