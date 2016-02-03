@@ -6,8 +6,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import stock.context.StockAppContext;
 import stock.manager.StockManager;
-import stock.manager.impl.StockManagerImpl;
 
 public class DateUtils {
 	
@@ -17,20 +17,13 @@ public class DateUtils {
 	private static final Integer CLOSE_HOUR = 15;
 	private static final Integer CLOSE_MIN = 30;
 	
-	private static StockManager query;
-	
-	private static StockManager getDBQuery() {
-		if (query == null) {
-			query = new StockManagerImpl();
-		}
-		return query;
-	}
+	private static StockManager stockManager = (StockManager)StockAppContext.getBean("stockManager");
 	
 	private static Map<String, Integer> dateStatus;
 	
 	private static Map<String, Integer> getDateStatus() throws Exception {
 		if (dateStatus == null) {
-			dateStatus = getDBQuery().initDateStatus();
+			dateStatus = stockManager.initDateStatus();
 		}
 		return dateStatus;
 	}

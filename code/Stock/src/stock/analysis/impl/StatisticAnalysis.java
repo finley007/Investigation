@@ -25,7 +25,7 @@ public class StatisticAnalysis implements StockAnalysis {
 		int riseNum = 0;
 		for (Stock stock : list) {
 			HTTPFeeder feeder = new SinaHTTPHistoryFeeder();
-			feeder.feedInfo(new MyStock());
+			feeder.feedInfo(new Stock());
 			DailyPriceVO todayPriceVO = stock.getDailyPrice().get(StockConstants.sdf_date.format(new Date()));
 			DailyPriceVO yesterdayPriceVO = stock.getDailyPrice().get(StockConstants.sdf_date.format(getLastTransactionDay()));
 			if (todayPriceVO != null && yesterdayPriceVO != null) {

@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import stock.model.MyStock;
 import stock.model.Stock;
 import stock.parse.InfoParser;
 import stock.util.StockConstants;
@@ -20,16 +19,16 @@ public class SinaStockHistoryParser implements InfoParser {
 	private final Pattern pattern2 = Pattern.compile("([0-9]+\\.[0-9]+)|([0-9]{5,})");
 	
 	@Override
-	public void parseStockInfo(MyStock myStock, String info) throws Exception {
+	public void parseStockInfo(Stock stock, String info) throws Exception {
 		// TODO Auto-generated method stub
-		myStock.getStock().clearDailyPrice();
+		stock.clearDailyPrice();
 		int size = StockConstants.CACHE_DATA_WINDOW_SIZE + 1;
         Matcher matcher = pattern.matcher(info);
         while (matcher.find() && size > 0) {
         	String target = matcher.group();
         	String date = getDate(target);
         	if (!"".equals(date)) {
-	        	setDailyPriceInfo(myStock.getStock(), target, date);
+	        	setDailyPriceInfo(stock, target, date);
 	        	size--;
         	}
         }

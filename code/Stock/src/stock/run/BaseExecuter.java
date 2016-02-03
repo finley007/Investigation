@@ -6,9 +6,9 @@ import java.util.List;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import stock.context.StockAppContext;
 import stock.feed.InfoFeeder;
 import stock.manager.StockManager;
-import stock.manager.impl.StockManagerImpl;
 import stock.model.Stock;
 import stock.rule.Rule;
 import stock.util.CommonUtils;
@@ -19,6 +19,8 @@ public abstract class BaseExecuter {
 	
 	private static Logger logger = LogManager.getLogger(BaseExecuter.class);
 	
+	private static StockManager stockManager = (StockManager)StockAppContext.getBean("stockManager");
+	
 	private void init() {
 	}
 	
@@ -28,35 +30,33 @@ public abstract class BaseExecuter {
 	}
 	
 	public void excecute() {
-		StockManager query = new StockManagerImpl();
-		List<Stock> resultSet = new ArrayList<Stock>();
 		try {
-			executeRule(query, resultSet);
-			solveResult(query, resultSet);
+			List<Stock> resultSet = executeRule();
+			solveResult(resultSet);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void solveResult(StockManager query, List<Stock> resultSet) throws Exception {
+	private void solveResult(List<Stock> resultSet) throws Exception {
 		String historyId = CommonUtils.createTransactionId(this.getRuleId());
 		for (Stock info : resultSet) {
 			logger.info(info.toString());
-			query.addRuleResult(historyId, info.getCode());
+			stockManager.addRuleResult(historyId, info.getCode());
 //			Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler http://finance.sina.com.cn/realstock/company/" + info.getCode() + "/nc.shtml");
 		}
-		query.addRuleHistory(this.getRuleId(), historyId, StockConstants.RESULT_STATUS_SUCCESS, 0l, resultSet.size());
+		stockManager.addRuleHistory(this.getRuleId(), historyId, StockConstants.RESULT_STATUS_SUCCESS, 0l, resultSet.size());
 	}
 
-	private void executeRule(StockManager query, List<Stock> resultSet)
-			throws Exception {
-		List<Stock> stocks = query.getStockList();
+	private List<Stock> executeRule() throws Exception {
+		List<Stock> resultSet = new ArrayList<Stock>();
+		List<Stock> stocks = stockManager.getStockList();
 		if (stocks != null && stocks.size() > 0) {
 			for (Stock stock : stocks) {
 				logger.debug("Stock name: " + stock.getName() + " and code: " + stock.getCode());
 				InfoFeeder infoFeeder = getInfoFeeder();
 				try {
-//					infoFeeder.feedInfo(stock);
+					infoFeeder.feedInfo(stock);
 					logger.debug(stock.toString());
 					Rule rule = getRule();
 					if (rule.isSatisfy(stock)) {
@@ -70,6 +70,7 @@ public abstract class BaseExecuter {
 		}
 		logger.info("*******************************************");
 		logger.info("The stocks to be checked: ");
+		return resultSet;
 	}
 	
 	protected abstract InfoFeeder getInfoFeeder();

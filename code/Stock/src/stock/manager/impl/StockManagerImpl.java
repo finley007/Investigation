@@ -1,6 +1,7 @@
 package stock.manager.impl;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -9,16 +10,17 @@ import stock.dao.IStockOperation;
 import stock.feed.InfoFeeder;
 import stock.feed.http.MyStockInfoFeeder;
 import stock.manager.StockManager;
+import stock.model.Calendar;
 import stock.model.MyAction;
 import stock.model.MyStock;
 import stock.model.RuleItem;
+import stock.model.RuleResult;
 import stock.model.RuleRunHistory;
 import stock.model.Stock;
 import stock.timer.TimerConstants;
 import stock.util.CommonUtils;
 import stock.util.StockConstants;
 import stock.vo.AlertVO;
-import stock.vo.RuleItemVO;
 import stock.vo.TransInfoVO;
 
 public class StockManagerImpl implements StockManager {
@@ -52,7 +54,8 @@ public class StockManagerImpl implements StockManager {
 		if (list != null && list.size() > 0) {
 			for (MyStock myStock : list) {
 				InfoFeeder feeder = new MyStockInfoFeeder();
-				feeder.feedInfo(myStock);
+				feeder.feedInfo(myStock.getStock());
+				myStock.caculateProfit();
 			}
 		}
 	}
@@ -187,36 +190,27 @@ public class StockManagerImpl implements StockManager {
 	}
 	
 	public String addRuleHistory(String ruleId, String historyId, Integer result, Long timeCost, Integer stockNum) throws Exception {
-//		Connection conn = getConnection();
-//		PreparedStatement statement = conn.prepareStatement("insert into rule_run_history values (?,?,?,?,?,?)");
-//		statement.setString(1, historyId);
-//		statement.setString(2, ruleId);
-//		statement.setTimestamp(3, Timestamp.valueOf(CommonUtils.getDateString(new Date())));
-//		statement.setInt(4, result);
-//		statement.setLong(5, timeCost);
-//		statement.setInt(6, stockNum);
-//		statement.execute();
-//		conn.close();
-//		return historyId;
-		return null;
+		RuleRunHistory history = new RuleRunHistory();
+		history.setId(historyId);
+		history.setRuleId(ruleId);
+		history.setRunTime(new Date());
+		history.setResult(result);
+		history.setTimeCost(timeCost.intValue());
+		history.setStockNum(stockNum);
+		stockOperation.insertRuleRunHistory(history);
+		return historyId;
 	}
 	
 	public void addRuleResult(String historyId, String stockCode) throws Exception {
-//		Connection conn = getConnection();
-//		PreparedStatement statement = conn.prepareStatement("insert into rule_result values (?,?,?,?,?,?)");
-//		String id = UUID.randomUUID().toString();
-//		statement.setString(1, id);
-//		statement.setString(2, historyId);
-//		statement.setString(3, stockCode);
-//		statement.setDouble(4, 0.0);
-//		statement.setDouble(5, 0.0);
-//		statement.setDouble(6, 0.0);
-//		statement.execute();
-//		conn.close();
+		RuleResult ruleResult = new RuleResult();
+		ruleResult.setId(UUID.randomUUID().toString());
+		ruleResult.setHistoryId(historyId);
+		ruleResult.setStockCode(stockCode);
+		stockOperation.insertRuleResult(ruleResult);
 	}
 	
 	public List<Stock> getRuleResultByHistoryId(String historyId) throws Exception {
-		return stockOperation.selectRuleResultByHisoryId(historyId);
+		return stockOperation.selectRuleResultByHistoryId(historyId);
 	}
 	
 	public void updateRuleResultTrend(String historyId, String stockCode, Integer day, Double profit) throws Exception {
@@ -244,106 +238,38 @@ public class StockManagerImpl implements StockManager {
 		return stockOperation.selectRuleItemByType(type);
 	}
 	
-	public void saveOrUpdateRuleItem(RuleItemVO ruleItem) throws Exception {
-//		if (ruleItem != null && ruleItem.getId() != null 
-//				&& !"".equals(ruleItem.getId())) {
-//			Connection conn = getConnection();
-//			String sql = "select * from rule_item t where t.id = ? and t.type = ?";
-//			PreparedStatement statement = conn.prepareStatement(sql);
-//			statement.setString(1, ruleItem.getId());
-//			statement.setInt(2, ruleItem.getType());
-//			ResultSet rs = statement.executeQuery();
-//			if (rs.next()) {
-//				String update = "update rule_item t set t.name = ?, t.impl_class = ?, t.description = ? where t.id = ? and t.type = ?";
-//				statement = conn.prepareStatement(update);
-//				statement.setString(1, ruleItem.getName());
-//				statement.setString(2, ruleItem.getImplClz());
-//				statement.setString(3, ruleItem.getDesp());
-//				statement.setString(4, ruleItem.getId());
-//				statement.setInt(5, ruleItem.getType());
-//				statement.execute();
-//			} else {
-//				String insert = "insert into rule_item values (?, ?, ?, ?, ?)";
-//				statement = conn.prepareStatement(insert);
-//				statement.setString(1, ruleItem.getId());
-//				statement.setString(2, ruleItem.getName());
-//				statement.setInt(3, ruleItem.getType());
-//				statement.setString(4, ruleItem.getImplClz());
-//				statement.setString(5, ruleItem.getDesp());
-//				statement.execute();
-//			}
-//		} else {
-//			throw new Exception("Rule item is null");
-//		}
+	public void saveOrUpdateRuleItem(RuleItem ruleItem) throws Exception {
+		if (ruleItem != null && ruleItem.getId() != null && !"".equals(ruleItem.getId())) {
+			RuleItem curRuleItem = stockOperation.selectRuleItemByPK(ruleItem);
+			if (curRuleItem != null) {
+				stockOperation.updateRuleItemByPK(ruleItem);
+			} else {
+				stockOperation.insertRuleItem(ruleItem);
+			}
+		} else {
+			throw new Exception("Rule item is null");
+		}
 	}
 	
-	public void deleteRuleItem(RuleItemVO ruleItem) throws Exception {
-//		if (ruleItem != null && ruleItem.getId() != null 
-//				&& !"".equals(ruleItem.getId())) {
-//			Connection conn = getConnection();
-//			String sql = "delete from rule_item where id = ? and type = ?";
-//			PreparedStatement statement = conn.prepareStatement(sql);
-//			statement.setString(1, ruleItem.getId());
-//			statement.setInt(2, ruleItem.getType());
-//			statement.execute();
-//		}
+	public void deleteRuleItem(RuleItem ruleItem) throws Exception {
+		stockOperation.deleteRuleItemByPK(ruleItem);
 	}
 	
-	public RuleItem getRuleItemById(String ruleId) throws Exception {
-		return stockOperation.selectRuleItemById(ruleId);
-	}
-	
-	public void clearCalendar(Date start, Date end) throws Exception {
-//		String sql = "delete from calendar where date >= ? and date <= ?";
-//		Connection conn = getConnection();
-//		PreparedStatement statement = conn.prepareStatement(sql);
-//		statement.setDate(1, new java.sql.Date(start.getTime()));
-//		statement.setDate(2, new java.sql.Date(end.getTime()));
-//		statement.execute();
-	}
-	
-	public void insertCalendar(Date date, Integer status) throws Exception {
-//		String sql = "insert into calendar values (?, ?)";
-//		Connection conn = getConnection();
-//		PreparedStatement statement = conn.prepareStatement(sql);
-//		statement.setDate(1, new java.sql.Date(date.getTime()));
-//		statement.setInt(2, status);
-//		statement.execute();
+	public RuleItem getRuleItemByPK(RuleItem ruleItem) throws Exception {
+		return stockOperation.selectRuleItemByPK(ruleItem);
 	}
 	
 	public Map<String, Integer> initDateStatus() throws Exception {
-//		Map<String, Integer> result = new HashMap<String, Integer>();
-//		String sql = "select * from calendar order by date";
-//		Connection conn = getConnection();
-//		PreparedStatement statement = conn.prepareStatement(sql);
-//		ResultSet rs = statement.executeQuery();  
-//		if (rs.next()) {
-//			result.put(StockConstants.sdf_date.format(rs.getDate(1)), rs.getInt(2));
-//		}
-//		return result;
-		return null;
+		Map<String, Integer> result = new HashMap<String, Integer>();
+		List<Calendar> list = stockOperation.selectAllCalendar();
+		for (Calendar cal : list) {
+			result.put(StockConstants.sdf_date.format(cal.getDate()), cal.getIsValid());
+		}
+		return result;
 	}
 	
 	public List<RuleRunHistory> getRuleRunHistoryByRuleId(String ruleId) throws Exception {
 		return stockOperation.selectRuleRunHistoryByRuleId(ruleId);
-	}
-	
-	public List<Stock> getRuleResultByRuleHisId(String hisId) throws Exception {
-//		List<Stock> result = new ArrayList<Stock>();
-//		String sql = "select * from rule_result t where t.history_id = ? order by t.stock_code";
-//		Connection conn = getConnection();
-//		PreparedStatement statement = conn.prepareStatement(sql);
-//		statement.setString(1, hisId);
-//		ResultSet rs = statement.executeQuery();  
-//		while (rs.next()) {
-//			Stock stock = new Stock();
-//			String code = rs.getString("stock_code");
-//			stock.setCode(code);
-//			stock.setName(StockCache.getNameByCode(code));
-//			result.add(stock);
-//		}
-//		return result;
-		return null;
 	}
 	
 	public List<Stock> getStockCategory() throws Exception {
@@ -393,12 +319,5 @@ public class StockManagerImpl implements StockManager {
 		return null;
 	}
 	
-	private String filterByStockCode(String stockCode) {
-		if (stockCode != null && !"".equals(stockCode)) {
-			return " and t.STOCK_CODE = '" + stockCode + "' ";
-		} else {
-			return "";
-		}
-	}
 }
  

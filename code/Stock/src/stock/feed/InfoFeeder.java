@@ -1,9 +1,9 @@
 package stock.feed;
 
-import stock.model.MyStock;
+import stock.model.Stock;
 
 public interface InfoFeeder {
 	
-	public void feedInfo(MyStock stock) throws Exception;
+	public void feedInfo(Stock stock) throws Exception;
 
 }

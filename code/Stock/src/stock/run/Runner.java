@@ -11,8 +11,8 @@ import stock.run.impl.FallTrendAnalysisExecuter;
 public class Runner {
 
 	public static void main(String[] args) {
-//		executeRule();
-		checkStocks();
+		executeRule();
+//		checkStocks();
 //		doAnalysis();
 	}
 

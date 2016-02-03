@@ -22,5 +22,6 @@
         <mapper resource="stock/model/RuleResultMapper.xml"/>
         <mapper resource="stock/model/RuleRunHistoryMapper.xml"/>
         <mapper resource="stock/model/RuleTypeMapper.xml"/>
+        <mapper resource="stock/model/CalendarMapper.xml"/>
     </mappers>
 </configuration>

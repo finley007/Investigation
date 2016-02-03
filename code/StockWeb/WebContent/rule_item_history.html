@@ -23,7 +23,7 @@
         	"ajax": './ruleitem?ruleType=' + ruleType,
         	"fnCreatedRow": function( nRow, aData, iDataIndex ) { 
         	    var ruleId = aData[0];
-		        $('td:eq(4)', nRow).html( '<div style="text-align:center"><button id="' + ruleId + '" onclick="runRule(this)">Run</button></div>' );
+		        $('td:eq(4)', nRow).html( '<div style="text-align:center"><button id="' + ruleId + '" type="' + ruleType + '" onclick="runRule(this)">Run</button></div>' );
 		    } 
     	});
     	

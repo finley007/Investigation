@@ -2,6 +2,9 @@ package stock.model;
 
 import java.util.Date;
 
+import stock.util.CommonUtils;
+import stock.util.StockConstants;
+
 public class MyStock {
 	
 	private Stock stock;
@@ -103,5 +106,12 @@ public class MyStock {
 
     public void setCloseTime(Date closeTime) {
         this.closeTime = closeTime;
+    }
+    
+    public void caculateProfit() {
+    	if (this.stock != null) {
+    		this.profit = CommonUtils.round((this.stock.getCurrentPrice() - this.buyPrice) * this.quantity, StockConstants.PRICE_SCALE);
+    		this.profitRate = CommonUtils.round((this.stock.getCurrentPrice() - this.buyPrice) * 100 / this.buyPrice, StockConstants.PRICE_SCALE);
+    	}
     }
 }

@@ -53,21 +53,15 @@ public interface StockManager {
 
 	public List<RuleItem> getRuleItemByType(Integer type) throws Exception;
 	
-	public void saveOrUpdateRuleItem(RuleItemVO ruleItem) throws Exception;
+	public void saveOrUpdateRuleItem(RuleItem ruleItem) throws Exception;
 	
-	public void deleteRuleItem(RuleItemVO ruleItem) throws Exception;
+	public void deleteRuleItem(RuleItem ruleItem) throws Exception;
 	
-	public RuleItem getRuleItemById(String ruleId) throws Exception;
-	
-	public void clearCalendar(Date start, Date end) throws Exception;
-	
-	public void insertCalendar(Date date, Integer status) throws Exception;
+	public RuleItem getRuleItemByPK(RuleItem ruleItem) throws Exception;
 	
 	public Map<String, Integer> initDateStatus() throws Exception;
 	
 	public List<RuleRunHistory> getRuleRunHistoryByRuleId(String ruleId) throws Exception;
-	
-	public List<Stock> getRuleResultByRuleHisId(String ruleId) throws Exception;
 	
 	public List<Stock> getStockCategory() throws Exception;
 	

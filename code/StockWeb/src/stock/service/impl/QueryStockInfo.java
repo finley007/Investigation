@@ -33,7 +33,7 @@ public class QueryStockInfo implements StockService {
 		StockManager manager = (StockManager)StockAppContext.getBean("stockManager");
 		MyStock myStock = manager.getMyStockByTransId(transId);
 		InfoFeeder feeder = new TencentHTTPRuntimeFeeder();
-		feeder.feedInfo(myStock);
+		feeder.feedInfo(myStock.getStock());
 		return myStock.getStock().toJson();
 	}
 

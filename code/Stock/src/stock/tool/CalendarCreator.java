@@ -2,32 +2,30 @@ package stock.tool;
 
 import java.util.Date;
 
-import stock.manager.StockManager;
-import stock.manager.impl.StockManagerImpl;
+import stock.context.StockAppContext;
+import stock.dao.IStockOperation;
+import stock.model.Calendar;
+import stock.model.DateInterval;
 import stock.util.DateUtils;
 import stock.util.StockConstants;
 
 public class CalendarCreator {
 	
-	private static StockManager query;
-	
-	private static StockManager getDBQuery() {
-		if (query == null) {
-			query = new StockManagerImpl();
-		}
-		return query;
-	}
+	private static IStockOperation operation = (IStockOperation)StockAppContext.getBean("stockMapper");
 	
 	public static void createCalendar(Date start, Date end) throws Exception {
-		getDBQuery().clearCalendar(start, end);
+		operation.deleteCalendarBetweenInterval(new DateInterval(start, end));
 		Date sd = DateUtils.clearTime(start);
 		Date ed = DateUtils.clearTime(end);
 		while (sd.compareTo(ed) <= 0) {
+			Calendar cal = new Calendar();
+			cal.setDate(sd);
 			if (DateUtils.isWeekEnd(sd)) {
-				getDBQuery().insertCalendar(sd, StockConstants.INVALID_DAY);
+				cal.setIsValid(StockConstants.INVALID_DAY);
 			} else {
-				getDBQuery().insertCalendar(sd, StockConstants.VALID_DAY);
+				cal.setIsValid(StockConstants.VALID_DAY);
 			}
+			operation.insertCalendar(cal);
 			sd = DateUtils.getDayAfterNDays(sd, 1);
 		}
 	}

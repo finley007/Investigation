@@ -22,7 +22,7 @@
 	function runRule(bt) {
 		$.ajax({     
             	type: 'Post',     
-            	url:  './runrule?action=' + $(bt).text() + '&ruleId=' + $(bt).attr('id'),     
+            	url:  './runrule?action=' + $(bt).text() + '&ruleId=' + $(bt).attr('id') + '&ruleType=' + $(bt).attr('type'),     
             	contentType: 'application/json; charset=utf-8',     
 	            success: function() {
 	            },     

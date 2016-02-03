@@ -10,7 +10,7 @@
     <result column="THIRD_DAY_TREND" property="thirdDayTrend" jdbcType="DOUBLE" />
   </resultMap>
   
-  <select id="selectRuleResultByHisoryId" resultMap="StockMap" parameterType="java.lang.String" >
+  <select id="selectRuleResultByHistoryId" resultMap="StockMap" parameterType="java.lang.String" >
   	select t1.* from rule_result t, all_stock t1 where t.history_id = #{historyId,jdbcType=VARCHAR} and t1.code = t.STOCK_CODE 
   		order by code
   </select>

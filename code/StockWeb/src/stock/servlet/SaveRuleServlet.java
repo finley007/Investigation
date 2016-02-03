@@ -6,7 +6,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import stock.vo.RuleItemVO;
+import stock.context.StockAppContext;
+import stock.manager.StockManager;
+import stock.model.RuleItem;
 
 public class SaveRuleServlet extends BaseStockServlet {
 
@@ -18,13 +20,14 @@ public class SaveRuleServlet extends BaseStockServlet {
 			String name = request.getParameter("name");
 			String implClz = request.getParameter("implClz");
 			String desp = request.getParameter("desp");
-			RuleItemVO vo = new RuleItemVO();
-			vo.setType(Integer.valueOf(type));
-			vo.setId(id);
-			vo.setName(name);
-			vo.setImplClz(implClz);
-			vo.setDesp(desp);
-//			getDBQuery().saveOrUpdateRuleItem(vo);
+			RuleItem ruleItem = new RuleItem();
+			ruleItem.setType(type);
+			ruleItem.setId(id);
+			ruleItem.setName(name);
+			ruleItem.setImplClass(implClz);
+			ruleItem.setDescription(desp);
+			StockManager manager = (StockManager)StockAppContext.getBean("stockManager");
+			manager.saveOrUpdateRuleItem(ruleItem);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

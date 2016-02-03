@@ -9,8 +9,10 @@
     <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
   </resultMap>
   
-  <select id="selectRuleItemById" resultMap="RuleItemMap" parameterType="java.lang.String" >
-  	select * from rule_item t where t.id = #{ruleId,jdbcType=VARCHAR}
+  <select id="selectRuleItemByPK" resultMap="RuleItemMap" parameterType="stock.model.RuleItem" >
+  	select * from rule_item t 
+  	where t.id = #{id,jdbcType=VARCHAR}
+  	and t.type = #{type,jdbcType=VARCHAR}
   </select>
   
   <select id="selectRuleItemByType" resultMap="RuleItemMap" parameterType="java.lang.Integer" >
@@ -62,4 +64,37 @@
       </if>
     </trim>
   </insert>
+  
+  <update id="updateRuleItemByPKSelective" parameterType="stock.model.RuleItem" >
+    update rule_item
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="implClass != null" >
+        IMPL_CLASS = #{implClass,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateRuleItemByPK" parameterType="stock.model.RuleItem" >
+    update rule_item
+    set NAME = #{name,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
+      IMPL_CLASS = #{implClass,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <delete id="deleteRuleItemByPK" parameterType="stock.model.RuleItem" >
+    delete from rule_item
+    where ID = #{id,jdbcType=VARCHAR} and TYPE = #{type,jdbcType=VARCHAR}
+  </delete>
 </mapper>
