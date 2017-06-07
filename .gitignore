@@ -1,1 +1,10 @@
 *.class
+code/Stock/.gradle/
+code/Stock/.idea/
+code/Stock/build/
+code/Stock/gradle/
+code/Stock/gradlew
+code/Stock/gradlew.bat
+code/Stock/out/
+code/StockWeb/.settings/com.ibm.etools.common.migration.prefs
+code/Stock_eclipse/
