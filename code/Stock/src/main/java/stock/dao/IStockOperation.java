@@ -1,6 +1,7 @@
 package stock.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -9,8 +10,8 @@ import stock.model.DateInterval;
 import stock.model.MyAction;
 import stock.model.MyStock;
 import stock.model.RuleItem;
-import stock.model.RuleResult;
-import stock.model.RuleRunHistory;
+import stock.model.RuleExecuteResult;
+import stock.model.RuleExecuteHistory;
 import stock.model.Stock;
 
 public interface IStockOperation {
@@ -41,7 +42,9 @@ public interface IStockOperation {
      * all_stock operation
      */
     List<Stock> selectAllStock();
-    
+
+    List<Stock> selectStockByCondition(@Param("condition")String condition);
+
     List<Stock> selectAllMyStock();
     
     int insertStock(Stock record);
@@ -76,18 +79,18 @@ public interface IStockOperation {
     void deleteRuleItemByPK(RuleItem ruleItem);
     
     /**
-     * rule_run_history operation
+     * rule_execute_history operation
      */
-    List<RuleRunHistory> selectRuleRunHistoryByRuleId(@Param("ruleId")String ruleId);
+    List<RuleExecuteHistory> selectRuleExecuteHistoryByRuleId(@Param("ruleId")String ruleId);
     
-    void insertRuleRunHistory(RuleRunHistory history);
+    void insertRuleExecuteHistory(RuleExecuteHistory history);
     
     /**
-     * rule_result operation
+     * rule_execute_result operation
      */
-    List<Stock> selectRuleResultByHistoryId(@Param("historyId")String historyId);
+    List<Stock> selectRuleExecuteResultByHistoryId(@Param("historyId")String historyId);
     
-    void insertRuleResult(RuleResult ruleResult);
+    void insertRuleExecuteResult(RuleExecuteResult ruleExecuteResult);
     
     /**
      * calendar operation

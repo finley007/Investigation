@@ -31,4 +31,9 @@ public class BandRule implements Rule {
 		return true;
 	}
 
+	public String getRuleId() {
+		// TODO Auto-generated method stub
+		return "RULE_HISTORY_3";
+	}
+
 }

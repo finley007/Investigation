@@ -7,7 +7,7 @@ import java.util.Map;
 import stock.model.MyAction;
 import stock.model.MyStock;
 import stock.model.RuleItem;
-import stock.model.RuleRunHistory;
+import stock.model.RuleExecuteHistory;
 import stock.model.Stock;
 import stock.vo.AlertVO;
 import stock.vo.RuleItemVO;
@@ -22,6 +22,8 @@ import stock.vo.TransInfoVO;
 public interface StockManager {
 	
 	public List<Stock> getStockList() throws Exception;
+
+	public List<Stock> getStockListByCondition(String condition) throws Exception;
 	
 	public List<MyStock> getMyCurrentStock() throws Exception;
 	
@@ -43,9 +45,9 @@ public interface StockManager {
 	
 	public void updateAlertStatus(String alertId, Integer status) throws Exception;
 	
-	public String addRuleHistory(String ruleId, String historyId, Integer result, Long timeCost, Integer stockNum) throws Exception;
+	public String addRuleExecuteHistory(String ruleId, String historyId, Integer result, Long timeCost, Integer stockNum) throws Exception;
 	
-	public void addRuleResult(String historyId, String stockCode) throws Exception;
+	public void addRuleExecuteResult(String historyId, String stockCode) throws Exception;
 	
 	public List<Stock> getRuleResultByHistoryId(String historyId) throws Exception;
 	
@@ -61,7 +63,7 @@ public interface StockManager {
 	
 	public Map<String, Integer> initDateStatus() throws Exception;
 	
-	public List<RuleRunHistory> getRuleRunHistoryByRuleId(String ruleId) throws Exception;
+	public List<RuleExecuteHistory> getRuleExecuteHistoryByRuleId(String ruleId) throws Exception;
 	
 	public List<Stock> getStockCategory() throws Exception;
 	

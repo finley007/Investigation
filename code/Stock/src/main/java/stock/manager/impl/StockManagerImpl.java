@@ -14,8 +14,8 @@ import stock.model.Calendar;
 import stock.model.MyAction;
 import stock.model.MyStock;
 import stock.model.RuleItem;
-import stock.model.RuleResult;
-import stock.model.RuleRunHistory;
+import stock.model.RuleExecuteResult;
+import stock.model.RuleExecuteHistory;
 import stock.model.Stock;
 import stock.timer.TimerConstants;
 import stock.util.CommonUtils;
@@ -38,6 +38,10 @@ public class StockManagerImpl implements StockManager {
 	public List<Stock> getStockList() throws Exception {
 		// TODO Auto-generated method stub
 		return stockOperation.selectAllStock();
+	}
+
+	public List<Stock> getStockListByCondition(String condition) throws Exception {
+		return stockOperation.selectStockByCondition(condition);
 	}
 	
 	public List<MyStock> getMyCurrentStock() throws Exception {
@@ -189,28 +193,28 @@ public class StockManagerImpl implements StockManager {
 //		conn.close();
 	}
 	
-	public String addRuleHistory(String ruleId, String historyId, Integer result, Long timeCost, Integer stockNum) throws Exception {
-		RuleRunHistory history = new RuleRunHistory();
+	public String addRuleExecuteHistory(String ruleId, String historyId, Integer result, Long timeCost, Integer stockNum) throws Exception {
+		RuleExecuteHistory history = new RuleExecuteHistory();
 		history.setId(historyId);
 		history.setRuleId(ruleId);
 		history.setRunTime(new Date());
 		history.setResult(result);
 		history.setTimeCost(timeCost.intValue());
 		history.setStockNum(stockNum);
-		stockOperation.insertRuleRunHistory(history);
+		stockOperation.insertRuleExecuteHistory(history);
 		return historyId;
 	}
 	
-	public void addRuleResult(String historyId, String stockCode) throws Exception {
-		RuleResult ruleResult = new RuleResult();
-		ruleResult.setId(UUID.randomUUID().toString());
-		ruleResult.setHistoryId(historyId);
-		ruleResult.setStockCode(stockCode);
-		stockOperation.insertRuleResult(ruleResult);
+	public void addRuleExecuteResult(String historyId, String stockCode) throws Exception {
+		RuleExecuteResult ruleExecuteResult = new RuleExecuteResult();
+		ruleExecuteResult.setId(UUID.randomUUID().toString());
+		ruleExecuteResult.setHistoryId(historyId);
+		ruleExecuteResult.setStockCode(stockCode);
+		stockOperation.insertRuleExecuteResult(ruleExecuteResult);
 	}
 	
 	public List<Stock> getRuleResultByHistoryId(String historyId) throws Exception {
-		return stockOperation.selectRuleResultByHistoryId(historyId);
+		return stockOperation.selectRuleExecuteResultByHistoryId(historyId);
 	}
 	
 	public void updateRuleResultTrend(String historyId, String stockCode, Integer day, Double profit) throws Exception {
@@ -268,8 +272,8 @@ public class StockManagerImpl implements StockManager {
 		return result;
 	}
 	
-	public List<RuleRunHistory> getRuleRunHistoryByRuleId(String ruleId) throws Exception {
-		return stockOperation.selectRuleRunHistoryByRuleId(ruleId);
+	public List<RuleExecuteHistory> getRuleExecuteHistoryByRuleId(String ruleId) throws Exception {
+		return stockOperation.selectRuleExecuteHistoryByRuleId(ruleId);
 	}
 	
 	public List<Stock> getStockCategory() throws Exception {

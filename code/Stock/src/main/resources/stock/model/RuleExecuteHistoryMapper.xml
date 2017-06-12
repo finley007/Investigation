@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="stock.dao.IStockOperation" >
-  <resultMap id="RuleRunHistoryMap" type="stock.model.RuleRunHistory" >
+  <resultMap id="RuleExecuteHistoryMap" type="stock.model.RuleExecuteHistory" >
     <result column="ID" property="id" jdbcType="VARCHAR" />
     <result column="RULE_ID" property="ruleId" jdbcType="VARCHAR" />
     <result column="RUN_TIME" property="runTime" jdbcType="TIMESTAMP" />
@@ -10,13 +10,13 @@
     <result column="STOCK_NUM" property="stockNum" jdbcType="INTEGER" />
   </resultMap>
   
-  <select id="selectRuleRunHistoryByRuleId" resultMap="RuleRunHistoryMap" parameterType="java.lang.String">
-  	select * from rule_run_history t where t.rule_id = #{ruleId,jdbcType=VARCHAR} 
+  <select id="selectRuleExecuteHistoryByRuleId" resultMap="RuleExecuteHistoryMap" parameterType="java.lang.String">
+  	select * from rule_execute_history t where t.rule_id = #{ruleId,jdbcType=VARCHAR}
   	order by t.run_time desc
   </select>
   
-  <insert id="insertRuleRunHistory" parameterType="stock.model.RuleRunHistory" >
-    insert into rule_run_history (ID, RULE_ID, RUN_TIME, 
+  <insert id="insertRuleExecuteHistory" parameterType="stock.model.RuleExecuteHistory" >
+    insert into rule_execute_history (ID, RULE_ID, RUN_TIME,
       RESULT, TIME_COST, STOCK_NUM
       )
     values (#{id,jdbcType=VARCHAR}, #{ruleId,jdbcType=VARCHAR}, #{runTime,jdbcType=TIMESTAMP}, 
@@ -24,8 +24,8 @@
       )
   </insert>
   
-  <insert id="insertSelectiveRuleRunHistory" parameterType="stock.model.RuleRunHistory" >
-    insert into rule_run_history
+  <insert id="insertSelectiveRuleExecuteHistory" parameterType="stock.model.RuleExecuteHistory" >
+    insert into rule_execute_history
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         ID,

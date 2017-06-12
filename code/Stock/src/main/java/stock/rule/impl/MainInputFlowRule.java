@@ -17,4 +17,7 @@ public class MainInputFlowRule implements Rule {
 		}
 	}
 
+	public String getRuleId() {
+		return "RULE_RUNTIME_1";
+	}
 }

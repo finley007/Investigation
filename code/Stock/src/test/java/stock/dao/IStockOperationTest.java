@@ -4,7 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +16,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import stock.model.MyAction;
 import stock.model.MyStock;
 import stock.model.RuleItem;
-import stock.model.RuleRunHistory;
+import stock.model.RuleExecuteHistory;
 import stock.model.Stock;
 
 public class IStockOperationTest {
@@ -155,13 +157,19 @@ public class IStockOperationTest {
 	
 	@Test
 	public void testSelectRuleRunHistoryByRuleId() {
-		List<RuleRunHistory> ruleRunHistoryList = mapper.selectRuleRunHistoryByRuleId("RULE_HISTORY_1");
+		List<RuleExecuteHistory> ruleRunHistoryList = mapper.selectRuleExecuteHistoryByRuleId("RULE_HISTORY_1");
 		assertEquals(25, ruleRunHistoryList.size());
 	}
 
 	@Test
 	public void testSelectRuleResultByHistoryId() {
-		List<Stock> stockList = mapper.selectRuleResultByHistoryId("20150908110903337RULE_HISTORY_1");
+		List<Stock> stockList = mapper.selectRuleExecuteResultByHistoryId("20150908110903337RULE_HISTORY_1");
 		System.out.println(stockList.get(0).getCode());
+	}
+
+	@Test
+	public void testSelectStockByCondition() {
+		List<Stock> stockList = mapper.selectStockByCondition("where code like '%0'");
+		System.out.println(stockList.size());
 	}
 }

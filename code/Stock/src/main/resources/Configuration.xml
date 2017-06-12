@@ -19,5 +19,7 @@
         <mapper resource="stock/model/StockMapper.xml"/>
         <mapper resource="stock/model/MyActionMapper.xml"/>
         <mapper resource="stock/model/CalendarMapper.xml"/>
+        <mapper resource="stock/model/RuleExecuteResultMapper.xml"/>
+        <mapper resource="stock/model/RuleExecuteHistoryMapper.xml"/>
     </mappers>
 </configuration>

@@ -1,14 +1,23 @@
 package stock.run;
 
-import java.util.Date;
-
 import stock.analysis.StockAnalysis;
 import stock.analysis.impl.ShowDiagram;
 import stock.analysis.impl.StatisticAnalysis;
-import stock.run.impl.FallTrendAnalysisExecuter;
+import stock.context.StockAppContext;
+import stock.feed.http.MyStockInfoFeeder;
+import stock.manager.StockManager;
+import stock.model.Stock;
+import stock.rule.Rule;
+import stock.rule.impl.FallTrendRule;
+import stock.rule.impl.TrendRule;
+import stock.util.CommonUtils;
+
+import java.util.List;
 
 
 public class Runner {
+
+	private static StockManager stockManager = (StockManager) StockAppContext.getBean("stockManager");
 
 	public static void main(String[] args) {
 		executeRule();
@@ -41,11 +50,33 @@ public class Runner {
 	}
 
 	private static void executeRule() {
-		BaseExecuter executer = new FallTrendAnalysisExecuter();
-		Date start = new Date();
-		executer.run();
-		Date end = new Date();
-		System.out.println("-------------------------------------------------");
-		System.out.println("Using time: " + (end.getTime() - start.getTime()));
+		try {
+			Rule rule = new TrendRule();
+			String historyId = CommonUtils.createTransactionId(rule.getRuleId());
+			String[] conditions = new String[]{
+					"where code like '%0'",
+					"where code like '%1'",
+					"where code like '%2'",
+					"where code like '%3'",
+					"where code like '%4'",
+					"where code like '%5'",
+					"where code like '%6'",
+					"where code like '%7'",
+					"where code like '%8'",
+					"where code like '%9'"
+			};
+			for (int i = 0; i < conditions.length; i++) {
+				List<Stock> stockList = stockManager.getStockListByCondition(conditions[i]);
+				RuleExecuter executer = new RuleExecuter();
+				executer.setFeeder(new MyStockInfoFeeder());
+				executer.setHistoryId(historyId);
+				executer.setRule(rule);
+				executer.setStockList(stockList);
+				Thread thread = new Thread(executer);
+				thread.start();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

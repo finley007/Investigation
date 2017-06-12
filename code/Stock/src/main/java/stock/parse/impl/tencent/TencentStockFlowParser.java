@@ -13,10 +13,12 @@ public class TencentStockFlowParser implements InfoParser {
 		// TODO Auto-generated method stub
 		logger.debug(info);
 		String[] params = info.split("~");
-		stock.setMainInflow(Double.valueOf(params[1]));
-		stock.setMainOutflow(Double.valueOf(params[2]));
-		stock.setRetailInflow(Double.valueOf(params[5]));
-		stock.setRetailOutflow(Double.valueOf(params[6]));
+		if (params != null && params.length > 0) {
+			stock.setMainInflow(Double.valueOf(params[1]));
+			stock.setMainOutflow(Double.valueOf(params[2]));
+			stock.setRetailInflow(Double.valueOf(params[5]));
+			stock.setRetailOutflow(Double.valueOf(params[6]));
+		}
 	}
 	
 }

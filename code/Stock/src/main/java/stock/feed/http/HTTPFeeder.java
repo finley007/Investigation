@@ -14,7 +14,7 @@ public abstract class HTTPFeeder implements InfoFeeder {
 	public void feedInfo(Stock myStock) throws Exception {
 		// TODO Auto-generated method stub
 		if (caller == null) {
-			caller = createCaller(myStock, HTTPCaller.Method.Get);
+			caller = createCaller(myStock);
 		}
 		String result = caller.callHTTPServ(null);
 		this.parser.parseStockInfo(myStock, result);
@@ -22,9 +22,9 @@ public abstract class HTTPFeeder implements InfoFeeder {
 	
 	protected abstract String getURL(String stockCode);
 	
-	protected HTTPCaller createCaller(Stock stock, HTTPCaller.Method method) {
+	protected HTTPCaller createCaller(Stock stock) {
 		String url = getURL(stock.getCode());
-		HTTPCaller caller = HTTPCaller.getIns(method, url);
+		HTTPCaller caller = HTTPCaller.getIns(HTTPCaller.Method.Get, url);
 		return caller;
 	}
 

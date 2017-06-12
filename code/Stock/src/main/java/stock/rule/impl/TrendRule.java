@@ -33,21 +33,25 @@ public class TrendRule implements Rule {
 					return false;
 				}
 			}
-			// #2
-			DailyPriceVO today = info.getDailyPrice().get(list.get(0));
-			DailyPriceVO lastDay = info.getDailyPrice().get(list.get(1));
-			if ((today.getEndPrice() - lastDay.getEndPrice())/lastDay.getEndPrice() < 0.05) {
-				return false;
-			}
-			// #3
-			if (info.getMainInflow() < 1.5 * info.getMainOutflow()) {
-				return false;
-			}
-			if (today.getEndPrice() > 20) {
-				return false;
-			}
+//			// #2
+//			DailyPriceVO today = info.getDailyPrice().get(list.get(0));
+//			DailyPriceVO lastDay = info.getDailyPrice().get(list.get(1));
+//			if ((today.getEndPrice() - lastDay.getEndPrice())/lastDay.getEndPrice() < 0.05) {
+//				return false;
+//			}
+//			// #3
+//			if (info.getMainInflow() < 1.5 * info.getMainOutflow()) {
+//				return false;
+//			}
+//			if (today.getEndPrice() > 20) {
+//				return false;
+//			}
 		}
 		return true;
+	}
+
+	public String getRuleId() {
+		return "RULE_HISTORY_1";
 	}
 	
 }

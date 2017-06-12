@@ -11,16 +11,25 @@ import stock.feed.InfoFeeder;
 import stock.manager.StockManager;
 import stock.model.Stock;
 import stock.rule.Rule;
-import stock.util.CommonUtils;
-import stock.util.StockConstants;
 
 
-public abstract class BaseExecuter {
-	
-	private static Logger logger = LoggerFactory.getLogger(BaseExecuter.class);
+/**
+ * 执行者：根据配置的规则筛选股票
+ */
+public class RuleExecuter implements Runnable {
+
+	private static Logger logger = LoggerFactory.getLogger(RuleExecuter.class);
 	
 	private static StockManager stockManager = (StockManager)StockAppContext.getBean("stockManager");
-	
+
+	private List<Stock> stockList = new ArrayList<Stock>();
+
+	private String historyId = "";
+
+	private Rule rule;
+
+	private InfoFeeder feeder;
+
 	private void init() {
 	}
 	
@@ -29,7 +38,7 @@ public abstract class BaseExecuter {
 		excecute();
 	}
 	
-	public void excecute() {
+	private void excecute() {
 		try {
 			List<Stock> resultSet = executeRule();
 			solveResult(resultSet);
@@ -39,26 +48,25 @@ public abstract class BaseExecuter {
 	}
 
 	private void solveResult(List<Stock> resultSet) throws Exception {
-		String historyId = CommonUtils.createTransactionId(this.getRuleId());
-		for (Stock info : resultSet) {
-			logger.info(info.toString());
-			stockManager.addRuleResult(historyId, info.getCode());
+		if (this.historyId != null && !"".equals(this.historyId)) {
+			for (Stock info : resultSet) {
+				logger.info(info.toString());
+				stockManager.addRuleExecuteResult(historyId, info.getCode());
 //			Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler http://finance.sina.com.cn/realstock/company/" + info.getCode() + "/nc.shtml");
+			}
+		} else {
+			logger.warn("History id not specified");
 		}
-		stockManager.addRuleHistory(this.getRuleId(), historyId, StockConstants.RESULT_STATUS_SUCCESS, 0l, resultSet.size());
 	}
 
 	private List<Stock> executeRule() throws Exception {
 		List<Stock> resultSet = new ArrayList<Stock>();
-		List<Stock> stocks = stockManager.getStockList();
-		if (stocks != null && stocks.size() > 0) {
-			for (Stock stock : stocks) {
+		if (stockList != null && stockList.size() > 0) {
+			for (Stock stock : stockList) {
 				logger.debug("Stock name: " + stock.getName() + " and code: " + stock.getCode());
-				InfoFeeder infoFeeder = getInfoFeeder();
 				try {
-					infoFeeder.feedInfo(stock);
+					feeder.feedInfo(stock);
 					logger.debug(stock.toString());
-					Rule rule = getRule();
 					if (rule.isSatisfy(stock)) {
 						resultSet.add(stock);
 					}
@@ -72,11 +80,37 @@ public abstract class BaseExecuter {
 		logger.info("The stocks to be checked: ");
 		return resultSet;
 	}
-	
-	protected abstract InfoFeeder getInfoFeeder();
-	
-	protected abstract Rule getRule();
-	
-	protected abstract String getRuleId();
+
+	public void clearStockList() {
+		this.stockList.clear();
+	}
+
+	public void setStockList(List<Stock> list) {
+		this.stockList = list;
+	}
+
+	public void addStockList(Stock stock) {
+		this.stockList.add(stock);
+	}
+
+	public String getHistoryId() {
+		return historyId;
+	}
+
+	public void setHistoryId(String historyId) {
+		this.historyId = historyId;
+	}
+
+	public void setRule(Rule rule) {
+		this.rule = rule;
+	}
+
+	public InfoFeeder getFeeder() {
+		return feeder;
+	}
+
+	public void setFeeder(InfoFeeder feeder) {
+		this.feeder = feeder;
+	}
 
 }

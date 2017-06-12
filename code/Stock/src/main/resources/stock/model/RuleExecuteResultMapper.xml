@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="stock.dao.IStockOperation" >
-  <resultMap id="RuleResultMap" type="stock.model.RuleResult" >
+  <resultMap id="RuleExecuteResultMap" type="stock.model.RuleExecuteResult" >
     <result column="ID" property="id" jdbcType="VARCHAR" />
     <result column="HISTORY_ID" property="historyId" jdbcType="VARCHAR" />
     <result column="STOCK_CODE" property="stockCode" jdbcType="VARCHAR" />
@@ -10,13 +10,13 @@
     <result column="THIRD_DAY_TREND" property="thirdDayTrend" jdbcType="DOUBLE" />
   </resultMap>
   
-  <select id="selectRuleResultByHistoryId" resultMap="StockMap" parameterType="java.lang.String" >
-  	select t1.* from rule_result t, all_stock t1 where t.history_id = #{historyId,jdbcType=VARCHAR} and t1.code = t.STOCK_CODE 
+  <select id="selectRuleExecuteResultByRuleId" resultMap="StockMap" parameterType="java.lang.String" >
+  	select t1.* from rule_execute_result t, all_stock t1 where t.history_id = #{historyId,jdbcType=VARCHAR} and t1.code = t.STOCK_CODE
   		order by code
   </select>
   
-  <insert id="insertRuleResult" parameterType="stock.model.RuleResult" >
-    insert into rule_result (ID, HISTORY_ID, STOCK_CODE, 
+  <insert id="insertRuleExecuteResult" parameterType="stock.model.RuleExecuteResult" >
+    insert into rule_execute_result (ID, HISTORY_ID, STOCK_CODE,
       FIRST_DAY_TREND, SECOND_DAY_TREND, THIRD_DAY_TREND
       )
     values (#{id,jdbcType=VARCHAR}, #{historyId,jdbcType=VARCHAR}, #{stockCode,jdbcType=VARCHAR}, 
@@ -24,8 +24,8 @@
       )
   </insert>
   
-  <insert id="insertSelectiveRuleResult" parameterType="stock.model.RuleResult" >
-    insert into rule_result
+  <insert id="insertSelectiveRuleExecuteResult" parameterType="stock.model.RuleExecuteResult" >
+    insert into rule_execute_result
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         ID,

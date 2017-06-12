@@ -24,4 +24,9 @@ public class AbnormalRule implements Rule {
 		}
 	}
 
+	public String getRuleId() {
+		// TODO Auto-generated method stub
+		return "RULE_HISTORY_4";
+	}
+
 }
