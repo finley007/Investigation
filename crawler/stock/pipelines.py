@@ -5,9 +5,13 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 import MySQLdb
+import re
 
 class StockPipeline(object):
     def process_item(self, item, spider):
+        stock_code = item["stock_code"]
+        if re.match('[1249]\w{5}', stock_code):
+            return item
         insert_section = "INSERT INTO COMMON_SECTION(CODE, LABEL) \
 	       VALUES ('%s', '%s')" % \
 	       (item['section_code'], 

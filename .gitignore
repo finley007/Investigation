@@ -8,3 +8,5 @@ code/Stock/gradlew.bat
 code/Stock/out/
 code/StockWeb/.settings/com.ibm.etools.common.migration.prefs
 code/Stock_eclipse/
+*log*
+
