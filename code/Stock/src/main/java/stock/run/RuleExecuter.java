@@ -26,9 +26,11 @@ public class RuleExecuter implements Runnable {
 
 	private String historyId = "";
 
-	private Rule rule;
+	private List<Rule> ruleList = new ArrayList<Rule>();
 
 	private InfoFeeder feeder;
+
+	private Counter counter;
 
 	private void init() {
 	}
@@ -63,22 +65,44 @@ public class RuleExecuter implements Runnable {
 		List<Stock> resultSet = new ArrayList<Stock>();
 		if (stockList != null && stockList.size() > 0) {
 			for (Stock stock : stockList) {
-				logger.debug("Stock name: " + stock.getName() + " and code: " + stock.getCode());
+				countTotal();
+				logger.info("Start to solve stock: " + stock.getLabel() + " and code: " + stock.getCode());
 				try {
 					feeder.feedInfo(stock);
-					logger.debug(stock.toString());
-					if (rule.isSatisfy(stock)) {
-						resultSet.add(stock);
-					}
+					logger.debug(stock.toJson());
+					checkRule(resultSet, stock);
 				} catch (Exception e) {
-					e.printStackTrace();
-					logger.error("Ths stock: " + stock.getCode() + " are failed to obtain");
+					logger.error("Solve stock error", e);
 				}
 			}
 		}
 		logger.info("*******************************************");
 		logger.info("The stocks to be checked: ");
 		return resultSet;
+	}
+
+	private void checkRule(List<Stock> resultSet, Stock stock) throws Exception {
+		if (this.ruleList != null && this.ruleList.size() > 0) {
+            for (Rule rule : this.ruleList) {
+                if (!rule.isSatisfy(stock)) {
+                    return;
+                }
+            }
+            resultSet.add(stock);
+            countTarget();
+        }
+	}
+
+	private void countTotal() {
+		if (this.counter != null) {
+			this.counter.addTotalCount();
+		}
+	}
+
+	private void countTarget() {
+		if (this.counter != null) {
+			this.counter.addTargetCount();
+		}
 	}
 
 	public void clearStockList() {
@@ -101,16 +125,60 @@ public class RuleExecuter implements Runnable {
 		this.historyId = historyId;
 	}
 
-	public void setRule(Rule rule) {
-		this.rule = rule;
-	}
-
 	public InfoFeeder getFeeder() {
 		return feeder;
 	}
 
 	public void setFeeder(InfoFeeder feeder) {
 		this.feeder = feeder;
+	}
+
+	public void clearRuleList() {
+		this.ruleList.clear();
+	}
+
+	public void setRuleList(List<Rule> list) {
+		this.ruleList = list;
+	}
+
+	public void addRule(Rule rule) {
+		this.ruleList.add(rule);
+	}
+
+	public void setCounter(Counter counter) {
+		this.counter = counter;
+	}
+
+	static class Counter {
+
+		private int totalCount = 0;
+
+		private int targetCount = 0;
+
+		public synchronized void clearTotalCount() {
+			this.totalCount = 0;
+		}
+
+		public synchronized void clearTargetCount() {
+			this.totalCount = 0;
+		}
+
+		public synchronized void addTotalCount() {
+			this.totalCount ++;
+		}
+
+		public synchronized void addTargetCount() {
+			this.targetCount ++;
+		}
+
+		public int getTotalCount() {
+			return this.totalCount;
+		}
+
+		public int getTargetCount() {
+			return this.targetCount;
+		}
+
 	}
 
 }

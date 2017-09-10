@@ -30,7 +30,10 @@ class SohuSpider(scrapy.Spider):
             logger.info('Section name: ' + item_name)
             logger.info('Section url: ' + self.add_base_url(item_url))
             yield Request(url=self.add_base_url(item_url), callback=self.parse_item)
-
+        nextPage = response.xpath("//*[@id='PageControl1_hlk_next']/@href").extract()
+        logger.info('***************Next url: ' + self.add_host(nextPage[0]))
+        if nextPage:
+                yield Request(url=self.add_host(nextPage[0]), callback=self.parse)
 
     def add_base_url(self, section):
         return self.base_url + section

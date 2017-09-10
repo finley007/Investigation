@@ -43,6 +43,8 @@ public interface IStockOperation {
      */
     List<Stock> selectAllStock();
 
+    int getStockCount();
+
     List<Stock> selectStockByCondition(@Param("condition")String condition);
 
     List<Stock> selectAllMyStock();

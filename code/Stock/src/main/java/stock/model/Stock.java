@@ -142,15 +142,4 @@ public class Stock {
     public String toJson() {
         return JsonHelper.toJson(this);
     }
-
-    public String toString() {
-        StringBuffer sb = new StringBuffer("Stock info: \n");
-        sb.append("name: " + this.getName() + "\n");
-        sb.append("code: " + this.getCode() + "\n");
-        sb.append("main inflow:" + this.mainInflow + "\n");
-        sb.append("main outflow:" + this.mainOutflow + "\n");
-        sb.append("retail inflow:" + this.retailInflow + "\n");
-        sb.append("retail outflow:" + this.retailOutflow + "\n");
-        return sb.toString();
-    }
 }

@@ -11,7 +11,7 @@ public class TencentStockFlowParser implements InfoParser {
 
 	public void parseStockInfo(Stock stock, String info) throws Exception {
 		// TODO Auto-generated method stub
-		logger.debug(info);
+		logger.debug("Parse stock flow info for " + stock.getLabel() + " and info content: " + info);
 		String[] params = info.split("~");
 		if (params != null && params.length > 0) {
 			stock.setMainInflow(Double.valueOf(params[1]));

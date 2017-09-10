@@ -40,6 +40,10 @@ public class StockManagerImpl implements StockManager {
 		return stockOperation.selectAllStock();
 	}
 
+	public int getStockCount() throws Exception {
+		return stockOperation.getStockCount();
+	}
+
 	public List<Stock> getStockListByCondition(String condition) throws Exception {
 		return stockOperation.selectStockByCondition(condition);
 	}

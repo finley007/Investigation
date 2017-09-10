@@ -172,4 +172,9 @@ public class IStockOperationTest {
 		List<Stock> stockList = mapper.selectStockByCondition("where code like '%0'");
 		System.out.println(stockList.size());
 	}
+
+	@Test
+	public void testGetStockCount() {
+		System.out.println(mapper.getStockCount());
+	}
 }

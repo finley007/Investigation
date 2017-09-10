@@ -23,6 +23,8 @@ public interface StockManager {
 	
 	public List<Stock> getStockList() throws Exception;
 
+	public int getStockCount() throws Exception;
+
 	public List<Stock> getStockListByCondition(String condition) throws Exception;
 	
 	public List<MyStock> getMyCurrentStock() throws Exception;

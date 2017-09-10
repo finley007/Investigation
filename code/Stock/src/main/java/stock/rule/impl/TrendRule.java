@@ -2,10 +2,11 @@ package stock.rule.impl;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import stock.model.Stock;
 import stock.rule.Rule;
 import stock.util.DateUtils;
-import stock.util.StockConstants;
 import stock.vo.DailyPriceVO;
 
 /**
@@ -15,17 +16,20 @@ import stock.vo.DailyPriceVO;
  * 2. Rise smaller than half of max rise limit(10%). 
  * 3. Input flow should larger than 1.5 output flow.
  */
-public class TrendRule implements Rule {
+public class TrendRule extends BaseRule implements Rule {
+
+	Logger logger = LoggerFactory.getLogger(TrendRule.class);
 	
 	@Override
-	public Boolean isSatisfy(Stock info) throws Exception {
+	public Boolean isSatisfy(Stock stock) throws Exception {
 		// TODO Auto-generated method stub
-		List<String> list = DateUtils.getRecentDate(StockConstants.TREND_WINDOW_SIZE);
+		logger.info("Execute trend rule for stock: " + stock.getLabel() + " window: " + windowSize);
+		List<String> list = DateUtils.getRecentDate(this.windowSize);
 		if (list != null && list.size() > 0) {
 			// #1
 			for (int i = 0; i < list.size() - 1; i++) {
-				DailyPriceVO day = info.getDailyPrice().get(list.get(i));
-				DailyPriceVO lastDay = info.getDailyPrice().get(list.get(i + 1));
+				DailyPriceVO day = stock.getDailyPrice().get(list.get(i));
+				DailyPriceVO lastDay = stock.getDailyPrice().get(list.get(i + 1));
 				if (day.getEndPrice() < day.getStartPrice()) {
 					return false;
 				} else if (day.getEndPrice().equals(day.getStartPrice())

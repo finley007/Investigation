@@ -1,9 +1,13 @@
 package stock.rule.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import stock.model.Stock;
 import stock.rule.Rule;
 
-public class MainInputFlowRule implements Rule {
+public class MainInputFlowRule extends BaseRule implements Rule {
+
+	Logger logger = LoggerFactory.getLogger(MainInputFlowRule.class);
 	
 	private static final Double level = 2000.0;
 

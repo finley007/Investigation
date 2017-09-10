@@ -38,12 +38,11 @@ public void after() throws Exception {
 public void testRun() throws Exception { 
 //TODO: Test goes here...
     try {
-        Rule rule = new FallTrendRule();
         List<Stock> stockList = new ArrayList<Stock>();
         stockList.add(new Stock("603977"));
         RuleExecuter executer = new RuleExecuter();
         executer.setFeeder(new MyStockInfoFeeder());
-        executer.setRule(rule);
+        executer.addRule(new FallTrendRule());
         executer.setStockList(stockList);
         executer.run();
     } catch (Exception e) {

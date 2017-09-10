@@ -94,7 +94,7 @@ public class DateUtils {
 		if (isOverCloseTime(new Date())) {
 			beforeDays --;
 		}
-		for (int i = 0; i < days + 1; i++) { //StockConstants.HISTORY_DAILY_INFO_SIZE + 1: Count more 1 day for judging limit up
+		for (int i = 1; i < days + 1; i++) { //StockConstants.HISTORY_DAILY_INFO_SIZE + 1: Count more 1 day for judging limit up
 			Date date = null;
 			do {
 				date = getDayBeforeNDays(new Date(), ++beforeDays);

@@ -1,11 +1,13 @@
 package stock.util;
 
 import java.util.Date;
+import java.util.List;
 
 import junit.framework.Assert;
 
 import org.junit.Test;
 
+import stock.rule.impl.TrendRule;
 import stock.util.DateUtils;
 import stock.util.StockConstants;
 
@@ -92,6 +94,18 @@ public class DateUtilsTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Test
+	public void testGetRecentDate() {
+		List<String> list = null;
+		try {
+			list = DateUtils.getRecentDate(5);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(list.toString());
 	}
 
 }

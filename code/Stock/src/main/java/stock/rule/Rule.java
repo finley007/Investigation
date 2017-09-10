@@ -11,5 +11,6 @@ public interface Rule {
 	
 	public Boolean isSatisfy(Stock info) throws Exception;
 	public String getRuleId();
+	public void setWindowSize(int size);
 
 }

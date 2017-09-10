@@ -12,7 +12,7 @@ public class TencentStockRuntimeParser implements InfoParser {
 
 	public void parseStockInfo(Stock stock, String info) throws Exception {
 		// TODO Auto-generated method stub
-		logger.debug(info);
+		logger.debug("Parse stock runtime info for " + stock.getLabel() + " and info content: " + info);
 		String[] params = info.split("~");
 		Double currentPrice = Double.valueOf(params[3]);
 		stock.setCurrentPrice(currentPrice);

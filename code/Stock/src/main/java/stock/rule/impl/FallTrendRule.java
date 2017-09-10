@@ -13,9 +13,9 @@ import stock.vo.DailyPriceVO;
 
 /**
  * @author liuli
- * 规则描述：连续TREND_WINDOW_SIZE天下跌，市盈率小于20
+ * 规则描述：连续几天下跌，市盈率小于20
  */
-public class FallTrendRule implements Rule {
+public class FallTrendRule extends BaseRule implements Rule {
 
 	Logger logger = LoggerFactory.getLogger(FallTrendRule.class);
 	
@@ -26,33 +26,42 @@ public class FallTrendRule implements Rule {
 	}
 	
 	@Override
-	public Boolean isSatisfy(Stock info) throws Exception {
+	public Boolean isSatisfy(Stock stock) throws Exception {
 		// TODO Auto-generated method stub
-		List<String> list = DateUtils.getRecentDate(StockConstants.TREND_WINDOW_SIZE);
+		logger.info("Excecute fall trend rule for stock: " + stock.getLabel() + " and window: " + this.windowSize);
+		List<String> list = DateUtils.getRecentDate(this.windowSize);
 		//TODO Consider limit up first
 		if (list != null && list.size() > 0) {
+			int comparedNum = 0;
 			for (int i = 0; i < list.size() - 1; i++) {
-				DailyPriceVO dayPrice = info.getDailyPrice().get(list.get(i));
-				DailyPriceVO lastDayPrice = info.getDailyPrice().get(list.get(i + 1));
+				DailyPriceVO dayPrice = stock.getDailyPrice().get(list.get(i));
+				DailyPriceVO lastDayPrice = stock.getDailyPrice().get(list.get(i + 1));
 				if (dayPrice == null) {
-					logger.warn("The data for stock: " + info.getLabel() + " on date: " + list.get(i) + " is not found");
+					logger.warn("The data for stock: " + stock.getLabel() + " on date: " + list.get(i) + " is not found");
 					continue;
 				}
 				if (lastDayPrice == null) {
-					logger.warn("The data for stock: " + info.getLabel() + " on date: " + list.get(i + 1) + " is not found");
+					logger.warn("The data for stock: " + stock.getLabel() + " on date: " + list.get(i + 1) + " is not found");
+					i++;
 					continue;
 				}
 				if (dayPrice.getEndPrice() >= lastDayPrice.getEndPrice()) {
 					return false;
-				} 
+				} else {
+					comparedNum++;
+				}
 			}
-			DailyPriceVO todayPrice = info.getDailyPrice().get(list.get(0));
+			//可比较的数据小于总数据的的80%，不予考虑
+			if ((comparedNum / (list.size() - 1)) < 0.8) {
+				return false;
+			}
+//			DailyPriceVO todayPrice = stock.getDailyPrice().get(list.get(0));
 //			if (todayPrice.getEndPrice() > 20) {
 //				return false;
 //			}
-			if (info.getPer() > 20) {
-				return false;
-			}
+//			if (stock.getPer() > 20) {
+//				return false;
+//			}
 		}
 		return true;
 	}

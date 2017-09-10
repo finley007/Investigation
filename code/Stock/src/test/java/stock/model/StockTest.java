@@ -4,6 +4,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
+import stock.feed.InfoFeeder;
+import stock.feed.http.HTTPFeeder;
+import stock.feed.http.MyStockInfoFeeder;
 
 /**
  * Stock Tester.
@@ -197,16 +200,13 @@ public class StockTest {
      */
     @Test
     public void testToJson() throws Exception {
-//TODO: Test goes here... 
+//TODO: Test goes here...
+        Stock stock = new Stock("601212");
+        InfoFeeder feeder = new MyStockInfoFeeder();
+        feeder.feedInfo(stock);
+        System.out.println(stock.toJson());
     }
 
-    /**
-     * Method: toString()
-     */
-    @Test
-    public void testToString() throws Exception {
-//TODO: Test goes here... 
-    }
 
     @Test
     public void testAddPrefix() throws Exception {
@@ -217,5 +217,6 @@ public class StockTest {
         code = stock.addPrefix("300001");
         Assert.assertEquals("sz300001", code);
     }
+
 
 } 

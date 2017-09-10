@@ -5,12 +5,17 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import stock.model.Stock;
 import stock.parse.InfoParser;
+import stock.parse.impl.tencent.TencentStockFlowParser;
 import stock.util.StockConstants;
 import stock.vo.DailyPriceVO;
 
 public class SinaStockHistoryParser implements InfoParser {
+
+	Logger logger = LoggerFactory.getLogger(SinaStockHistoryParser.class);
 	
 	private final Pattern pattern = Pattern.compile("[0-9]{4}-[0-9]{2}-[0-9]{2}\\s+</a>\\s+</div></td>\\s+(<td><div align=\"center\">([0-9]+.[0-9]+)</div></td>\\s+){3}" +
 			"(<td class=\"tdr\"><div align=\"center\">([0-9]+.[0-9]+)</div></td>\\s+){3}");
@@ -21,6 +26,7 @@ public class SinaStockHistoryParser implements InfoParser {
 	@Override
 	public void parseStockInfo(Stock stock, String info) throws Exception {
 		// TODO Auto-generated method stub
+		logger.debug("Parse stock history info for " + stock.getLabel());
 		stock.clearDailyPrice();
 		int size = StockConstants.CACHE_DATA_WINDOW_SIZE + 1;
         Matcher matcher = pattern.matcher(info);

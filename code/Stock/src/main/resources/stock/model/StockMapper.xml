@@ -56,6 +56,10 @@
   	select * from common_stock order by code
   </select>
 
+  <select id="getStockCount" resultType="int">
+    select count(*) from common_stock
+  </select>
+
   <select id="selectStockByCondition" resultMap="StockMap" parameterType="java.lang.String">
     select * from common_stock ${condition} order by code
   </select>
